@@ -67,10 +67,10 @@
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
 						<li>菜单</li>
-						<li>Tags</li>
+						<li>標籤</li>
 						
 						
-						<li>Über</li>
+						<li>關於</li>
 						
 					</ul>
 				</div>
@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/http/" style="font-size: 20px;">http</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 15px;">mongodb</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node-js/" style="font-size: 12.5px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
 					</div>
 				</section>
 				
@@ -163,6 +163,206 @@
 
       <div class="body-wrap">
   
+    <article id="post-msgpack" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/08/msgpack/" class="article-date">
+  	<time datetime="2016-04-08T00:00:52.000Z" itemprop="datePublished">2016-04-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/08/msgpack/">msgpack使用记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们平时做接口调接口，总会遇到一些接口返回的数据量特别庞大的问题，这容易导致客户端流量增加，也影响响应时间。msgpack可以将数据压缩，通过<a href="http://msgpack.org/" target="_blank" rel="external">msgpack</a>，我们一般可以讲原始数据压缩一半左右，当数量很大时，非常赞！<br>步骤也很简单，如下：<br>1.安装模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install msgpack5 --save</span><br></pre></td></tr></table></figure></p>
+<p>2.压缩/解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let msgpack = require(&#39;msgpack5&#39;)()&#10;  , encode  = msgpack.encode&#10;  , decode  = msgpack.decode;&#10;&#10;console.log(decode(encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;))) // &#123; hello: &#39;world&#39; &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>encode</code>的结果是Buffer对象，你可以直接返回二进制编码，也可以通过toString(‘hex’)返回十六进制编码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#36820;&#22238;&#20108;&#36827;&#21046;&#10;this.body = encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;);&#10;// &#36820;&#22238;&#21313;&#20845;&#36827;&#21046;&#10;this.body = encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;).toString(&#39;hex&#39;);</span><br></pre></td></tr></table></figure></p>
+<p>如果你用二进制，用request测试，记得必须将encoding设为null<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request(&#123;&#10;&#9;method: &#39;post&#39;,&#10;&#9;url:&#39;http://localhost:3000/sign_in&#39;, &#10;&#9;form: &#123;account: &#39;11111121123&#39;, password: &#39;123456&#39;&#125;,&#10;&#9;encoding: null&#10;&#125;, function(err, res, body) &#123;&#10;&#9;if (err) throw err;&#10;&#9;console.log(msgpack.decode(body));&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>如果你用十六进制，需要将结果转为二进制后才能正常解码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request(&#123;&#10;&#9;method: &#39;post&#39;,&#10;&#9;url:&#39;http://localhost:3000/sign_in&#39;, &#10;&#9;form: &#123;account: &#39;11111121123&#39;, password: &#39;123456&#39;&#125;,&#10;&#125;, function(err, res, body) &#123;&#10;&#9;if (err) throw err;&#10;&#9;console.log(msgpack.decode(Buffer(body, &#39;hex&#39;)));&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/msgpack/">msgpack</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/node-js/">node.js</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-highlight-build" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/06/highlight-build/" class="article-date">
+  	<time datetime="2016-04-05T23:38:50.000Z" itemprop="datePublished">2016-04-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/06/highlight-build/">highlight使用前的构建操作</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>highlight</code>是一个很好的代码高亮工具，但是官方似乎没有太好的使用说明，以至于一开始使用的时候搞了有点久，这里做个简单的记录。<br>1.你需要引入css文件，这个很简单，样式文件都在<code>src/styles</code>下面<br>2.如果你跟我一样是使用bower安装的话，一开始是没有<code>highlight.pack.js</code>文件的，你需要build一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#20551;&#35774;&#20320;&#21482;&#38656;&#35201;javascript&#20195;&#30721;&#30340;&#39640;&#20142;&#10;node tools/build.js javascript</span><br></pre></td></tr></table></figure></p>
+<p>3.之后你会看到根目录下面多了一个build的文件夹，打开就会发现<code>highlight.pack.js</code>文件了，引入该文件，再按官方指引就可以正常使用了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/highlight/">highlight</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-redis-basic" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/25/redis-basic/" class="article-date">
+  	<time datetime="2016-03-25T05:34:21.000Z" itemprop="datePublished">2016-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/25/redis-basic/">redis基础操作指令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>预置数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sadd user1:follow &#39;user2&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user1:follow &#39;user3&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user1:follow &#39;user5&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user1&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user4&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user5&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+<p>删除集合中的某个元素（SREM）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; srem user4:follow user3&#10;(integer) 0&#10;127.0.0.1:6379&#62; srem user4:follow user1&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user4&#34;&#10;127.0.0.1:6379&#62;</span><br></pre></td></tr></table></figure></p>
+<p>计算出两个集合的交集（SINTER）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sinter user1:follow user2:follow&#10;1) &#34;user5&#34;</span><br></pre></td></tr></table></figure></p>
+<p>将一个元素从一个集合移动到另一个集合（SMOVE）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smove user2:follow user1:follow &#39;user6&#39;&#10;(integer) 0&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user4&#34;&#10;127.0.0.1:6379&#62; smove user2:follow user1:follow &#39;user5&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; smove user2:follow user1:follow &#39;user4&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;4) &#34;user4&#34;&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user1&#34;&#10;127.0.0.1:6379&#62; sinter user1:follow user2:follow&#10;(empty list or set)</span><br></pre></td></tr></table></figure></p>
+<p>返回所有集合的并集（SUNION）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sunion user1:follow user2:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user5&#34;&#10;3) &#34;user2&#34;&#10;4) &#34;user4&#34;&#10;5) &#34;user1&#34;</span><br></pre></td></tr></table></figure></p>
+<p>返回集合的基数（SCARD）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; scard user1:follow&#10;(integer) 4&#10;127.0.0.1:6379&#62; scard user2:follow&#10;(integer) 1</span><br></pre></td></tr></table></figure></p>
+<p>将两个集合的交集成为另一个key的值（SINTERSTORE）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sadd user3:follow &#39;user2&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user3:follow &#39;user4&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user3:follow&#10;1) &#34;user2&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; sinterstore user4:follow user1:follow user3:follow&#10;(integer) 2&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user2&#34;&#10;2) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+<p>移除集合中的一个随机元素（SPOP）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; spop user1:follow&#10;&#34;user4&#34;&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; spop user1:follow&#10;&#34;user5&#34;&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user2&#34;</span><br></pre></td></tr></table></figure></p>
+<p>将集合的并集作为另一个键的值（SUNIONSTORE）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sunionstore user5:follow user1:follow user2:follow user3:follow&#10;(integer) 4&#10;127.0.0.1:6379&#62; smembers user5:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user2&#34;&#10;4) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+<p>计算两个集合的差集（SDIFF）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user2&#34;&#10;127.0.0.1:6379&#62; sdiff user5:follow user1:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+<p>判断一个元素是否为某个集合内的元素（ISMEMBER）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user2&#34;&#10;127.0.0.1:6379&#62; sismember user1:follow user1&#10;(integer) 0&#10;127.0.0.1:6379&#62; sismember user1:follow user3&#10;(integer) 1</span><br></pre></td></tr></table></figure></p>
+<p>返回集合中的一个随机元素（SRANDMEMBER）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; srandmember user1:follow&#10;&#34;user2&#34;</span><br></pre></td></tr></table></figure></p>
+<p>计算两个集合的差集并将结果作为值赋值给一个键（SDIFFSTORE）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user2&#34;&#10;127.0.0.1:6379&#62; smembers user5:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user2&#34;&#10;4) &#34;user4&#34;&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user2&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; sdiffstore user4:follow user5:follow user1:follow&#10;(integer) 2&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/redis/">redis</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-javascript-useful-functions" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -189,7 +389,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570"><a href="#u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570" class="headerlink" title="随机字符串函数"></a>随机字符串函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**&#10; * &#29983;&#25104;&#38543;&#26426;&#23383;&#31526;&#20018;&#10; *&#10; * @param total &#23383;&#31526;&#20018;&#38271;&#24230;&#10; * @param method &#23383;&#31526;&#20018;&#31867;&#22411;&#65292;&#25968;&#23383;&#65295;&#23567;&#20889;&#23383;&#27597;&#65295;&#22823;&#20889;&#23383;&#27597;&#10; * @return string&#10; */&#10;var randomString = function(total, method) &#123;&#10;    var codes = [], ret = &#39;&#39;;&#10;    method = method || 7;&#10;    if (method &#38; randomString.number) &#123;&#10;        var number_codes = new Array(10).fill(0).map(function(item, index) &#123;return 48 + index;&#125;);&#10;        codes = codes.concat(number_codes);&#10;    &#125;&#10;    if (method &#38; randomString.lower) &#123;&#10;        var number_codes = new Array(26).fill(0).map(function(item, index) &#123;return 97 + index;&#125;);&#10;        codes = codes.concat(number_codes);&#10;    &#125;&#10;    if (method &#38; randomString.upper) &#123;&#10;        var number_codes = new Array(26).fill(0).map(function(item, index) &#123;return 65 + index;&#125;);&#10;        codes = codes.concat(number_codes);&#10;    &#125;&#10;    while (total--) &#123;&#10;        ret += String.fromCharCode(codes[Math.floor(Math.random() * codes.length)]);&#10;    &#125;&#10;    return ret;&#10;&#125;;&#10;/**&#10; * &#25968;&#23383;&#10; */&#10;randomString.number = 1;&#10;/** &#10; * &#23567;&#20889;&#23383;&#27597;&#10; */&#10;randomString.lower = 2;&#10;/**&#10; * &#22823;&#20889;&#23383;&#27597;&#10; */&#10;randomString.upper = 4;</span><br></pre></td></tr></table></figure>
+        <h2 id="u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570"><a href="#u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570" class="headerlink" title="随机字符串函数"></a>随机字符串函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 生成随机字符串</span><br><span class="line"> *</span><br><span class="line"> * @param total 字符串长度</span><br><span class="line"> * @param method 字符串类型，数字／小写字母／大写字母</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> randomString = <span class="function"><span class="keyword">function</span>(<span class="params">total, method</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> codes = [], ret = <span class="string">''</span>;</span><br><span class="line">    method = method || <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.number) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">48</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.lower) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">26</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">97</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.upper) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">26</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">65</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (total--) &#123;</span><br><span class="line">        ret += <span class="built_in">String</span>.fromCharCode(codes[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * codes.length)]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 数字</span><br><span class="line"> */</span></span><br><span class="line">randomString.number = <span class="number">1</span>;</span><br><span class="line"><span class="comment">/** </span><br><span class="line"> * 小写字母</span><br><span class="line"> */</span></span><br><span class="line">randomString.lower = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 大写字母</span><br><span class="line"> */</span></span><br><span class="line">randomString.upper = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="u7EE7_u627F_u51FD_u6570"><a href="#u7EE7_u627F_u51FD_u6570" class="headerlink" title="继承函数"></a>继承函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var extend = function() &#123;&#10;    var params = Array.prototype.slice.call(arguments),&#10;        method = &#39;number&#39; == typeof params[params.length - 1] ? params.pop() : 0,&#10;        ret = method &#38; extend.replaceFirst ? params.shift() : &#123;&#125;,&#10;        deep = method &#38; extend.deepExtend,&#10;        rmNull = method &#38; extend.removeNull,&#10;        obj;&#10;&#10;    while (params.length) &#123;&#10;        obj = params.shift();&#10;        for (var k in obj) &#123;&#10;            if (null === obj[k]) &#123;&#10;                rmNull ? delete ret[k] : ret[k] = obj[k];&#10;            &#125; else if (!ret[k] || ret[k].constructor !== Object || obj[k].constructor !== Object) &#123;&#10;                ret[k] = obj[k];&#10;            &#125; else &#123;&#10;                ret[k] = deep ? extend(ret[k], obj[k], method) : obj[k];&#10;            &#125;&#10;        &#125;&#10;    &#125;&#10;    return ret;&#10;&#125;;&#10;/**&#10; * &#23558;&#32467;&#26524;&#36171;&#20540;&#32473;&#31532;&#19968;&#20010;&#23545;&#35937;&#10; */&#10;extend.replaceFirst = extend.RF = 1;&#10;/**&#10; * &#28145;&#24230;&#21512;&#24182;&#10; */&#10;extend.deepExtend = extend.DE = 2;&#10;/**&#10; * &#21024;&#38500;&#20540;&#20026;null&#30340;&#38190;&#10; */&#10;extend.removeNull = extend.RN = 4;</span><br></pre></td></tr></table></figure>
 <h2 id="u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570"><a href="#u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570" class="headerlink" title="字符串及时间格式化函数"></a>字符串及时间格式化函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;/**&#10; * &#23383;&#31526;&#20018;&#26684;&#24335;&#21270;&#26041;&#27861;&#10; * @params null&#10; * @example _.format(&#39;&#25105;&#26159;&#123;0&#125;&#39;, &#39;CoderQ&#39;) =&#62; &#39;&#25105;&#26159;CoderQ&#39;; &#39;&#25105;&#26159;&#123;name&#125;&#39;.format(&#123;name:&#39;CoderQ&#39;&#125;) =&#62; &#39;&#25105;&#26159;CoderQ&#39;;&#10; * @depends null&#10; * @return string&#10; */&#10;var string_format = function() &#123;&#10;    var args = Array.prototype.slice.call(arguments),&#10;        string = args.shift(),&#10;        params = &#39;object&#39; == typeof args[0] ? args[0] : args;&#10;    return string.replace(/\&#123;(\w+)(\|([^&#125;]+))?\&#125;/g, function($, $1, $2, $3) &#123;&#10;        return &#39;undefined&#39; == typeof params[$1] ? eval($3) : params[$1];&#10;    &#125;);&#10;&#125;;&#10;&#10;/**&#10; * &#26102;&#38388;&#26684;&#24335;&#21270;&#20989;&#25968;&#10; * @params&#10; *    format &#26684;&#24335;&#10; *    language &#35821;&#35328;&#10; * @example new Date().format(&#39;Y-m-d H:i:s&#39;)&#10; * @depends toString&#10; * @return string&#10; */&#10;var date_format = function(format, date, lang) &#123;&#10;    var _format = format || &#39;&#39;;&#10;    var _lang = lang || &#39;zh&#39;;&#10;    var _month_text = &#123;&#10;        &#39;zh&#39;: [&#39;&#19968;&#39;, &#39;&#20108;&#39;, &#39;&#19977;&#39;, &#39;&#22235;&#39;, &#39;&#20116;&#39;, &#39;&#20845;&#39;, &#39;&#19971;&#39;, &#39;&#20843;&#39;, &#39;&#20061;&#39;, &#39;&#21313;&#39;, &#39;&#21313;&#19968;&#39;, &#39;&#21313;&#20108;&#39;],&#10;        &#39;en&#39;: [&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;May&#39;, &#39;Jun&#39;, &#39;Jul&#39;, &#39;Aug&#39;, &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;]&#10;    &#125;;&#10;    var _day_text = &#123;&#10;        &#39;zh&#39;: [&#39;&#26085;&#39;, &#39;&#19968;&#39;, &#39;&#20108;&#39;, &#39;&#19977;&#39;, &#39;&#22235;&#39;, &#39;&#20116;&#39;, &#39;&#20845;&#39;],&#10;        &#39;en&#39;: [&#39;Sun&#39;, &#39;Mon&#39;, &#39;Tues&#39;, &#39;Wed&#39;, &#39;Thur&#39;, &#39;Fri&#39;, &#39;Sat&#39;]&#10;    &#125;;&#10;    var _year = date.getFullYear();&#10;    var _month = date.getMonth() + 1;&#10;    var _date = date.getDate();&#10;    var _day = date.getDay();&#10;    var _hour = date.getHours();&#10;    var _minute = date.getMinutes();&#10;    var _second = date.getSeconds();&#10;    return _format.replace(/Y/g, _year)&#10;        .replace(/y/g, _year.toString().substr(2))&#10;        .replace(/M/g, _month_text[_lang][_month - 1])&#10;        .replace(/m/g, _month &#62; 9 ? _month : &#39;0&#39; + _month)&#10;        .replace(/n/g, _month)&#10;        .replace(/D/g, _day_text[_lang][_day])&#10;        .replace(/d/g, _date &#62; 9 ? _date : &#39;0&#39; + _date)&#10;        .replace(/j/g, _date)&#10;        .replace(/H/g, _hour &#62; 9 ? _hour : &#39;0&#39; + _hour)&#10;        .replace(/G/g, _hour)&#10;        .replace(/h/g, (_hour % 12) &#62; 9 ? (_hour % 12) : &#39;0&#39; + (_hour % 12))&#10;        .replace(/g/g, _hour % 12)&#10;        .replace(/i/g, _minute &#62; 9 ? _minute : &#39;0&#39; + _minute)&#10;        .replace(/s/g, _second &#62; 9 ? _second : &#39;0&#39; + _second);&#10;&#125;;&#10;&#10;/**&#10; * &#25968;&#25454;&#26684;&#24335;&#21270;&#10; * @param format&#10; * @param obj&#10; * @return string&#10; */&#10;var format = function(format, obj) &#123;&#10;    if (Object.prototype.toString.call(obj) == &#39;[object Date]&#39;) &#123;&#10;        return date_format.apply(null, arguments);&#10;    &#125; else &#123;&#10;        return string_format.apply(null, arguments);&#10;    &#125;&#10;&#125;;</span><br></pre></td></tr></table></figure>
       
@@ -536,15 +736,22 @@
 <h2 id="Object-freeze"><a href="#Object-freeze" class="headerlink" title="Object.freeze"></a>Object.freeze</h2><p>将某个对象<em>冻住</em>，好形象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;a:1, b: 2&#125;; &#10;Object.freeze(a); &#10;a.c =3;&#10;console.log(a); // &#123;a: 1, b: 2&#125;</span><br></pre></td></tr></table></figure></p>
 <h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;&#125;;&#10;Object.defineProperty(obj1, &#34;x&#34;, &#123; value: 42, writable: false &#125;);&#10;obj1.x = 9; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25243;&#20986;TypeError&#38169;&#35823;&#10;console.log(obj1.x); // 42</span><br></pre></td></tr></table></figure>
 <h2 id="Object-preventExtensions"><a href="#Object-preventExtensions" class="headerlink" title="Object.preventExtensions"></a>Object.preventExtensions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#32473;&#19981;&#21487;&#25193;&#23637;&#23545;&#35937;&#30340;&#26032;&#23646;&#24615;&#36171;&#20540;&#10;var fixed = &#123;&#125;;&#10;Object.preventExtensions(fixed);&#10;fixed.newProp = &#34;ohai&#34;; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25243;&#20986;TypeError&#38169;&#35823;&#10;console.log(fixed); // &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="http://stackoverflow.com/questions/2428409/how-can-you-make-a-variable-object-read-only-in-javascript" target="_blank" rel="external">http://stackoverflow.com/questions/2428409/how-can-you-make-a-variable-object-read-only-in-javascript</a></p>
-
+<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(new Function(&#39;a&#39;, &#39;b&#39;, &#39;return a + b;&#39;)(1, 2)) // 3</span><br></pre></td></tr></table></figure>
       
     </div>
     
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
 
       
       <div class="clearfix"></div>
@@ -599,195 +806,13 @@
     <div class="article-info article-info-index">
       
       
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-nginx-config" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/03/nginx-config/" class="article-date">
-  	<time datetime="2016-03-03T00:41:07.000Z" itemprop="datePublished">2016-03-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/03/nginx-config/">nginx配置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u5168_u5C40_u914D_u7F6E"><a href="#u5168_u5C40_u914D_u7F6E" class="headerlink" title="全局配置"></a>全局配置</h2><h3 id="user"><a href="#user" class="headerlink" title="user"></a>user</h3><p>用于指定nginx进程运行用户以及用户组，默认情况下将使用与用户名相同的组，除非编译时指定–user=USER和–group=GROUP</p>
-<h3 id="worker_processes"><a href="#worker_processes" class="headerlink" title="worker_processes"></a>worker_processes</h3><p>用于指定nginx的进程数，一般设置为与CPU核数一致即可。</p>
-<h3 id="error_log"><a href="#error_log" class="headerlink" title="error_log"></a>error_log</h3><p>用于指定全局错误日志文件，日志错误级别包括debug,info,notice,warn,error,crit，日志的信息量由debug到crit递减。</p>
-<p>nginx支持为每个虚拟主机配置不同的日志文件，如果在编译安装的时候加入–with-debug参数，可以使用以下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_log LOGFILE [debug_core | debug_alloc | debug_mutex | debug_event | debug_http | debug_imap];</span><br></pre></td></tr></table></figure></p>
-<p><strong>error_log off</strong>并不能关闭日志记录，而会将日志文件写入另一个文件名为off的文件中，如果你想关闭错误日志功能 ，应使用以下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_log  /dev/null crit;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;&#10;worker_processes  auto;&#10;&#10;#error_log  logs/error.log;&#10;#error_log  logs/error.log  notice;&#10;#error_log  logs/error.log  info;&#10;&#10;#pid        logs/nginx.pid;&#10;&#10;events &#123;&#10;    worker_connections  1024;&#10;    multi_accept on;&#10;&#125;&#10;&#10;http &#123;&#10;    include       mime.types;&#10;    default_type  application/octet-stream;&#10;&#10;    server_tokens   off;&#10;    sendfile        on;&#10;    tcp_nopush      on;&#10;    tcp_nodelay     on;&#10;&#10;    keepalive_timeout  65;&#10;    &#10;    server &#123;&#10;        listen 80;&#10;        server_name local.tms.shenba.com;&#10;&#10;        location / &#123;&#10;            proxy_set_header Host $host;&#10;            proxy_set_header X-Real-IP $remote_addr;&#10;            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#10;            proxy_buffering off;&#10;            proxy_pass           http://localhost:3445;&#10;        &#125;&#10;&#10;        &#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.h5.shenba.com;&#10;&#10;        location / &#123;&#10;            proxy_set_header Host $host;&#10;            proxy_set_header X-Real-IP $remote_addr;&#10;            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#10;            proxy_buffering off;&#10;            proxy_pass           http://localhost:3446;&#10;        &#125;&#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.h5statics.shenba.com;&#10;&#10;        root /Users/CoderQ/shenba/code/h5statics.shenba.com;&#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.dian.shenba.com;&#10;        #access_log /var/log/nginx/node_h5site.log&#10;        location / &#123;&#10;            proxy_set_header    X-Real-IP           $remote_addr;&#10;            proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;&#10;            proxy_set_header    Host                $http_host;&#10;            proxy_set_header    X-NginX-Proxy       true;&#10;            proxy_set_header    Connection          &#34;&#34;;&#10;            proxy_http_version  1.1;&#10;            proxy_pass          http://localhost:3444;&#10;        &#125;&#10;    &#125;&#10;    server &#123;&#10;        listen       80;&#10;        server_name  local.dstatics.shenba.com;&#10;&#10;        root   /Users/CoderQ/shenba/code/dstatics.shenba.com;&#10;&#10;        #&#23383;&#20307;&#36328;&#22495;&#10;        location ~* \.(eot|ttf|woff|js)$ &#123;&#10;            add_header Access-Control-Allow-Origin *;&#10;        &#125;&#10;    &#125;&#10;&#10;    # another virtual host using mix of IP-, name-, and port-based configuration&#10;    #&#10;    #server &#123;&#10;    #    listen       8000;&#10;    #    listen       somename:8080;&#10;    #    server_name  somename  alias  another.alias;&#10;&#10;    #    location / &#123;&#10;    #        root   html;&#10;    #        index  index.html index.htm;&#10;    #    &#125;&#10;    #&#125;&#10;&#10;&#10;    # HTTPS server&#10;    #&#10;    #server &#123;&#10;    #    listen       443 ssl;&#10;    #    server_name  localhost;&#10;&#10;    #    ssl_certificate      cert.pem;&#10;    #    ssl_certificate_key  cert.key;&#10;&#10;    #    ssl_session_cache    shared:SSL:1m;&#10;    #    ssl_session_timeout  5m;&#10;&#10;    #    ssl_ciphers  HIGH:!aNULL:!MD5;&#10;    #    ssl_prefer_server_ciphers  on;&#10;&#10;    #    location / &#123;&#10;    #        root   html;&#10;    #        index  index.html index.htm;&#10;    #    &#125;&#10;    #&#125;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/nginx/">nginx</a>
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
 	</div>
 
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-create-openssl-certificate-for-https" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/02/create-openssl-certificate-for-https/" class="article-date">
-  	<time datetime="2016-03-02T11:59:33.000Z" itemprop="datePublished">2016-03-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/02/create-openssl-certificate-for-https/">通过OpenSSL创建证书文件构建https服务</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>以前用node.js构建过https服务，很简单，就是把两个文件的路径放在代码里，把http协议换成https就搞定了。不过今天我收到的是一个文件夹，两个文件怎么用都报错，于是有了自己生成证书文件来证实问题出在哪里的想法。最后发现问题在于这个文件夹里全是—–BEGIN CERTIFICATE—–的文件，找不到一个—–BEGIN RSA PRIVATE KEY—–的文件。</p>
-<h2 id="OpenSSL_u751F_u6210_u8BC1_u4E66"><a href="#OpenSSL_u751F_u6210_u8BC1_u4E66" class="headerlink" title="OpenSSL生成证书"></a>OpenSSL生成证书</h2><ul>
-<li><p>创建openssl.cnf文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[req]  &#10;    distinguished_name = req_distinguished_name  &#10;    req_extensions = v3_req  &#10;  &#10;    [req_distinguished_name]  &#10;    countryName = Country Name (2 letter code)  &#10;    countryName_default = CN  &#10;    stateOrProvinceName = State or Province Name (full name)  &#10;    stateOrProvinceName_default = BeiJing  &#10;    localityName = Locality Name (eg, city)  &#10;    localityName_default = YaYunCun  &#10;    organizationalUnitName  = Organizational Unit Name (eg, section)  &#10;    organizationalUnitName_default  = Domain Control Validated  &#10;    commonName = Internet Widgits Ltd  &#10;    commonName_max  = 64  &#10;  &#10;    [ v3_req ]  &#10;    # Extensions to add to a certificate request  &#10;    basicConstraints = CA:FALSE  &#10;    keyUsage = nonRepudiation, digitalSignature, keyEncipherment  &#10;    subjectAltName = @alt_names  &#10;  &#10;    [alt_names]  &#10;&#9;#&#27880;&#24847;&#36825;&#20010;IP.1&#30340;&#35774;&#32622;&#65292;IP&#22320;&#22336;&#38656;&#35201;&#21644;&#20320;&#30340;&#26381;&#21153;&#22120;&#30340;&#30417;&#21548;&#22320;&#22336;&#19968;&#26679;&#10;    IP.1 = 127.0.0.1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为CA生成私钥</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out ca-key.pem -des 1024</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过CA私钥生成CSR</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key ca-key.pem -out ca-csr.pem</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过CSR文件和私钥生成CA证书</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -in ca-csr.pem -signkey ca-key.pem -out ca-cert.pem</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过服务器私钥文件和CSR文件生成服务器证书</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in server-csr.pem -out server-cert.pem -extensions v3_req -extfile openssl.cnf</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="node-js_u670D_u52A1_u7AEF"><a href="#node-js_u670D_u52A1_u7AEF" class="headerlink" title="node.js服务端"></a>node.js服务端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var https = require(&#39;https&#39;);&#10;var fs = require(&#39;fs&#39;);&#10;&#10;var options = &#123;&#10;&#9;key: fs.readFileSync(&#39;./keys/server-key.pem&#39;),&#10;&#9;// ca: [fs.readFileSync(&#39;./keys/ca-cert.pem&#39;)],&#10;&#9;cert: fs.readFileSync(&#39;./keys/server-cert.pem&#39;)&#10;&#125;;&#10;&#10;https.createServer(options,function(req,res)&#123;&#10;&#9;res.writeHead(200);&#10;&#9;res.end(&#39;hello world\n&#39;);&#10;&#125;).listen(3000,&#39;127.0.0.1&#39;);</span><br></pre></td></tr></table></figure>
-<h2 id="u53C2_u8003_u6587_u732E"><a href="#u53C2_u8003_u6587_u732E" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://cnodejs.org/topic/54745ac22804a0997d38b32d" target="_blank" rel="external">https://cnodejs.org/topic/54745ac22804a0997d38b32d</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-decode-utf8" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/29/decode-utf8/" class="article-date">
-  	<time datetime="2016-02-29T00:05:06.000Z" itemprop="datePublished">2016-02-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/29/decode-utf8/">html中UTF8编码的解码</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我们写爬虫爬回来的一些页面可能是编码后的utf8码，这时候我们需要对他们进行解码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var code10, code16, zh;&#10;&#10;code10 = &#39;&#38;#22825;&#38;#22530;&#38;#21521;&#38;#24038;,&#38;#28145;&#38;#22323;&#38;#21521;&#38;#21491;&#39;;&#10;&#10;zh = code10.replace(/&#38;#(\d+);/g, function($, $1) &#123;return String.fromCodePoint($1)&#125;);&#10;&#10;console.log(zh);&#10;&#10;code16 = zh.replace(/[^\u0000-\u00ff]/g, function($) &#123;return &#39;&#38;#x&#39; + $.codePointAt(0).toString(16) + &#39;;&#39;;&#125;);&#10;&#10;console.log(code16);&#10;&#10;zh = code16.replace(/&#38;#x(\w+);/g, function($, $1) &#123;return String.fromCodePoint(parseInt($1, 16))&#125;);&#10;&#10;console.log(zh);</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
       
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/html/">html</a>
+	<a class="article-category-link" href="/categories/npm/">npm</a>
 	</div>
 
 

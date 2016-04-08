@@ -67,10 +67,10 @@
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
 						<li>菜单</li>
-						<li>Tags</li>
+						<li>標籤</li>
 						
 						
-						<li>Über</li>
+						<li>關於</li>
 						
 					</ul>
 				</div>
@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/http/" style="font-size: 20px;">http</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 15px;">mongodb</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node-js/" style="font-size: 12.5px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
 					</div>
 				</section>
 				
@@ -162,6 +162,212 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-nginx-config" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/03/nginx-config/" class="article-date">
+  	<time datetime="2016-03-03T00:41:07.000Z" itemprop="datePublished">2016-03-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/03/nginx-config/">nginx配置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u5168_u5C40_u914D_u7F6E"><a href="#u5168_u5C40_u914D_u7F6E" class="headerlink" title="全局配置"></a>全局配置</h2><h3 id="user"><a href="#user" class="headerlink" title="user"></a>user</h3><p>用于指定nginx进程运行用户以及用户组，默认情况下将使用与用户名相同的组，除非编译时指定–user=USER和–group=GROUP</p>
+<h3 id="worker_processes"><a href="#worker_processes" class="headerlink" title="worker_processes"></a>worker_processes</h3><p>用于指定nginx的进程数，一般设置为与CPU核数一致即可。</p>
+<h3 id="error_log"><a href="#error_log" class="headerlink" title="error_log"></a>error_log</h3><p>用于指定全局错误日志文件，日志错误级别包括debug,info,notice,warn,error,crit，日志的信息量由debug到crit递减。</p>
+<p>nginx支持为每个虚拟主机配置不同的日志文件，如果在编译安装的时候加入–with-debug参数，可以使用以下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_log LOGFILE [debug_core | debug_alloc | debug_mutex | debug_event | debug_http | debug_imap];</span><br></pre></td></tr></table></figure></p>
+<p><strong>error_log off</strong>并不能关闭日志记录，而会将日志文件写入另一个文件名为off的文件中，如果你想关闭错误日志功能 ，应使用以下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_log  /dev/null crit;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;&#10;worker_processes  auto;&#10;&#10;#error_log  logs/error.log;&#10;#error_log  logs/error.log  notice;&#10;#error_log  logs/error.log  info;&#10;&#10;#pid        logs/nginx.pid;&#10;&#10;events &#123;&#10;    worker_connections  1024;&#10;    multi_accept on;&#10;&#125;&#10;&#10;http &#123;&#10;    include       mime.types;&#10;    default_type  application/octet-stream;&#10;&#10;    server_tokens   off;&#10;    sendfile        on;&#10;    tcp_nopush      on;&#10;    tcp_nodelay     on;&#10;&#10;    keepalive_timeout  65;&#10;    &#10;    server &#123;&#10;        listen 80;&#10;        server_name local.tms.shenba.com;&#10;&#10;        location / &#123;&#10;            proxy_set_header Host $host;&#10;            proxy_set_header X-Real-IP $remote_addr;&#10;            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#10;            proxy_buffering off;&#10;            proxy_pass           http://localhost:3445;&#10;        &#125;&#10;&#10;        &#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.h5.shenba.com;&#10;&#10;        location / &#123;&#10;            proxy_set_header Host $host;&#10;            proxy_set_header X-Real-IP $remote_addr;&#10;            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#10;            proxy_buffering off;&#10;            proxy_pass           http://localhost:3446;&#10;        &#125;&#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.h5statics.shenba.com;&#10;&#10;        root /Users/CoderQ/shenba/code/h5statics.shenba.com;&#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.dian.shenba.com;&#10;        #access_log /var/log/nginx/node_h5site.log&#10;        location / &#123;&#10;            proxy_set_header    X-Real-IP           $remote_addr;&#10;            proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;&#10;            proxy_set_header    Host                $http_host;&#10;            proxy_set_header    X-NginX-Proxy       true;&#10;            proxy_set_header    Connection          &#34;&#34;;&#10;            proxy_http_version  1.1;&#10;            proxy_pass          http://localhost:3444;&#10;        &#125;&#10;    &#125;&#10;    server &#123;&#10;        listen       80;&#10;        server_name  local.dstatics.shenba.com;&#10;&#10;        root   /Users/CoderQ/shenba/code/dstatics.shenba.com;&#10;&#10;        #&#23383;&#20307;&#36328;&#22495;&#10;        location ~* \.(eot|ttf|woff|js)$ &#123;&#10;            add_header Access-Control-Allow-Origin *;&#10;        &#125;&#10;    &#125;&#10;&#10;    # another virtual host using mix of IP-, name-, and port-based configuration&#10;    #&#10;    #server &#123;&#10;    #    listen       8000;&#10;    #    listen       somename:8080;&#10;    #    server_name  somename  alias  another.alias;&#10;&#10;    #    location / &#123;&#10;    #        root   html;&#10;    #        index  index.html index.htm;&#10;    #    &#125;&#10;    #&#125;&#10;&#10;&#10;    # HTTPS server&#10;    #&#10;    #server &#123;&#10;    #    listen       443 ssl;&#10;    #    server_name  localhost;&#10;&#10;    #    ssl_certificate      cert.pem;&#10;    #    ssl_certificate_key  cert.key;&#10;&#10;    #    ssl_session_cache    shared:SSL:1m;&#10;    #    ssl_session_timeout  5m;&#10;&#10;    #    ssl_ciphers  HIGH:!aNULL:!MD5;&#10;    #    ssl_prefer_server_ciphers  on;&#10;&#10;    #    location / &#123;&#10;    #        root   html;&#10;    #        index  index.html index.htm;&#10;    #    &#125;&#10;    #&#125;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/nginx/">nginx</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-create-openssl-certificate-for-https" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/02/create-openssl-certificate-for-https/" class="article-date">
+  	<time datetime="2016-03-02T11:59:33.000Z" itemprop="datePublished">2016-03-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/02/create-openssl-certificate-for-https/">通过OpenSSL创建证书文件构建https服务</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>以前用node.js构建过https服务，很简单，就是把两个文件的路径放在代码里，把http协议换成https就搞定了。不过今天我收到的是一个文件夹，两个文件怎么用都报错，于是有了自己生成证书文件来证实问题出在哪里的想法。最后发现问题在于这个文件夹里全是—–BEGIN CERTIFICATE—–的文件，找不到一个—–BEGIN RSA PRIVATE KEY—–的文件。</p>
+<h2 id="OpenSSL_u751F_u6210_u8BC1_u4E66"><a href="#OpenSSL_u751F_u6210_u8BC1_u4E66" class="headerlink" title="OpenSSL生成证书"></a>OpenSSL生成证书</h2><ul>
+<li><p>创建openssl.cnf文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[req]  &#10;    distinguished_name = req_distinguished_name  &#10;    req_extensions = v3_req  &#10;  &#10;    [req_distinguished_name]  &#10;    countryName = Country Name (2 letter code)  &#10;    countryName_default = CN  &#10;    stateOrProvinceName = State or Province Name (full name)  &#10;    stateOrProvinceName_default = BeiJing  &#10;    localityName = Locality Name (eg, city)  &#10;    localityName_default = YaYunCun  &#10;    organizationalUnitName  = Organizational Unit Name (eg, section)  &#10;    organizationalUnitName_default  = Domain Control Validated  &#10;    commonName = Internet Widgits Ltd  &#10;    commonName_max  = 64  &#10;  &#10;    [ v3_req ]  &#10;    # Extensions to add to a certificate request  &#10;    basicConstraints = CA:FALSE  &#10;    keyUsage = nonRepudiation, digitalSignature, keyEncipherment  &#10;    subjectAltName = @alt_names  &#10;  &#10;    [alt_names]  &#10;&#9;#&#27880;&#24847;&#36825;&#20010;IP.1&#30340;&#35774;&#32622;&#65292;IP&#22320;&#22336;&#38656;&#35201;&#21644;&#20320;&#30340;&#26381;&#21153;&#22120;&#30340;&#30417;&#21548;&#22320;&#22336;&#19968;&#26679;&#10;    IP.1 = 127.0.0.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为CA生成私钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out ca-key.pem -des 1024</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过CA私钥生成CSR</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key ca-key.pem -out ca-csr.pem</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过CSR文件和私钥生成CA证书</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -in ca-csr.pem -signkey ca-key.pem -out ca-cert.pem</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过服务器私钥文件和CSR文件生成服务器证书</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in server-csr.pem -out server-cert.pem -extensions v3_req -extfile openssl.cnf</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="node-js_u670D_u52A1_u7AEF"><a href="#node-js_u670D_u52A1_u7AEF" class="headerlink" title="node.js服务端"></a>node.js服务端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var https = require(&#39;https&#39;);&#10;var fs = require(&#39;fs&#39;);&#10;&#10;var options = &#123;&#10;&#9;key: fs.readFileSync(&#39;./keys/server-key.pem&#39;),&#10;&#9;// ca: [fs.readFileSync(&#39;./keys/ca-cert.pem&#39;)],&#10;&#9;cert: fs.readFileSync(&#39;./keys/server-cert.pem&#39;)&#10;&#125;;&#10;&#10;https.createServer(options,function(req,res)&#123;&#10;&#9;res.writeHead(200);&#10;&#9;res.end(&#39;hello world\n&#39;);&#10;&#125;).listen(3000,&#39;127.0.0.1&#39;);</span><br></pre></td></tr></table></figure>
+<h2 id="u53C2_u8003_u6587_u732E"><a href="#u53C2_u8003_u6587_u732E" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://cnodejs.org/topic/54745ac22804a0997d38b32d" target="_blank" rel="external">https://cnodejs.org/topic/54745ac22804a0997d38b32d</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssl/">ssl</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/ssl/">ssl</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-decode-utf8" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/29/decode-utf8/" class="article-date">
+  	<time datetime="2016-02-29T00:05:06.000Z" itemprop="datePublished">2016-02-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/29/decode-utf8/">html中UTF8编码的解码</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们写爬虫爬回来的一些页面可能是编码后的utf8码，这时候我们需要对他们进行解码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var code10, code16, zh;&#10;&#10;code10 = &#39;&#38;#22825;&#38;#22530;&#38;#21521;&#38;#24038;,&#38;#28145;&#38;#22323;&#38;#21521;&#38;#21491;&#39;;&#10;&#10;zh = code10.replace(/&#38;#(\d+);/g, function($, $1) &#123;return String.fromCodePoint($1)&#125;);&#10;&#10;console.log(zh);&#10;&#10;code16 = zh.replace(/[^\u0000-\u00ff]/g, function($) &#123;return &#39;&#38;#x&#39; + $.codePointAt(0).toString(16) + &#39;;&#39;;&#125;);&#10;&#10;console.log(code16);&#10;&#10;zh = code16.replace(/&#38;#x(\w+);/g, function($, $1) &#123;return String.fromCodePoint(parseInt($1, 16))&#125;);&#10;&#10;console.log(zh);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/html/">html</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-mongodb-update-by-self-field" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -260,6 +466,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/javascript/">javascript</a>
@@ -334,6 +544,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/opencv/">opencv</a>
@@ -392,6 +606,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/javascript/">javascript</a>
@@ -450,6 +668,10 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+	</div>
+
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/C/">C</a>
@@ -592,803 +814,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/HTTP-TCP-IP/">HTTP/TCP/IP</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-http-accept" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/06/http-accept/" class="article-date">
-  	<time datetime="2016-02-05T23:57:52.000Z" itemprop="datePublished">2016-02-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/06/http-accept/">Accept</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u683C_u5F0F"><a href="#u683C_u5F0F" class="headerlink" title="格式"></a>格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept         = &#34;Accept&#34; &#34;:&#34;&#10;                    #( media-range [ accept-params ] )&#10;media-range    = ( &#34;*/*&#34;&#10;                    | ( type &#34;/&#34; &#34;*&#34; )&#10;                    | ( type &#34;/&#34; subtype )&#10;                    ) *( &#34;;&#34; parameter )&#10;accept-params  = &#34;;&#34; &#34;q&#34; &#34;=&#34; qvalue *( accept-extension )&#10;accept-extension = &#34;;&#34; token [ &#34;=&#34; ( token | quoted-string ) ]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Accept可以接受多种类型值，多个类型值之间用逗号隔开。</li>
-<li>q用于表示客户端对于某种类型的渴望程度，q的范围为0到1，q的值越高表示客户端越渴望得到这种类型的返回。q和类型值之间用分号隔开。默认值是1。小数位数不超过3位。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept: text/plain;q=0.5,text/xml;q=0.8,text/html</span><br></pre></td></tr></table></figure>
-<p>以上内容表示：客户端非常希望服务器端传回html格式的内容；如果没有，xml格式也可以接受；实在连xml都没有，txt格式也可以接受。</p>
-<h2 id="u5E38_u7528_u7C7B_u578B"><a href="#u5E38_u7528_u7C7B_u578B" class="headerlink" title="常用类型"></a>常用类型</h2><table>
-<thead>
-<tr>
-<th>文件类型</th>
-<th>Accept内容</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*.*</td>
-<td><em>/</em></td>
-<td>不限制类型</td>
-</tr>
-<tr>
-<td>*.html</td>
-<td>text/html</td>
-<td>HTML格式</td>
-</tr>
-<tr>
-<td></td>
-<td>image/*</td>
-<td>所有图片</td>
-</tr>
-<tr>
-<td>*.gif</td>
-<td>image/gif</td>
-<td>Graphic Interchange Format</td>
-</tr>
-<tr>
-<td>*.jp2</td>
-<td>image/jp2</td>
-<td>JPEG-2000</td>
-</tr>
-<tr>
-<td>*.jpe</td>
-<td>image/jpeg</td>
-<td>JPEG</td>
-</tr>
-<tr>
-<td>*.jpeg</td>
-<td>image/jpeg</td>
-<td>JPEG</td>
-</tr>
-<tr>
-<td>*.jpg</td>
-<td>image/jpeg</td>
-<td>JPEG</td>
-</tr>
-<tr>
-<td>*.css</td>
-<td>text/css</td>
-<td>Cascading Style Sheets</td>
-</tr>
-<tr>
-<td>*.js</td>
-<td>text/javascript, application/javascript</td>
-<td>JavaScript</td>
-</tr>
-<tr>
-<td>*.json</td>
-<td>application/json</td>
-<td>JavaScript Object Notation</td>
-</tr>
-<tr>
-<td>*.xml</td>
-<td>text/xml, application/xml</td>
-<td>Extensible Markup Language</td>
-</tr>
-<tr>
-<td>*.txt</td>
-<td>text/plain</td>
-<td>Plain Text</td>
-</tr>
-</tbody>
-</table>
-<h2 id="u5168_u90E8_u7C7B_u578B"><a href="#u5168_u90E8_u7C7B_u578B" class="headerlink" title="全部类型"></a>全部类型</h2><table>
-<thead>
-<tr>
-<th>文件类型</th>
-<th>Accept内容</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>*.3gpp</td>
-<td>audio/3gpp, video/3gpp</td>
-<td>3GPP Audio/Video</td>
-</tr>
-<tr>
-<td>*.ac3</td>
-<td>audio/ac3</td>
-<td>AC3 Audio</td>
-</tr>
-<tr>
-<td>*.asf</td>
-<td>allpication/vnd.ms-asf</td>
-<td>Advanced Streaming Format</td>
-</tr>
-<tr>
-<td>*.au</td>
-<td>audio/basic</td>
-<td>AU Audio</td>
-</tr>
-<tr>
-<td>*.css</td>
-<td>text/css</td>
-<td>Cascading Style Sheets</td>
-</tr>
-<tr>
-<td>*.csv</td>
-<td>text/csv</td>
-<td>Comma Separated Values</td>
-</tr>
-<tr>
-<td>*.doc</td>
-<td>application/msword</td>
-<td>MS Word Document</td>
-</tr>
-<tr>
-<td>*.dot</td>
-<td>application/msword</td>
-<td>MS Word Template</td>
-</tr>
-<tr>
-<td>*.dtd</td>
-<td>application/xml-dtd</td>
-<td>Document Type Definition</td>
-</tr>
-<tr>
-<td>*.dwg</td>
-<td>image/vnd.dwg</td>
-<td>AutoCAD Drawing Database</td>
-</tr>
-<tr>
-<td>*.dxf</td>
-<td>image/vnd.dxf</td>
-<td>AutoCAD Drawing Interchange Format</td>
-</tr>
-<tr>
-<td>*.gif</td>
-<td>image/gif</td>
-<td>Graphic Interchange Format</td>
-</tr>
-<tr>
-<td>*.htm</td>
-<td>text/html</td>
-<td>HyperText Markup Language</td>
-</tr>
-<tr>
-<td>*.html</td>
-<td>text/html</td>
-<td>HyperText Markup Language</td>
-</tr>
-<tr>
-<td>*.jp2</td>
-<td>image/jp2</td>
-<td>JPEG-2000</td>
-</tr>
-<tr>
-<td>*.jpe</td>
-<td>image/jpeg</td>
-<td>JPEG</td>
-</tr>
-<tr>
-<td>*.jpeg</td>
-<td>image/jpeg</td>
-<td>JPEG</td>
-</tr>
-<tr>
-<td>*.jpg</td>
-<td>image/jpeg</td>
-<td>JPEG</td>
-</tr>
-<tr>
-<td>*.js</td>
-<td>text/javascript, application/javascript</td>
-<td>JavaScript</td>
-</tr>
-<tr>
-<td>*.json</td>
-<td>application/json</td>
-<td>JavaScript Object Notation</td>
-</tr>
-<tr>
-<td>*.mp2</td>
-<td>audio/mpeg, video/mpeg</td>
-<td>MPEG Audio/Video Stream, Layer II</td>
-</tr>
-<tr>
-<td>*.mp3</td>
-<td>audio/mpeg</td>
-<td>MPEG Audio Stream, Layer III</td>
-</tr>
-<tr>
-<td>*.mp4</td>
-<td>audio/mp4, video/mp4</td>
-<td>MPEG-4 Audio/Video</td>
-</tr>
-<tr>
-<td>*.mpeg</td>
-<td>video/mpeg</td>
-<td>MPEG Video Stream, Layer II</td>
-</tr>
-<tr>
-<td>*.mpg</td>
-<td>video/mpeg</td>
-<td>MPEG Video Stream, Layer II</td>
-</tr>
-<tr>
-<td>*.mpp</td>
-<td>application/vnd.ms-project</td>
-<td>MS Project Project</td>
-</tr>
-<tr>
-<td>*.ogg</td>
-<td>application/ogg, audio/ogg</td>
-<td>Ogg Vorbis</td>
-</tr>
-<tr>
-<td>*.pdf</td>
-<td>application/pdf</td>
-<td>Portable Document Format</td>
-</tr>
-<tr>
-<td>*.png</td>
-<td>image/png</td>
-<td>Portable Network Graphics</td>
-</tr>
-<tr>
-<td>*.pot</td>
-<td>application/vnd.ms-powerpoint</td>
-<td>MS PowerPoint Template</td>
-</tr>
-<tr>
-<td>*.pps</td>
-<td>application/vnd.ms-powerpoint</td>
-<td>MS PowerPoint Slideshow</td>
-</tr>
-<tr>
-<td>*.ppt</td>
-<td>application/vnd.ms-powerpoint</td>
-<td>MS PowerPoint Presentation</td>
-</tr>
-<tr>
-<td>*.rtf</td>
-<td>application/rtf, text/rtf</td>
-<td>Rich Text Format</td>
-</tr>
-<tr>
-<td>*.svf</td>
-<td>image/vnd.svf</td>
-<td>Simple Vector Format</td>
-</tr>
-<tr>
-<td>*.tif</td>
-<td>image/tiff</td>
-<td>Tagged Image Format File</td>
-</tr>
-<tr>
-<td>*.tiff</td>
-<td>image/tiff</td>
-<td>Tagged Image Format File</td>
-</tr>
-<tr>
-<td>*.txt</td>
-<td>text/plain</td>
-<td>Plain Text</td>
-</tr>
-<tr>
-<td>*.wdb</td>
-<td>application/vnd.ms-works</td>
-<td>MS Works Database</td>
-</tr>
-<tr>
-<td>*.wps</td>
-<td>application/vnd.ms-works</td>
-<td>Works Text Document</td>
-</tr>
-<tr>
-<td>*.xhtml</td>
-<td>application/xhtml+xml</td>
-<td>Extensible HyperText Markup Language</td>
-</tr>
-<tr>
-<td>*.xlc</td>
-<td>application/vnd.ms-excel</td>
-<td>MS Excel Chart</td>
-</tr>
-<tr>
-<td>*.xlm</td>
-<td>application/vnd.ms-excel</td>
-<td>MS Excel Macro</td>
-</tr>
-<tr>
-<td>*.xls</td>
-<td>application/vnd.ms-excel</td>
-<td>MS Excel Spreadsheet</td>
-</tr>
-<tr>
-<td>*.xlt</td>
-<td>application/vnd.ms-excel</td>
-<td>MS Excel Template</td>
-</tr>
-<tr>
-<td>*.xlw</td>
-<td>application/vnd.ms-excel</td>
-<td>MS Excel Workspace</td>
-</tr>
-<tr>
-<td>*.xml</td>
-<td>text/xml, application/xml</td>
-<td>Extensible Markup Language</td>
-</tr>
-<tr>
-<td>*.zip</td>
-<td>aplication/zip</td>
-<td>Compressed Archive</td>
-</tr>
-</tbody>
-</table>
-<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1" target="_blank" rel="external">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1</a></li>
-<li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.9" target="_blank" rel="external">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.9</a></li>
-<li><a href="http://blog.sina.com.cn/s/blog_866e403f010179f1.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_866e403f010179f1.html</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/HTTP-TCP-IP/">HTTP/TCP/IP</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-http-header" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/06/http-header/" class="article-date">
-  	<time datetime="2016-02-05T23:22:28.000Z" itemprop="datePublished">2016-02-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/06/http-header/">HTTP报头字段列表</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u7B80_u8FF0"><a href="#u7B80_u8FF0" class="headerlink" title="简述"></a>简述</h2><ul>
-<li>HTTP报头分为通用报头、请求报头、响应报头和实体报头。    </li>
-<li>请求方的HTTP报头结构：通用报头、请求报头和实体报头。</li>
-<li>响应方的HTTP报头结构：通用报头、响应报头和实体报头。</li>
-</ul>
-<h2 id="u8BF7_u6C42_u5934"><a href="#u8BF7_u6C42_u5934" class="headerlink" title="请求头"></a>请求头</h2><ul>
-<li><p>Accept </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept: text/plain</span><br></pre></td></tr></table></figure>
-<p>能够接受的回应内容类型。<a href="/2016/02/06/http-accept/">更多类型</a> 。</p>
-</li>
-<li><p>Accept-Charset</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Charset: utf-8</span><br></pre></td></tr></table></figure>
-<p>能够接受的字符集。</p>
-</li>
-<li><p>Accept-Encoding</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding: gzip,deflate</span><br></pre></td></tr></table></figure>
-<p>能够支持的编码方式。默认是identity</p>
-</li>
-<li><p>Accept-Language</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Language: zh-cn</span><br></pre></td></tr></table></figure>
-<p>能够接受的自然语言。 </p>
-</li>
-<li><p>Accept-Datetime</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Datetime: Thu, 31 May 2007 20:35:00 GMT</span><br></pre></td></tr></table></figure>
-<p>能够接受的按照时间来表示的版本。 </p>
-</li>
-<li><p>Authorization</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</span><br></pre></td></tr></table></figure>
-<p>用于超文本传输协议的认证的认证信息。</p>
-</li>
-<li><p>Cache-Control</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control: no-cache</span><br></pre></td></tr></table></figure>
-<p>用来指定在这次的请求/回复链中的所有缓存机制都必须遵守的指令。</p>
-</li>
-<li><p>Connection</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection: keep-alive &#60;br&#62; Connection: Upgrade</span><br></pre></td></tr></table></figure>
-<p>该浏览器想要优先使用的连接类型</p>
-</li>
-<li><p>Cookie</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: Version=1; name=test1;</span><br></pre></td></tr></table></figure>
-<p>之前由服务器通过 Set-Cookie 发送的一个超文本传输协议 Cookie 。</p>
-</li>
-<li><p>Content-Length</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Length: 348</span><br></pre></td></tr></table></figure>
-<p>以八位字节数组（8位的字节）表示的请求体的长度。  </p>
-</li>
-<li><p>Content-MD5</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==</span><br></pre></td></tr></table></figure>
-<p>请求体的内容的二进制 MD5 散列值，以 Base64 编码的结果。</p>
-</li>
-<li><p>Content-Type</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: application/x-www-form-urlencoded</span><br></pre></td></tr></table></figure>
-<p>请求体的多媒体类型（用于POST和PUT请求中）  </p>
-</li>
-<li><p>Date</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Date: Tue, 15 Nov 1994 08:12:31 GMT</span><br></pre></td></tr></table></figure>
-<p>发送该消息的日期和时间(按照 RFC 7231 中定义的”超文本传输协议日期”格式来发送) 。  </p>
-</li>
-<li><p>Expect</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expect: 100-continue</span><br></pre></td></tr></table></figure>
-<p>表明客户端要求服务器做出特定的行为。  </p>
-</li>
-<li><p>From</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">From: user@example.com</span><br></pre></td></tr></table></figure>
-<p>发起此请求的用户的邮件地址。  </p>
-</li>
-<li><p>Host</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Host: coderq.github.io</span><br></pre></td></tr></table></figure>
-<p>服务器的域名(用于虚拟主机 )，以及服务器所监听的 传输控制协议端口号。如果所请求的端口是对应的服务的标准端口，则端口号可被省略。  </p>
-</li>
-<li><p>If-Match</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-Match: &#34;737060cd8c284d8af7ad3082f209582d&#34;</span><br></pre></td></tr></table></figure>
-<p>仅当客户端提供的实体与服务器上对应的实体相匹配时，才进行对应的操作。主要作用时，用作像 PUT 这样的方法中，仅当从用户上次更新某个资源以来，该资源未被修改的情况下，才更新该资源。  </p>
-</li>
-<li><p>If-Modified-Since</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-Modified-Since: Sat, 29 Oct 1994 19:43:31 GMT</span><br></pre></td></tr></table></figure>
-<p>允许在对应的内容未被修改的情况下返回304未修改（ 304 Not Modified ）。  </p>
-</li>
-<li><p>If-None-Match</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-None-Match: &#34;737060cd8c284d8af7ad3082f209582d&#34;</span><br></pre></td></tr></table></figure>
-<p>允许在对应的内容未被修改的情况下返回304未修改（ 304 Not Modified ）。  </p>
-</li>
-<li><p>If-Range </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-Range: &#34;737060cd8c284d8af7ad3082f209582d&#34;</span><br></pre></td></tr></table></figure>
-<p>如果该实体未被修改过，则向我发送我所缺少的那一个或多个部分；否则，发送整个新的实体。  </p>
-</li>
-<li><p>If-Unmodified-Since</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">If-Unmodified-Since: Sat, 29 Oct 1994 19:43:31 GMT</span><br></pre></td></tr></table></figure>
-<p>仅当该实体自某个特定时间已来未被修改的情况下，才发送回应。  </p>
-</li>
-<li><p>Max-Forwards</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Max-Forwards: 10</span><br></pre></td></tr></table></figure>
-<p>限制该消息可被代理及网关转发的次数。  </p>
-</li>
-<li><p>Origin</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: http://www.example-social-network.com</span><br></pre></td></tr></table></figure>
-<p>发起一个针对跨来源资源共享的请求（要求服务器在回应中加入一个‘访问控制-允许来源’（’Access-Control-Allow-Origin’）字段）。  </p>
-</li>
-<li><p>Pragma</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pragma: no-cache</span><br></pre></td></tr></table></figure>
-<p>与具体的实现相关，这些字段可能在请求/回应链中的任何时候产生 多种效果。  </p>
-</li>
-<li><p>Proxy-Authorization</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==</span><br></pre></td></tr></table></figure>
-<p>用来向代理进行认证的认证信息。</p>
-</li>
-<li><p>Range</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Range: bytes=500-999</span><br></pre></td></tr></table></figure>
-<p>仅请求某个实体的一部分。字节偏移以0开始。  </p>
-</li>
-<li><p>Referer</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Referer: http://en.wikipedia.org/wiki/Main_Page</span><br></pre></td></tr></table></figure>
-<p>表示浏览器所访问的前一个页面，正是那个页面上的某个链接将浏览器带到了当前所请求的这个页面。(“引导者”（“referrer”）这个单词，在RFC 中被拼错了，因此在大部分的软件实现中也拼错了，以至于，错误的拼法成为了标准的用法，还被当成了正确的术语) 。 </p>
-</li>
-<li><p>TE</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TE: trailers, deflate</span><br></pre></td></tr></table></figure>
-<p> 浏览器预期接受的传输编码方式：可使用回应协议头Transfer-Encoding 字段中的那些值，另外还有一个值可用，”trailers”（与” 分 块 “传输方式相关），用来表明，浏览器希望在最后一个尺寸为0的块之后还接收到一些额外的字段。  </p>
-</li>
-<li><p>User-Agent</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0</span><br></pre></td></tr></table></figure>
-<p>浏览器的浏览器身份标识字符串。  </p>
-</li>
-<li><p>Upgrade</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11</span><br></pre></td></tr></table></figure>
-<p>要求服务器升级到另一个协议。  </p>
-</li>
-<li><p>Via</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Via: 1.0 fred, 1.1 example.com (Apache/1.1)</span><br></pre></td></tr></table></figure>
-<p>向服务器告知，这个请求是由哪些代理发出的。  </p>
-</li>
-<li><p>Warning</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Warning: 199 Miscellaneous warning</span><br></pre></td></tr></table></figure>
-<p>一个一般性的警告，告知，在实体内容体中可能存在错误。  </p>
-</li>
-</ul>
-<h2 id="u54CD_u5E94_u5934"><a href="#u54CD_u5E94_u5934" class="headerlink" title="响应头"></a>响应头</h2><ul>
-<li><p>Access-Control-Allow-Origin</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: *</span><br></pre></td></tr></table></figure>
-<p>指定哪些网站可参与到跨来源资源共享过程中。 </p>
-</li>
-<li><p>Accept-Patch</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Patch: text/example;charset=utf-8</span><br></pre></td></tr></table></figure>
-<p>指定服务器支持哪种文档格式。</p>
-</li>
-<li><p>Accept-Ranges</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Ranges: bytes</span><br></pre></td></tr></table></figure>
-<p>这个服务器支持哪些种类的部分内容范围。</p>
-</li>
-<li><p>Age</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Age: 12</span><br></pre></td></tr></table></figure>
-<p>这个对象在代理缓存中存在的时间，以秒为单位。</p>
-</li>
-<li><p>Allow</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Allow: GET, HEAD</span><br></pre></td></tr></table></figure>
-<p>对于特定资源有效的动作。针对405不允许该方法（ 405 Method not allowed ）而使用。</p>
-</li>
-<li><p>Cache-Control</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-Control: max-age=3600</span><br></pre></td></tr></table></figure>
-<p>向从服务器直到客户端在内的所有缓存机制告知，它们是否可以缓存这个对象。其单位为秒。</p>
-</li>
-<li><p>Connection</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
-<p>针对该连接所预期的选项。</p>
-</li>
-<li><p>Content-Disposition</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Disposition: attachment; filename=&#34;fname.ext&#34;</span><br></pre></td></tr></table></figure>
-<p>强制浏览器弹出下载窗口，注意不可以禁止缓存。</p>
-</li>
-<li><p>Content-Encoding</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Encoding: gzip</span><br></pre></td></tr></table></figure>
-<p>在数据上使用的编码类型。参考超文本传输协议压缩。</p>
-</li>
-<li><p>Content-Language</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Language: da</span><br></pre></td></tr></table></figure>
-<p>内容所使用的语言。</p>
-</li>
-<li><p>Content-Length</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Length: 348</span><br></pre></td></tr></table></figure>
-<p>回应消息体的长度，以字节（8位为一字节）为单位。</p>
-</li>
-<li><p>Content-Location</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Location: /index.htm</span><br></pre></td></tr></table></figure>
-<p>所返回的数据的一个候选位置。</p>
-</li>
-<li><p>Content-MD5</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==</span><br></pre></td></tr></table></figure>
-<p>回应内容的二进制 MD5 散列，以 Base64 方式编码。</p>
-</li>
-<li><p>Content-Range</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Range: bytes 21010-47021/47022</span><br></pre></td></tr></table></figure>
-<p>这条部分消息是属于某条完整消息的哪个部分。</p>
-</li>
-<li><p>Content-Type</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Type: text/html; charset=utf-8</span><br></pre></td></tr></table></figure>
-<p>当前内容的MIME类型。</p>
-</li>
-<li><p>Date</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Date: Tue, 15 Nov 1994 08:12:31 GMT</span><br></pre></td></tr></table></figure>
-<p>此条消息被发送时的日期和时间(按照 RFC 7231 中定义的“超文本传输协议日期”格式来表示) 。</p>
-</li>
-<li><p>ETag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ETag: &#34;737060cd8c284d8af7ad3082f209582d&#34;</span><br></pre></td></tr></table></figure>
-<p>对于某个资源的某个特定版本的一个标识符，通常是一个消息散列。</p>
-</li>
-<li><p>Expires</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expires: Thu, 01 Dec 1994 16:00:00 GMT</span><br></pre></td></tr></table></figure>
-<p>指定一个日期/时间，超过该时间则认为此回应已经过期。</p>
-</li>
-<li><p>Last-Modified</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Last-Modified: Tue, 15 Nov 1994 12:45:26 GMT</span><br></pre></td></tr></table></figure>
-<p>所请求的对象的最后修改日期(按照 RFC 7231 中定义的“超文本传输协议日期”格式来表示) 。</p>
-</li>
-<li><p>Link</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Link: &#60;/feed&#62;; rel=&#34;alternate&#34;</span><br></pre></td></tr></table></figure>
-<p>用来表达与另一个资源之间的类型关系，此处所说的类型关系是在 RFC 5988 中定义的。</p>
-</li>
-<li><p>Location</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Location: http://www.w3.org/pub/WWW/People.html</span><br></pre></td></tr></table></figure>
-<p>用来进行重定向，或者在创建了某个新资源时使用。</p>
-</li>
-<li><p>Pragma</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Pragma: no-cache</span><br></pre></td></tr></table></figure>
-<p>与具体的实现相关，这些字段可能在请求/回应链中的任何时候产生多种效果。</p>
-</li>
-<li><p>Proxy-Authenticate</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Proxy-Authenticate: Basic</span><br></pre></td></tr></table></figure>
-<p>要求在访问代理时提供身份认证信息。</p>
-</li>
-<li><p>Public-Key-Pins</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Public-Key-Pins: max-age=2592000; pin-sha256=&#34;E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=&#34;;</span><br></pre></td></tr></table></figure>
-<p>用于缓解中间人攻击 ，声明网站的认证用的传输层安全协议证书的散列值。</p>
-</li>
-<li><p>Refresh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Refresh: 5; url=http://www.w3.org/pub/WWW/People.html</span><br></pre></td></tr></table></figure>
-<p>用于重定向或当一个新的资源被创建。这个刷新会在5秒后执行。</p>
-</li>
-<li><p>Retry-After</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Retry-After: 120&#10;Retry-After: Fri, 07 Nov 2014 23:59:59 GMT</span><br></pre></td></tr></table></figure>
-<p>如果某个实体临时不可用，则此协议头用来告知客户端日后重试。其值可以是一个特定的时间段(以秒为单位)或一个超文本传输协议日期。</p>
-</li>
-<li><p>Server</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server: Apache/2.4.1 (Unix)</span><br></pre></td></tr></table></figure>
-<p>服务器的名字。</p>
-</li>
-<li><p>Set-Cookie</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1</span><br></pre></td></tr></table></figure>
-<p>HTTP cookie</p>
-</li>
-<li><p>Transfer-Encoding</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Transfer-Encoding: chunked</span><br></pre></td></tr></table></figure>
-<p>用来将实体安全地传输给用户的编码形式。当前定义的方法包括：分块、压缩（compress）、缩小（deflate）、压缩（gzip）、实体（identity）。</p>
-</li>
-<li><p>Upgrade</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11</span><br></pre></td></tr></table></figure>
-<p>要求客户端升级到另一个协议。</p>
-</li>
-<li><p>Vary</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vary: *</span><br></pre></td></tr></table></figure>
-<p>告知下游的代理服务器，应当如何对未来的请求协议头进行匹配，以决定是否可使用已缓存的回应内容而不是重新从原始服务器请求新的内容。</p>
-</li>
-<li><p>Via</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Via: 1.0 fred, 1.1 example.com (Apache/1.1)</span><br></pre></td></tr></table></figure>
-<p>告知代理服务器的客户端，当前回应是通过什么途径发送的。</p>
-</li>
-<li><p>Warning</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Warning: 199 Miscellaneous warning</span><br></pre></td></tr></table></figure>
-<p>一般性的警告，告知在实体内容体中可能存在错误。</p>
-</li>
-<li><p>WWW-Authenticate</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WWW-Authenticate: Basic</span><br></pre></td></tr></table></figure>
-<p>表明在请求获取这个实体时应当使用的认证模式。</p>
-</li>
-</ul>
-<h2 id="Accept_u4E0EContent-Type_u7684_u533A_u522B"><a href="#Accept_u4E0EContent-Type_u7684_u533A_u522B" class="headerlink" title="Accept与Content-Type的区别"></a>Accept与Content-Type的区别</h2><ul>
-<li>Accept代表发送端希望得到的数据类型</li>
-<li>Content-Type代表客户端或服务端发送的实体数据的数据类型</li>
-</ul>
-<p>扩展阅读：<a href="https://www.w3.org/Protocols/rfc2616/rfc2616.html" target="_blank" rel="external">官方文档</a></p>
-<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://blog.csdn.net/muzizongheng/article/details/46795243" target="_blank" rel="external">http://blog.csdn.net/muzizongheng/article/details/46795243</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/HTTP%E5%A4%B4%E5%AD%97%E6%AE%B5%E5%88%97%E8%A1%A8" target="_blank" rel="external">https://zh.wikipedia.org/wiki/HTTP%E5%A4%B4%E5%AD%97%E6%AE%B5%E5%88%97%E8%A1%A8</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/HTTP-TCP-IP/">HTTP/TCP/IP</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-node-mongodb" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/05/node-mongodb/" class="article-date">
-  	<time datetime="2016-02-05T09:03:45.000Z" itemprop="datePublished">2016-02-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/05/node-mongodb/">MongoDB的NodeJS版API操作笔记</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="upsert_u7684_u4F7F_u7528"><a href="#upsert_u7684_u4F7F_u7528" class="headerlink" title="upsert的使用"></a>upsert的使用</h2><p>今天用upsert为数据库增加一些可能没有的ISBN号，结果怎么试都不成功，求助于github上的<a href="https://github.com/mongodb/node-mongodb-native/blob/2.1/docs/reference/content/reference/crud/index.md" target="_blank" rel="external">文档</a>才得以解决。<br>使用upsert要注意<em>upsert的值必须是true，1是不可以的</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection(&#39;isbn&#39;).updateOne(&#123;&#10;&#9;isbn: info.isbn&#10;&#125;, &#123;$set: info&#125;, &#123;&#10;&#9;upsert: true&#10;&#125;, function(err, ret) &#123;&#10;&#9;if (err) reject(err);&#10;&#9;else resolve(ret.result);&#10;&#125;);</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/mongodb/">mongodb</a>
 	</div>
 
 
