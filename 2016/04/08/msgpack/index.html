@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="CoderQ·博客">
 <meta property="og:description" content="我们平时做接口调接口，总会遇到一些接口返回的数据量特别庞大的问题，这容易导致客户端流量增加，也影响响应时间。msgpack可以将数据压缩，通过msgpack，我们一般可以讲原始数据压缩一半左右，当数量很大时，非常赞！步骤也很简单，如下：1.安装模块1npm install msgpack5 --save
 2.压缩/解压1let msgpack = require(&amp;#39;msgpack5&amp;#39">
-<meta property="og:updated_time" content="2016-04-08T00:54:15.000Z">
+<meta property="og:updated_time" content="2016-04-08T03:01:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="msgpack使用记录">
 <meta name="twitter:description" content="我们平时做接口调接口，总会遇到一些接口返回的数据量特别庞大的问题，这容易导致客户端流量增加，也影响响应时间。msgpack可以将数据压缩，通过msgpack，我们一般可以讲原始数据压缩一半左右，当数量很大时，非常赞！步骤也很简单，如下：1.安装模块1npm install msgpack5 --save
@@ -211,6 +211,7 @@
 <p><code>encode</code>的结果是Buffer对象，你可以直接返回二进制编码，也可以通过toString(‘hex’)返回十六进制编码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#36820;&#22238;&#20108;&#36827;&#21046;&#10;this.body = encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;);&#10;// &#36820;&#22238;&#21313;&#20845;&#36827;&#21046;&#10;this.body = encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;).toString(&#39;hex&#39;);</span><br></pre></td></tr></table></figure></p>
 <p>如果你用二进制，用request测试，记得必须将encoding设为null<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request(&#123;&#10;&#9;method: &#39;post&#39;,&#10;&#9;url:&#39;http://localhost:3000/sign_in&#39;, &#10;&#9;form: &#123;account: &#39;11111121123&#39;, password: &#39;123456&#39;&#125;,&#10;&#9;encoding: null&#10;&#125;, function(err, res, body) &#123;&#10;&#9;if (err) throw err;&#10;&#9;console.log(msgpack.decode(body));&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
 <p>如果你用十六进制，需要将结果转为二进制后才能正常解码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request(&#123;&#10;&#9;method: &#39;post&#39;,&#10;&#9;url:&#39;http://localhost:3000/sign_in&#39;, &#10;&#9;form: &#123;account: &#39;11111121123&#39;, password: &#39;123456&#39;&#125;,&#10;&#125;, function(err, res, body) &#123;&#10;&#9;if (err) throw err;&#10;&#9;console.log(msgpack.decode(Buffer(body, &#39;hex&#39;)));&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><em>注意</em> 对数据进行encode操作的时候，如果encode的内容是类似于mongoose返回的实体对象这一类的数据的话，这个对象是存在某些读写限制的，encode遇到这类数据后抛出<code>not implemented yet</code>的异常。如果是mongoose的实体对象，可以使用其内置的toObject方法将对象转换为普通对象再执行encode操作。</p>
 
       
     </div>
