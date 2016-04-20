@@ -66,7 +66,7 @@
 				<div class="tips-box hide">
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
-						<li>菜单</li>
+						<li>Menu</li>
 						<li>標籤</li>
 						
 						
@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node-js/" style="font-size: 12.5px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 17.5px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12.5px;">orientdb</a> <a href="/tags/redis/" style="font-size: 17.5px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
 					</div>
 				</section>
 				
@@ -162,6 +162,374 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-backend-build" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/20/backend-build/" class="article-date">
+  	<time datetime="2016-04-20T00:06:21.000Z" itemprop="datePublished">2016-04-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/20/backend-build/">我是如何构建我的后端服务器的</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近有空的时候一直在整理自己的后端代码，希望整理出一套较为通用的代码，可以运用到大多数的项目中去。现在的项目基本都是前后端分离的，后端只负责提供restful api接口，根据不同的项目，和前端会有不同的集成方式，例如app的后端，基本就是一个独立的项目，我个人的博客后端，我会考虑使用nginx做一个转发，当接收到<code>/</code>到请求时，转发给前端页面处理；当接受到<code>/service</code>请求时，转发给后端处理，这些请求基本上都是前端的ajax请求，避免了跨域的麻烦。后端的代码中我们只要用一个简单的use方法做转发可以将<code>/service</code>的请求转回原地址了。</p>
+<p>我的项目目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">controller // &#23384;&#20648;&#25511;&#21046;&#22120;&#30340;&#25991;&#20214;&#22841;&#10;library // &#23384;&#20648;&#36890;&#29992;&#20195;&#30721;&#30340;&#25991;&#20214;&#22841;&#10;- error.js // &#36890;&#29992;&#38169;&#35823;&#23450;&#20041;&#10;- helper.js // &#31995;&#32479;&#32423;&#36890;&#29992;&#20989;&#25968;&#23450;&#20041;&#65292;&#20363;&#22914;jwt&#20196;&#29260;&#29983;&#20135;&#21644;&#26657;&#39564;&#10;- middleware.js // &#20013;&#38388;&#20214;&#23450;&#20041;&#10;- util.js // &#24120;&#35268;&#36890;&#29992;&#20989;&#25968;&#23450;&#20041;&#65292;&#19968;&#33324;&#20197;lodash&#25110;&#31995;&#32479;&#20869;&#32622;&#30340;util&#27169;&#22359;&#20026;&#22522;&#30784;&#65292;md5&#31561;&#33258;&#24049;&#24120;&#29992;&#30340;&#26041;&#27861;&#10;model // &#23384;&#20648;mysql&#12289;mongo&#21450;redis&#25968;&#25454;&#27169;&#22411;&#30340;&#25991;&#20214;&#22841;&#10;- mysql // mysql&#10;- mongo // mongodb&#10;- redis // redis&#10;- index.js&#10;node_modules // node.js&#30340;&#27169;&#22359;&#10;router // &#31995;&#32479;&#36335;&#30001;&#10;- v1.js // &#29256;&#26412;1&#30340;&#36335;&#30001;&#10;- v1_1.js // &#29256;&#26412;1.1&#30340;&#36335;&#30001;&#10;- index.js // &#36890;&#36807;use&#26041;&#27861;&#35843;&#29992;&#21508;&#29256;&#26412;&#36335;&#30001;&#10;service // controller&#21644;model&#20043;&#38388;&#30340;&#19994;&#21153;&#36923;&#36753;&#20195;&#30721;&#10;test // &#21333;&#20803;&#27979;&#35797;&#25991;&#20214;&#22841;&#10;.gitignore&#10;app.js // &#21551;&#21160;&#25991;&#20214;&#10;config.js // &#37197;&#32622;&#25991;&#20214;&#10;package.json // &#27169;&#22359;&#37197;&#32622;&#25991;&#20214;&#10;readme.md</span><br></pre></td></tr></table></figure></p>
+<p>所有的请求都会经过路由再到达控制器，路由是所有代码内容的第一关，特别是在app项目里面，url一旦发布就难以修改（客户端也可以通过默写热修复的方法处理），url地址的设计好坏对于项目维护很重要。我在定义路由的时候，会有一个总的index.js文件，app.js只要引入这个文件即可，项目就可以访问到所有版本的api。</p>
+<p>index.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"><span class="comment">/* jshint node: true */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Mdl = <span class="built_in">require</span>(<span class="string">'../library/middleware'</span>);</span><br><span class="line"><span class="keyword">const</span> Ctr = <span class="built_in">require</span>(<span class="string">'../controller'</span>);</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="keyword">const</span> v_1 = <span class="built_in">require</span>(<span class="string">'./v1'</span>);</span><br><span class="line"><span class="keyword">const</span> v_1_1 = <span class="built_in">require</span>(<span class="string">'./v1_1'</span>);</span><br><span class="line"><span class="keyword">const</span> v_admin = <span class="built_in">require</span>(<span class="string">'./admin'</span>);</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">// restful api v1</span></span><br><span class="line">router.use(<span class="string">'/1'</span>, v_1.routes(), v_1.allowedMethods());</span><br><span class="line"><span class="comment">// restful api v1.1</span></span><br><span class="line">rotuer.use(<span class="string">'/1.1'</span>, v_1_1.routes(), v_1_1.allowedMethods());</span><br><span class="line"><span class="comment">// manage api</span></span><br><span class="line">router.use(<span class="string">'/admin'</span>, v_admin.routes(), v_admin.allowedMethods());</span><br><span class="line"></span><br><span class="line">router.all(<span class="string">'*'</span>, <span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.status = <span class="number">404</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/node-js/">node.js</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mongodb-command" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/18/mongodb-command/" class="article-date">
+  	<time datetime="2016-04-18T09:26:52.000Z" itemprop="datePublished">2016-04-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/18/mongodb-command/">自己平时使用过的一些mongodb命令记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u6839_u636E_u65E5_u671F_u7EDF_u8BA1_u51FA_u67D0_u4E9B_u624B_u673A_u53F7_u8BB0_u5F55_u6570"><a href="#u6839_u636E_u65E5_u671F_u7EDF_u8BA1_u51FA_u67D0_u4E9B_u624B_u673A_u53F7_u8BB0_u5F55_u6570" class="headerlink" title="根据日期统计出某些手机号记录数"></a>根据日期统计出某些手机号记录数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = db.spinetmp.aggregate([&#10;&#9;&#123;$match: &#123;status: &#39;visable&#39;, checkuserid: &#123;$in: [&#39;156****5285&#39;, &#39;156****5194&#39;, &#39;137****8875&#39;, &#39;158****1125&#39;]&#125;&#125;&#125;,&#10;&#9;&#123;$project: &#123;mobile: &#39;$checkuserid&#39;, date: &#123;$dateToString: &#123;format: &#34;%Y-%m-%d&#34;, date: &#34;$version&#34; &#125;&#125;&#125;&#125;,&#10;&#9;&#123;$group: &#123;_id: &#123;mobile: &#39;$mobile&#39;, date: &#34;$date&#34;&#125;, count: &#123;$sum: 1&#125;&#125;&#125;,&#10;&#9;&#123;$sort: &#123;&#39;_id.mobile&#39;: 1, &#39;_id.date&#39;: &#65293;1&#125;&#125;&#10;]);&#10;// &#23558;&#25968;&#25454;&#36716;&#20026;csv&#26684;&#24335;&#10;data.map(function(item) &#123;&#10;&#9;return item._id.mobile + &#39;,&#39; + item._id.date + &#39;,&#39; + item.count;&#10;&#125;).join(&#34;\n&#34;);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/mongodb/">mongodb</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mysql-commander" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/18/mysql-commander/" class="article-date">
+  	<time datetime="2016-04-17T23:41:59.000Z" itemprop="datePublished">2016-04-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/18/mysql-commander/">Mysql的一些语法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>添加一个主键并将其放到表的最前<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE `test`.`user` &#10;ADD COLUMN `id` INT UNSIGNED NOT NULL COMMENT &#39;&#20027;&#38190;&#39; FIRST,&#10;ADD PRIMARY KEY (`id`);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascript-skill" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/13/javascript-skill/" class="article-date">
+  	<time datetime="2016-04-12T23:33:29.000Z" itemprop="datePublished">2016-04-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/13/javascript-skill/">javascript的一些常用技能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32"><a href="#u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32" class="headerlink" title="反转一个字符串"></a>反转一个字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'123456789'</span>.split(<span class="string">''</span>).revert().join(<span class="string">''</span>); <span class="comment">// '987654321';</span></span><br></pre></td></tr></table></figure>
+<h2 id="u53BB_u91CD"><a href="#u53BB_u91CD" class="headerlink" title="去重"></a>去重</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'11122213434'</span>.split(<span class="string">''</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, ary</span>) </span>&#123;<span class="keyword">return</span> index == ary.indexOf(item)&#125;).join(<span class="string">''</span>); <span class="comment">// '1234'</span></span><br></pre></td></tr></table></figure>
+<h2 id="u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32"><a href="#u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32" class="headerlink" title="多维数组-&gt;字符串"></a>多维数组-&gt;字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[[<span class="number">1</span>], <span class="number">2</span>], [<span class="number">3</span>], <span class="number">4</span>].join(); <span class="comment">// '1,2,3,4'</span></span><br></pre></td></tr></table></figure>
+<h2 id="u8FD4_u56DE_u968F_u673A_u5143_u7D20"><a href="#u8FD4_u56DE_u968F_u673A_u5143_u7D20" class="headerlink" title="返回随机元素"></a>返回随机元素</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ary = [<span class="string">'male'</span>, <span class="string">'female'</span>];</span><br><span class="line"><span class="keyword">let</span> ret = ary[~~(<span class="built_in">Math</span>.random() * ary.length)];</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mac-server-cmd" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/11/mac-server-cmd/" class="article-date">
+  	<time datetime="2016-04-10T22:29:46.000Z" itemprop="datePublished">2016-04-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/11/mac-server-cmd/">MAC上的各种服务命令备忘</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># start&#10;sudo /usr/local/mysql/support-files/mysql.server start&#10;# stop&#10;sudo /usr/local/mysql/support-files/mysql.server stop&#10;# restart &#10;sudo /usr/local/mysql/support-files/mysql.server restart</span><br></pre></td></tr></table></figure>
+<h2 id="mongo"><a href="#mongo" class="headerlink" title="mongo"></a>mongo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath ~/mongodb_path</span><br></pre></td></tr></table></figure>
+<h2 id="orientdb"><a href="#orientdb" class="headerlink" title="orientdb"></a>orientdb</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/server.sh&#10;./bin/console.sh (or http://localhost:2424)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/orientdb/">orientdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/mac/">mac</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-orientdb-note-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/08/orientdb-note-1/" class="article-date">
+  	<time datetime="2016-04-08T09:05:56.000Z" itemprop="datePublished">2016-04-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/08/orientdb-note-1/">OrientDB学习笔记（一）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u4E0B_u8F7D_u3001_u5B89_u88C5_u548C_u542F_u52A8"><a href="#u4E0B_u8F7D_u3001_u5B89_u88C5_u548C_u542F_u52A8" class="headerlink" title="下载、安装和启动"></a>下载、安装和启动</h2><p>下载地址<a href="http://orientdb.com/download/" target="_blank" rel="external">http://orientdb.com/download/</a>，下载后解压进入bin目录，执行<code>./server.sh</code>命令，搞定。</p>
+<p>你可以通过<a href="http://localhost:2480访问web地址，也可以执行`./console.sh`启动客户端。" target="_blank" rel="external">http://localhost:2480访问web地址，也可以执行`./console.sh`启动客户端。</a></p>
+<h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>OrientDB是一款开源的非关系数据库系统，使用Java实现的，他是一个符合模型的数据库，支持文档、图和键值三种模型。记录间的关系以直接联系的方式存储在图数据库。</p>
+<h2 id="u7279_u8D28"><a href="#u7279_u8D28" class="headerlink" title="特质"></a>特质</h2><p>支持ACID事务保证。<br>图数据库的管理，采用Apache的TinkerPop开源图计算框架。</p>
+<p>Schema Class Cluster Record</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/orientdb/">orientdb</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/图数据库/">图数据库</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-msgpack" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -391,8 +759,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570"><a href="#u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570" class="headerlink" title="随机字符串函数"></a>随机字符串函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 生成随机字符串</span><br><span class="line"> *</span><br><span class="line"> * @param total 字符串长度</span><br><span class="line"> * @param method 字符串类型，数字／小写字母／大写字母</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> randomString = <span class="function"><span class="keyword">function</span>(<span class="params">total, method</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> codes = [], ret = <span class="string">''</span>;</span><br><span class="line">    method = method || <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.number) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">48</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.lower) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">26</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">97</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.upper) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">26</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">65</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (total--) &#123;</span><br><span class="line">        ret += <span class="built_in">String</span>.fromCharCode(codes[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * codes.length)]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 数字</span><br><span class="line"> */</span></span><br><span class="line">randomString.number = <span class="number">1</span>;</span><br><span class="line"><span class="comment">/** </span><br><span class="line"> * 小写字母</span><br><span class="line"> */</span></span><br><span class="line">randomString.lower = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 大写字母</span><br><span class="line"> */</span></span><br><span class="line">randomString.upper = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="u7EE7_u627F_u51FD_u6570"><a href="#u7EE7_u627F_u51FD_u6570" class="headerlink" title="继承函数"></a>继承函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var extend = function() &#123;&#10;    var params = Array.prototype.slice.call(arguments),&#10;        method = &#39;number&#39; == typeof params[params.length - 1] ? params.pop() : 0,&#10;        ret = method &#38; extend.replaceFirst ? params.shift() : &#123;&#125;,&#10;        deep = method &#38; extend.deepExtend,&#10;        rmNull = method &#38; extend.removeNull,&#10;        obj;&#10;&#10;    while (params.length) &#123;&#10;        obj = params.shift();&#10;        for (var k in obj) &#123;&#10;            if (null === obj[k]) &#123;&#10;                rmNull ? delete ret[k] : ret[k] = obj[k];&#10;            &#125; else if (!ret[k] || ret[k].constructor !== Object || obj[k].constructor !== Object) &#123;&#10;                ret[k] = obj[k];&#10;            &#125; else &#123;&#10;                ret[k] = deep ? extend(ret[k], obj[k], method) : obj[k];&#10;            &#125;&#10;        &#125;&#10;    &#125;&#10;    return ret;&#10;&#125;;&#10;/**&#10; * &#23558;&#32467;&#26524;&#36171;&#20540;&#32473;&#31532;&#19968;&#20010;&#23545;&#35937;&#10; */&#10;extend.replaceFirst = extend.RF = 1;&#10;/**&#10; * &#28145;&#24230;&#21512;&#24182;&#10; */&#10;extend.deepExtend = extend.DE = 2;&#10;/**&#10; * &#21024;&#38500;&#20540;&#20026;null&#30340;&#38190;&#10; */&#10;extend.removeNull = extend.RN = 4;</span><br></pre></td></tr></table></figure>
-<h2 id="u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570"><a href="#u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570" class="headerlink" title="字符串及时间格式化函数"></a>字符串及时间格式化函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;/**&#10; * &#23383;&#31526;&#20018;&#26684;&#24335;&#21270;&#26041;&#27861;&#10; * @params null&#10; * @example _.format(&#39;&#25105;&#26159;&#123;0&#125;&#39;, &#39;CoderQ&#39;) =&#62; &#39;&#25105;&#26159;CoderQ&#39;; &#39;&#25105;&#26159;&#123;name&#125;&#39;.format(&#123;name:&#39;CoderQ&#39;&#125;) =&#62; &#39;&#25105;&#26159;CoderQ&#39;;&#10; * @depends null&#10; * @return string&#10; */&#10;var string_format = function() &#123;&#10;    var args = Array.prototype.slice.call(arguments),&#10;        string = args.shift(),&#10;        params = &#39;object&#39; == typeof args[0] ? args[0] : args;&#10;    return string.replace(/\&#123;(\w+)(\|([^&#125;]+))?\&#125;/g, function($, $1, $2, $3) &#123;&#10;        return &#39;undefined&#39; == typeof params[$1] ? eval($3) : params[$1];&#10;    &#125;);&#10;&#125;;&#10;&#10;/**&#10; * &#26102;&#38388;&#26684;&#24335;&#21270;&#20989;&#25968;&#10; * @params&#10; *    format &#26684;&#24335;&#10; *    language &#35821;&#35328;&#10; * @example new Date().format(&#39;Y-m-d H:i:s&#39;)&#10; * @depends toString&#10; * @return string&#10; */&#10;var date_format = function(format, date, lang) &#123;&#10;    var _format = format || &#39;&#39;;&#10;    var _lang = lang || &#39;zh&#39;;&#10;    var _month_text = &#123;&#10;        &#39;zh&#39;: [&#39;&#19968;&#39;, &#39;&#20108;&#39;, &#39;&#19977;&#39;, &#39;&#22235;&#39;, &#39;&#20116;&#39;, &#39;&#20845;&#39;, &#39;&#19971;&#39;, &#39;&#20843;&#39;, &#39;&#20061;&#39;, &#39;&#21313;&#39;, &#39;&#21313;&#19968;&#39;, &#39;&#21313;&#20108;&#39;],&#10;        &#39;en&#39;: [&#39;Jan&#39;, &#39;Feb&#39;, &#39;Mar&#39;, &#39;Apr&#39;, &#39;May&#39;, &#39;Jun&#39;, &#39;Jul&#39;, &#39;Aug&#39;, &#39;Sep&#39;, &#39;Oct&#39;, &#39;Nov&#39;, &#39;Dec&#39;]&#10;    &#125;;&#10;    var _day_text = &#123;&#10;        &#39;zh&#39;: [&#39;&#26085;&#39;, &#39;&#19968;&#39;, &#39;&#20108;&#39;, &#39;&#19977;&#39;, &#39;&#22235;&#39;, &#39;&#20116;&#39;, &#39;&#20845;&#39;],&#10;        &#39;en&#39;: [&#39;Sun&#39;, &#39;Mon&#39;, &#39;Tues&#39;, &#39;Wed&#39;, &#39;Thur&#39;, &#39;Fri&#39;, &#39;Sat&#39;]&#10;    &#125;;&#10;    var _year = date.getFullYear();&#10;    var _month = date.getMonth() + 1;&#10;    var _date = date.getDate();&#10;    var _day = date.getDay();&#10;    var _hour = date.getHours();&#10;    var _minute = date.getMinutes();&#10;    var _second = date.getSeconds();&#10;    return _format.replace(/Y/g, _year)&#10;        .replace(/y/g, _year.toString().substr(2))&#10;        .replace(/M/g, _month_text[_lang][_month - 1])&#10;        .replace(/m/g, _month &#62; 9 ? _month : &#39;0&#39; + _month)&#10;        .replace(/n/g, _month)&#10;        .replace(/D/g, _day_text[_lang][_day])&#10;        .replace(/d/g, _date &#62; 9 ? _date : &#39;0&#39; + _date)&#10;        .replace(/j/g, _date)&#10;        .replace(/H/g, _hour &#62; 9 ? _hour : &#39;0&#39; + _hour)&#10;        .replace(/G/g, _hour)&#10;        .replace(/h/g, (_hour % 12) &#62; 9 ? (_hour % 12) : &#39;0&#39; + (_hour % 12))&#10;        .replace(/g/g, _hour % 12)&#10;        .replace(/i/g, _minute &#62; 9 ? _minute : &#39;0&#39; + _minute)&#10;        .replace(/s/g, _second &#62; 9 ? _second : &#39;0&#39; + _second);&#10;&#125;;&#10;&#10;/**&#10; * &#25968;&#25454;&#26684;&#24335;&#21270;&#10; * @param format&#10; * @param obj&#10; * @return string&#10; */&#10;var format = function(format, obj) &#123;&#10;    if (Object.prototype.toString.call(obj) == &#39;[object Date]&#39;) &#123;&#10;        return date_format.apply(null, arguments);&#10;    &#125; else &#123;&#10;        return string_format.apply(null, arguments);&#10;    &#125;&#10;&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="u7EE7_u627F_u51FD_u6570"><a href="#u7EE7_u627F_u51FD_u6570" class="headerlink" title="继承函数"></a>继承函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> extend = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> params = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>),</span><br><span class="line">        method = <span class="string">'number'</span> == <span class="keyword">typeof</span> params[params.length - <span class="number">1</span>] ? params.pop() : <span class="number">0</span>,</span><br><span class="line">        ret = method &amp; extend.replaceFirst ? params.shift() : &#123;&#125;,</span><br><span class="line">        deep = method &amp; extend.deepExtend,</span><br><span class="line">        rmNull = method &amp; extend.removeNull,</span><br><span class="line">        obj;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (params.length) &#123;</span><br><span class="line">        obj = params.shift();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="literal">null</span> === obj[k]) &#123;</span><br><span class="line">                rmNull ? <span class="keyword">delete</span> ret[k] : ret[k] = obj[k];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!ret[k] || ret[k].constructor !== <span class="built_in">Object</span> || obj[k].constructor !== <span class="built_in">Object</span>) &#123;</span><br><span class="line">                ret[k] = obj[k];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ret[k] = deep ? extend(ret[k], obj[k], method) : obj[k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 将结果赋值给第一个对象</span><br><span class="line"> */</span></span><br><span class="line">extend.replaceFirst = extend.RF = <span class="number">1</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 深度合并</span><br><span class="line"> */</span></span><br><span class="line">extend.deepExtend = extend.DE = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 删除值为null的键</span><br><span class="line"> */</span></span><br><span class="line">extend.removeNull = extend.RN = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570"><a href="#u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570" class="headerlink" title="字符串及时间格式化函数"></a>字符串及时间格式化函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 字符串格式化方法</span><br><span class="line"> * @params null</span><br><span class="line"> * @example _.format('我是&#123;0&#125;', 'CoderQ') =&gt; '我是CoderQ'; '我是&#123;name&#125;'.format(&#123;name:'CoderQ'&#125;) =&gt; '我是CoderQ';</span><br><span class="line"> * @depends null</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> string_format = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>),</span><br><span class="line">        string = args.shift(),</span><br><span class="line">        params = <span class="string">'object'</span> == <span class="keyword">typeof</span> args[<span class="number">0</span>] ? args[<span class="number">0</span>] : args;</span><br><span class="line">    <span class="keyword">return</span> string.replace(<span class="regexp">/\&#123;(\w+)(\|([^&#125;]+))?\&#125;/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$, $1, $2, $3</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'undefined'</span> == <span class="keyword">typeof</span> params[$<span class="number">1</span>] ? <span class="built_in">eval</span>($<span class="number">3</span>) : params[$<span class="number">1</span>];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 时间格式化函数</span><br><span class="line"> * @params</span><br><span class="line"> *    format 格式</span><br><span class="line"> *    language 语言</span><br><span class="line"> * @example new Date().format('Y-m-d H:i:s')</span><br><span class="line"> * @depends toString</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> date_format = <span class="function"><span class="keyword">function</span>(<span class="params">format, date, lang</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _format = format || <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> _lang = lang || <span class="string">'zh'</span>;</span><br><span class="line">    <span class="keyword">var</span> _month_text = &#123;</span><br><span class="line">        <span class="string">'zh'</span>: [<span class="string">'一'</span>, <span class="string">'二'</span>, <span class="string">'三'</span>, <span class="string">'四'</span>, <span class="string">'五'</span>, <span class="string">'六'</span>, <span class="string">'七'</span>, <span class="string">'八'</span>, <span class="string">'九'</span>, <span class="string">'十'</span>, <span class="string">'十一'</span>, <span class="string">'十二'</span>],</span><br><span class="line">        <span class="string">'en'</span>: [<span class="string">'Jan'</span>, <span class="string">'Feb'</span>, <span class="string">'Mar'</span>, <span class="string">'Apr'</span>, <span class="string">'May'</span>, <span class="string">'Jun'</span>, <span class="string">'Jul'</span>, <span class="string">'Aug'</span>, <span class="string">'Sep'</span>, <span class="string">'Oct'</span>, <span class="string">'Nov'</span>, <span class="string">'Dec'</span>]</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> _day_text = &#123;</span><br><span class="line">        <span class="string">'zh'</span>: [<span class="string">'日'</span>, <span class="string">'一'</span>, <span class="string">'二'</span>, <span class="string">'三'</span>, <span class="string">'四'</span>, <span class="string">'五'</span>, <span class="string">'六'</span>],</span><br><span class="line">        <span class="string">'en'</span>: [<span class="string">'Sun'</span>, <span class="string">'Mon'</span>, <span class="string">'Tues'</span>, <span class="string">'Wed'</span>, <span class="string">'Thur'</span>, <span class="string">'Fri'</span>, <span class="string">'Sat'</span>]</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> _year = date.getFullYear();</span><br><span class="line">    <span class="keyword">var</span> _month = date.getMonth() + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> _date = date.getDate();</span><br><span class="line">    <span class="keyword">var</span> _day = date.getDay();</span><br><span class="line">    <span class="keyword">var</span> _hour = date.getHours();</span><br><span class="line">    <span class="keyword">var</span> _minute = date.getMinutes();</span><br><span class="line">    <span class="keyword">var</span> _second = date.getSeconds();</span><br><span class="line">    <span class="keyword">return</span> _format.replace(<span class="regexp">/Y/g</span>, _year)</span><br><span class="line">        .replace(<span class="regexp">/y/g</span>, _year.toString().substr(<span class="number">2</span>))</span><br><span class="line">        .replace(<span class="regexp">/M/g</span>, _month_text[_lang][_month - <span class="number">1</span>])</span><br><span class="line">        .replace(<span class="regexp">/m/g</span>, _month &gt; <span class="number">9</span> ? _month : <span class="string">'0'</span> + _month)</span><br><span class="line">        .replace(<span class="regexp">/n/g</span>, _month)</span><br><span class="line">        .replace(<span class="regexp">/D/g</span>, _day_text[_lang][_day])</span><br><span class="line">        .replace(<span class="regexp">/d/g</span>, _date &gt; <span class="number">9</span> ? _date : <span class="string">'0'</span> + _date)</span><br><span class="line">        .replace(<span class="regexp">/j/g</span>, _date)</span><br><span class="line">        .replace(<span class="regexp">/H/g</span>, _hour &gt; <span class="number">9</span> ? _hour : <span class="string">'0'</span> + _hour)</span><br><span class="line">        .replace(<span class="regexp">/G/g</span>, _hour)</span><br><span class="line">        .replace(<span class="regexp">/h/g</span>, (_hour % <span class="number">12</span>) &gt; <span class="number">9</span> ? (_hour % <span class="number">12</span>) : <span class="string">'0'</span> + (_hour % <span class="number">12</span>))</span><br><span class="line">        .replace(<span class="regexp">/g/g</span>, _hour % <span class="number">12</span>)</span><br><span class="line">        .replace(<span class="regexp">/i/g</span>, _minute &gt; <span class="number">9</span> ? _minute : <span class="string">'0'</span> + _minute)</span><br><span class="line">        .replace(<span class="regexp">/s/g</span>, _second &gt; <span class="number">9</span> ? _second : <span class="string">'0'</span> + _second);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 数据格式化</span><br><span class="line"> * @param format</span><br><span class="line"> * @param obj</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> format = <span class="function"><span class="keyword">function</span>(<span class="params">format, obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Object</span>.prototype.toString.call(obj) == <span class="string">'[object Date]'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> date_format.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> string_format.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -406,414 +774,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-weixin-jssdk" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/18/weixin-jssdk/" class="article-date">
-  	<time datetime="2016-03-17T23:58:57.000Z" itemprop="datePublished">2016-03-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/18/weixin-jssdk/">实现记录微信分享路径树的功能</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u80CC_u666F"><a href="#u80CC_u666F" class="headerlink" title="背景"></a>背景</h2><p>接运营要求，希望记录文章被某个人分享出去之后的路径树，但因为微信分享时是无法获取到用户信息的，所以能记录的信息只有原始分享用户以及他分享出去后的路径树。</p>
-<h2 id="u5B9E_u73B0_u65B9_u6CD5"><a href="#u5B9E_u73B0_u65B9_u6CD5" class="headerlink" title="实现方法"></a>实现方法</h2><p>当文章被分享出去时，我们的URL里记录有文章ID及用户ID，当页面被打开时，后端会生成一个share_id，以query的方式加到当前URL的后面，当页面被再次分享出去时，后端会根据这个share_id再生成一个下级的share_id，并记录他们之间的关系，而之前的share_id在数据库里的记录会被更新为已读。</p>
-<h2 id="u5FAE_u4FE1_u7B7E_u540D_u751F_u6210_u89C4_u5219"><a href="#u5FAE_u4FE1_u7B7E_u540D_u751F_u6210_u89C4_u5219" class="headerlink" title="微信签名生成规则"></a>微信签名生成规则</h2><p>签名的生成需要以下四个参数</p>
-<ul>
-<li>jsapi_ticket 先通过appId获取access_token，在通过access_token获取jsapi_ticket</li>
-<li>noncestr 随机字符串</li>
-<li>timestamp 时间戳（秒级）</li>
-<li>url 当前页面URL，<em>是当前页面URL，而不是要分享出去的URL</em><br>最后形成一段与此类似的字符串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMCPGGVi4C3VM0P37wVUCFvkVAy_90u5h9nbSlYy3-Sl-HhTdfl2fzFy1AOcHKP7qg&#38;noncestr=Wm3WZYTPz0wzccnW&#38;timestamp=1414587457&#38;url=http://mp.weixin.qq.com?params=value</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>在经过sha1加密，得到signature</p>
-<h2 id="u6570_u636E_u6A21_u578B"><a href="#u6570_u636E_u6A21_u578B" class="headerlink" title="数据模型"></a>数据模型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var WeixinShareLogSchema = new Schema(&#123;&#10;    _id: &#123;type: String, unique: true, required: true&#125;,&#10;    parent_id: &#123;type: String, ref: &#39;weixin_share_log&#39;&#125;,&#10;    article_id: &#123;type: ObjectId, ref: &#39;article&#39;, required: true&#125;,&#10;    is_read: &#123;type: Boolean, default: false&#125;,&#10;    created_by : &#123;type : String, required: true&#125;,&#10;    created_at : &#123;type : Date, default : Date.now&#125;&#10;&#125;);&#10;&#36890;&#36807;&#36825;&#31181;&#32467;&#26500;&#65292;&#25105;&#20204;&#21482;&#35201;&#25628;&#32034;created_by&#20877;&#21152;&#19978;&#21069;&#31471;&#30340;&#24322;&#27493;&#23454;&#29616;&#23601;&#33021;&#30693;&#36947;&#34987;&#35813;&#29992;&#25143;&#20998;&#20139;&#20986;&#21435;&#30340;&#25991;&#31456;&#30340;&#26641;&#29366;&#32467;&#26500;&#20102;&#12290;</span><br></pre></td></tr></table></figure>
-<h2 id="u540E_u7AEF_u5B9E_u73B0"><a href="#u540E_u7AEF_u5B9E_u73B0" class="headerlink" title="后端实现"></a>后端实现</h2><p><em>因项目历史原因，没有使用es6</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">......&#10;// &#20998;&#20139;ID&#65292;&#22914;&#26524;&#26159;&#31532;&#19968;&#27425;&#20998;&#20139;&#65292;&#21017;&#20026;&#29992;&#25143;ID&#10;var parent_id = this.request.query.share_id || &#39;&#39;;&#10;// &#29983;&#25104;&#19968;&#20010;&#19979;&#32423;&#20998;&#20139;ID&#10;var share_id = md5(parent_id + Date.now());&#10;var WeixinShareLogModel = mongoose.model(&#39;weixinsharelog&#39;);&#10;// &#23558;&#24403;&#21069;&#30340;&#20998;&#20139;ID&#32622;&#20026;&#24050;&#35835;&#10;var e_weixin_share_log = yield WeixinShareLogModel.findOne(&#123;_id: parent_id&#125;).exec();&#10;if (e_weixin_share_log) &#123;&#10;    e_weixin_share_log.is_read = true;&#10;    yield e_weixin_share_log.save();&#10;&#125;&#10;e_weixin_share_log = new WeixinShareLogModel(&#123;&#10;    _id: share_id,&#10;    parent_id: parent_id,&#10;    article_id: article_id,&#10;    created_by: user_id&#10;&#125;);&#10;yield e_weixin_share_log.save();&#10;// url&#23450;&#20041;&#24494;&#20449;&#35201;&#27714;&#30340;&#29992;&#20110;&#33719;&#21462;&#31614;&#21517;&#30340;&#22320;&#22336;&#65292;&#38500;#&#21495;&#20043;&#21518;&#30340;&#21097;&#20313;&#37096;&#20998;&#10;var url = Tools.format(&#39;&#123;protocol&#125;://&#123;host&#125;&#123;url&#125;&#39;, &#123;&#10;    protocol: config.protocol,&#10;    host: config.host,&#10;    url: this.url.split(&#39;#&#39;).shift()&#10;&#125;);&#10;// &#33719;&#21462;&#24494;&#20449;&#31614;&#21517;&#10;var sign = yield Tools.getWeixinSignature(url);&#10;// &#29983;&#25104;&#19979;&#32423;&#20998;&#20139;&#22320;&#22336;&#10;var share_url = Tools.format(&#39;&#123;url&#125;?share_id=&#123;share_id&#125;&#39;, &#123;&#10;    url: url.split(&#39;?&#39;).shift(),&#10;    share_id: share_id&#10;&#125;);&#10;......</span><br></pre></td></tr></table></figure></p>
-<p>获取微信签名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**&#10; * &#33719;&#21462;&#24494;&#20449;&#31614;&#21517;&#10; */&#10;var getWeixinSignature = function* (url) &#123;&#10;    function* getWeixinTicket() &#123;&#10;        var data = yield request.get(format(config.weixin.path.access_token, config.weixin));&#10;        return yield request.get(format(config.weixin.path.ticket, &#123;access_token: data.access_token&#125;));&#10;    &#125;&#10;    try &#123;&#10;        var data, expire, nonce_str, timestamp, jsapi_ticket, signature;&#10;        // &#22914;&#26524;&#36807;&#26399;&#26102;&#38388;&#19981;&#23384;&#22312;&#25110;&#20165;&#23384;200&#31186;&#65292;&#21017;&#37325;&#26032;&#33719;&#21462;jsapi_ticket&#65292;&#24182;&#37325;&#32622;&#36807;&#26399;&#26102;&#38388;&#10;        if (!getWeixinSignature.expire || getWeixinSignature.expire &#62; new Date() - 200 * 1000) &#123;&#10;            data = yield getWeixinTicket();&#10;            getWeixinSignature.expire = data.expires_in * 1000 + new Date().getTime();&#10;            getWeixinSignature.jsapi_ticket = data.ticket;&#10;        &#125;&#10;        if (!getWeixinSignature.jsapi_ticket) return false;&#10;        nonce_str = randomString(16);&#10;        timestamp = Math.floor(new Date().getTime() / 1000);&#10;        signature = sha1(format(&#34;jsapi_ticket=&#123;jsapi_ticket&#125;&#38;noncestr=&#123;nonce_str&#125;&#38;timestamp=&#123;timestamp&#125;&#38;url=&#123;url&#125;&#34;, &#123;&#10;            jsapi_ticket: getWeixinSignature.jsapi_ticket,&#10;            nonce_str: nonce_str,&#10;            timestamp: timestamp,&#10;            url: url&#10;        &#125;));&#10;        return &#123;&#10;            appId: config.weixin.app_id,&#10;            timestamp: timestamp,&#10;            nonceStr: nonce_str,&#10;            signature: signature&#10;        &#125;&#10;    &#125; catch (e) &#123;&#10;        console.log(e.stack);&#10;        return false;&#10;    &#125;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
-<h2 id="u524D_u7AEF_u914D_u7F6E"><a href="#u524D_u7AEF_u914D_u7F6E" class="headerlink" title="前端配置"></a>前端配置</h2><ul>
-<li>引入文件<a href="https://res.wx.qq.com/open/js/jweixin-1.0.0.js" target="_blank" rel="external">https://res.wx.qq.com/open/js/jweixin-1.0.0.js</a></li>
-<li>定义配置信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx.config(&#123;&#10;    debug: false, &#10;    appId: &#39;&#60;%= sign.appId %&#62;&#39;,&#10;    nonceStr: &#39;&#60;%= sign.nonceStr %&#62;&#39;,&#10;    timestamp: &#39;&#60;%= sign.timestamp %&#62;&#39;,&#10;    signature: &#39;&#60;%= sign.signature %&#62;&#39;,&#10;    jsApiList: [&#10;        &#34;onMenuShareTimeline&#34;,&#10;        &#34;onMenuShareAppMessage&#34;,&#10;        &#34;onMenuShareQQ&#34;,&#10;        &#34;onMenuShareWeibo&#34;,&#10;        &#34;hideOptionMenu&#34;,&#10;        &#34;showOptionMenu&#34;&#10;    ]&#10;&#125;);&#10;wx.ready(function() &#123;&#10;&#9;var desc = $(&#39;meta[name=description]&#39;).attr(&#39;content&#39;) || $(&#39;body&#39;).find(&#39;h1,h2,h3,h4,p&#39;).eq(0).text() || &#39;&#32654;&#20029;&#38405;&#35835;&#25991;&#31456;&#20998;&#20139;&#39;;&#10;&#9;var image_url = $(&#39;body&#39;).find(&#39;img&#39;).get(0).src;&#10;    var shareInfo = &#123;&#10;        title: &#39;&#60;%= article_title %&#62;&#39;,&#10;        desc: desc,&#10;        imgUrl: image_url,&#10;        link: &#39;&#60;%= share_url %&#62;&#39;&#10;    &#125;;&#10;    /*&#20998;&#20139;&#21040;&#26379;&#21451;&#22280;*/&#10;    wx.onMenuShareTimeline(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#32473;&#26379;&#21451;&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareAppMessage(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#21040;QQ&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareQQ(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#21040;&#33150;&#35759;&#24494;&#21338;&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareWeibo(shareInfo);&#10;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>具体JSSDK配置请参考<a href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html" target="_blank" rel="external">微信官方文档</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/微信/">微信</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-flex-stylesheet-study" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/17/flex-stylesheet-study/" class="article-date">
-  	<time datetime="2016-03-17T00:05:06.000Z" itemprop="datePublished">2016-03-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/17/flex-stylesheet-study/">flex布局学习</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="flex_u5F39_u6027_u5E03_u5C40"><a href="#flex_u5F39_u6027_u5E03_u5C40" class="headerlink" title="flex弹性布局"></a>flex弹性布局</h2><p>有了flex，妈妈再也不用担心我不会写双飞布局了。N飞都行。</p>
-<h2 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h2><p>html:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;div class=&#34;container&#34;&#62;&#10;  &#60;div class=&#34;left&#34;&#62;&#10;    &#60;ul&#62;&#10;      &#60;li&#62;1&#60;/li&#62;&#10;      &#60;li&#62;2&#60;/li&#62;&#10;      &#60;li&#62;3&#60;/li&#62;&#10;      &#60;li&#62;4&#60;/li&#62;&#10;      &#60;li&#62;5&#60;/li&#62;&#10;      &#60;li&#62;6&#60;/li&#62;&#10;    &#60;/ul&#62;&#10;  &#60;/div&#62;&#10;  &#60;div class=&#34;center&#34;&#62;&#60;/div&#62;&#10;  &#60;div class=&#34;right&#34;&#62;&#60;/div&#62;&#10;&#60;/div&#62;</span><br></pre></td></tr></table></figure></p>
-<p>css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;&#10;  display: flex;&#10;&#125;&#10;&#10;.left, .right &#123;&#10;  width: 200px;&#10;  background-color: #ccc;&#10;&#125;&#10;&#10;.center &#123;&#10;  flex: 1;&#10;  background-color: #333;&#10;  /* min-width: 480px; */&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p><a href="https://jsfiddle.net/CoderQ/hcyxgdxw/2/" target="_blank" rel="external">在线demo</a></p>
-<h2 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h2><p>定义弹性元素在垂直及水平方向上有剩余空间时如何呈现每一行，如果弹性容器只有一行，则无效。（所有元素拉伸占满所有空间）</p>
-<p>| 默认值 | stretch |<br>| 使用元素 | 多行弹性元素 |<br>| 支持继承 | 否 |<br>| 使用媒体 | 可见的 |</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">align-content: flex-start | center | flex-end | space-between | space-around | stretch;</span><br></pre></td></tr></table></figure>
-<p><a href="https://jsfiddle.net/CoderQ/dgLs06fr/6/" target="_blank" rel="external">在线demo</a></p>
-<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Flexible_Box_Layout</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flex/">flex</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/html-css/">html+css</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-nodejs-stream" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/09/nodejs-stream/" class="article-date">
-  	<time datetime="2016-03-09T00:56:50.000Z" itemprop="datePublished">2016-03-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/09/nodejs-stream/">node.js使用stream处理大文件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u57FA_u7840_u7684_u6D41_u5904_u7406"><a href="#u57FA_u7840_u7684_u6D41_u5904_u7406" class="headerlink" title="基础的流处理"></a>基础的流处理</h2><p>当文件比较大的时候，例如GB级的日志文件，直接把文件整个读进来显然不太合适，这时候我们需要用到流的处理。</p>
-<h3 id="u8BFB"><a href="#u8BFB" class="headerlink" title="读"></a>读</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;use strict&#39;;&#10;&#10;let fs = require(&#39;fs&#39;);&#10;let file = &#39;image_info.csv&#39;;&#10;let readerStream = fs.createReadStream(__dirname + &#39;/&#39; + file);&#10;readerStream.setEncoding(&#39;utf8&#39;);&#10;&#10;let _data;&#10;readerStream.on(&#39;data&#39;, function(data) &#123;&#10;&#9;var data = (_data + data).split(&#34;\n&#34;);&#10;&#9;_data = data.pop();&#10;&#9;// console.log(&#39;-----------------------&#39;);&#10;&#9;data.forEach(function(item) &#123;&#10;&#9;&#9;console.log(item);&#10;&#9;&#125;)&#10;&#125;)&#10;&#10;readerStream.on(&#39;end&#39;, function() &#123;&#10;&#9;console.log(&#39;end&#39;);&#10;&#125;)&#10;&#10;readerStream.on(&#39;error&#39;, function(err)&#123;&#10;   console.log(err.stack);&#10;&#125;);</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream-node-js/">stream node.js</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/node-js/">node.js</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-proto-prototype-constructor" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/08/javascript-proto-prototype-constructor/" class="article-date">
-  	<time datetime="2016-03-08T02:35:59.000Z" itemprop="datePublished">2016-03-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/08/javascript-proto-prototype-constructor/">Javascript继承之理解__proto__、prototype、constructor三者的含义与用法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u5982_u4F55_u5199_u51FA_u6CA1_u6709_u6C61_u67D3_u7684_u7EE7_u627F"><a href="#u5982_u4F55_u5199_u51FA_u6CA1_u6709_u6C61_u67D3_u7684_u7EE7_u627F" class="headerlink" title="如何写出没有污染的继承"></a>如何写出没有污染的继承</h2><p>1.javascript中一切都是对象，每个对象都是基于原型对象创建的，每个对象中都有<strong>proto</strong>属性，这个属性指向的就是它基于的原型对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Foo = function () &#123;&#125;;&#10;var foo = new Foo(); &#10;console.log(&#10;    Foo.__proto__ === Function.prototype, // true&#10;    foo.__proto__ === Foo.prototype, // true&#10;);</span><br></pre></td></tr></table></figure></p>
-<p>2.只有构造函数对象才有prototype属性，构造函数的作用是创建对象，创建对象的时候，它要知道这个对象基于哪个原型来创建，这个prototype指向的就是这个原型。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Foo = function () &#123;&#125;;&#10;// Foo.prototype &#25351;&#21521; Foo.prototype;</span><br></pre></td></tr></table></figure></p>
-<p>3.只有原型对象才有constructor属性，而且也是系统（浏览器）给创建的。前面说过构造函数对象的prototype属性会指向一个原型对象，那么这个原型对象中的constructor属性指向的就是这个构造函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Foo = function () &#123;&#125;;&#10;var foo = new Foo(); &#10;console.log(&#10;    foo.constructor === Foo, // true&#10;);</span><br></pre></td></tr></table></figure></p>
-<p>4.思想合并<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var Parent = function () &#123;&#10;    this.name = &#39;parent&#39;;&#10;&#125;;&#10;Parent.prototype.sayName = function () &#123;&#10;    alert(this.name);&#10;&#125;;&#10;&#10;var Son = function () &#123;&#10;    Parent.apply(this, arguments);&#10;    this.name = &#39;son&#39;;&#10;&#125;;&#10;Son.prototype.__proto__ = Parent.prototype;&#10;&#10;var parent = new Parent();&#10;var son = new Son();&#10;parent.sayName();&#10;son.sayName();&#10;&#10;console.log(&#10;    Parent.__proto__ === Function.prototype,&#10;    parent.__proto__ === Parent.prototype,&#10;    parent.constructor === Parent,&#10;    Son.__proto__ === Function.prototype,&#10;    son.__proto__ === Son.prototype,&#10;    son.constructor === Son&#10;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html</a></li>
-<li><a href="http://blogzhoubo.iteye.com/blog/1685368" target="_blank" rel="external">http://blogzhoubo.iteye.com/blog/1685368</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-es5-useless-tech" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/08/javascript-es5-useless-tech/" class="article-date">
-  	<time datetime="2016-03-08T02:18:38.000Z" itemprop="datePublished">2016-03-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/08/javascript-es5-useless-tech/">Javascript中一些可能是用较少的语法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="set/get"><a href="#set/get" class="headerlink" title="set/get"></a>set/get</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;&#10;&#9;items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;],&#10;&#9;get length () &#123;&#10;&#9;&#9;return this.items.length;&#10;&#9;&#125;,&#10;&#9;set first (val) &#123;&#10;&#9;&#9;this.items[0] = val;&#10;&#9;&#125;&#10;&#125;;&#10;console.log(data.length); // 3&#10;data.length = 4; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25253;&#38169;&#65306;Uncaught TypeError: Cannot set property length of #&#60;Object&#62; which has only a getter(&#8230;)&#10;console.log(data.first = &#39;d&#39;);&#10;console.log(data.items); // [&#34;d&#34;, &#34;b&#34;, &#34;c&#34;]&#10;&#10;var MyDate = function() &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="defineGetter/defineSetter"><a href="#defineGetter/defineSetter" class="headerlink" title="defineGetter/defineSetter"></a><strong>defineGetter</strong>/<strong>defineSetter</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;&#10;&#9;items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&#10;&#125;;&#10;data.__defineGetter__(&#39;length&#39;, function() &#123;return this.items.length;&#125;);&#10;data.__defineSetter__(&#39;first&#39;, function(val) &#123;this.items[0] = val;&#125;)&#10;console.log(data.length); // 3&#10;console.log(data.first = &#39;d&#39;);&#10;console.log(data.items); // [&#34;d&#34;, &#34;b&#34;, &#34;c&#34;]</span><br></pre></td></tr></table></figure>
-<h2 id="Object-freeze"><a href="#Object-freeze" class="headerlink" title="Object.freeze"></a>Object.freeze</h2><p>将某个对象<em>冻住</em>，好形象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;a:1, b: 2&#125;; &#10;Object.freeze(a); &#10;a.c =3;&#10;console.log(a); // &#123;a: 1, b: 2&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;&#125;;&#10;Object.defineProperty(obj1, &#34;x&#34;, &#123; value: 42, writable: false &#125;);&#10;obj1.x = 9; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25243;&#20986;TypeError&#38169;&#35823;&#10;console.log(obj1.x); // 42</span><br></pre></td></tr></table></figure>
-<h2 id="Object-preventExtensions"><a href="#Object-preventExtensions" class="headerlink" title="Object.preventExtensions"></a>Object.preventExtensions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#32473;&#19981;&#21487;&#25193;&#23637;&#23545;&#35937;&#30340;&#26032;&#23646;&#24615;&#36171;&#20540;&#10;var fixed = &#123;&#125;;&#10;Object.preventExtensions(fixed);&#10;fixed.newProp = &#34;ohai&#34;; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25243;&#20986;TypeError&#38169;&#35823;&#10;console.log(fixed); // &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(new Function(&#39;a&#39;, &#39;b&#39;, &#39;return a + b;&#39;)(1, 2)) // 3</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-npm-useful-logs" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/08/npm-useful-logs/" class="article-date">
-  	<time datetime="2016-03-07T23:48:25.000Z" itemprop="datePublished">2016-03-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/08/npm-useful-logs/">npm命令使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>npm install</code> will install both “dependencies” and “devDependencies”</p>
-<p><code>npm install --production</code> will only install “dependencies”</p>
-<p><code>npm install --dev</code> will only install “devDependencies”</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/npm/">npm</a>
 	</div>
 
 
@@ -836,7 +796,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

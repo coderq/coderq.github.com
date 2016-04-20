@@ -66,7 +66,7 @@
 				<div class="tips-box hide">
 					<div class="tips-arrow"></div>
 					<ul class="tips-inner">
-						<li>菜单</li>
+						<li>Menu</li>
 						<li>標籤</li>
 						
 						
@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mongodb/" style="font-size: 12.5px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/node-js/" style="font-size: 12.5px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 17.5px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12.5px;">orientdb</a> <a href="/tags/redis/" style="font-size: 17.5px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
 					</div>
 				</section>
 				
@@ -162,6 +162,343 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-weixin-jssdk" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/18/weixin-jssdk/" class="article-date">
+  	<time datetime="2016-03-17T23:58:57.000Z" itemprop="datePublished">2016-03-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/18/weixin-jssdk/">实现记录微信分享路径树的功能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u80CC_u666F"><a href="#u80CC_u666F" class="headerlink" title="背景"></a>背景</h2><p>接运营要求，希望记录文章被某个人分享出去之后的路径树，但因为微信分享时是无法获取到用户信息的，所以能记录的信息只有原始分享用户以及他分享出去后的路径树。</p>
+<h2 id="u5B9E_u73B0_u65B9_u6CD5"><a href="#u5B9E_u73B0_u65B9_u6CD5" class="headerlink" title="实现方法"></a>实现方法</h2><p>当文章被分享出去时，我们的URL里记录有文章ID及用户ID，当页面被打开时，后端会生成一个share_id，以query的方式加到当前URL的后面，当页面被再次分享出去时，后端会根据这个share_id再生成一个下级的share_id，并记录他们之间的关系，而之前的share_id在数据库里的记录会被更新为已读。</p>
+<h2 id="u5FAE_u4FE1_u7B7E_u540D_u751F_u6210_u89C4_u5219"><a href="#u5FAE_u4FE1_u7B7E_u540D_u751F_u6210_u89C4_u5219" class="headerlink" title="微信签名生成规则"></a>微信签名生成规则</h2><p>签名的生成需要以下四个参数</p>
+<ul>
+<li>jsapi_ticket 先通过appId获取access_token，在通过access_token获取jsapi_ticket</li>
+<li>noncestr 随机字符串</li>
+<li>timestamp 时间戳（秒级）</li>
+<li>url 当前页面URL，<em>是当前页面URL，而不是要分享出去的URL</em><br>最后形成一段与此类似的字符串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMCPGGVi4C3VM0P37wVUCFvkVAy_90u5h9nbSlYy3-Sl-HhTdfl2fzFy1AOcHKP7qg&#38;noncestr=Wm3WZYTPz0wzccnW&#38;timestamp=1414587457&#38;url=http://mp.weixin.qq.com?params=value</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在经过sha1加密，得到signature</p>
+<h2 id="u6570_u636E_u6A21_u578B"><a href="#u6570_u636E_u6A21_u578B" class="headerlink" title="数据模型"></a>数据模型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var WeixinShareLogSchema = new Schema(&#123;&#10;    _id: &#123;type: String, unique: true, required: true&#125;,&#10;    parent_id: &#123;type: String, ref: &#39;weixin_share_log&#39;&#125;,&#10;    article_id: &#123;type: ObjectId, ref: &#39;article&#39;, required: true&#125;,&#10;    is_read: &#123;type: Boolean, default: false&#125;,&#10;    created_by : &#123;type : String, required: true&#125;,&#10;    created_at : &#123;type : Date, default : Date.now&#125;&#10;&#125;);&#10;&#36890;&#36807;&#36825;&#31181;&#32467;&#26500;&#65292;&#25105;&#20204;&#21482;&#35201;&#25628;&#32034;created_by&#20877;&#21152;&#19978;&#21069;&#31471;&#30340;&#24322;&#27493;&#23454;&#29616;&#23601;&#33021;&#30693;&#36947;&#34987;&#35813;&#29992;&#25143;&#20998;&#20139;&#20986;&#21435;&#30340;&#25991;&#31456;&#30340;&#26641;&#29366;&#32467;&#26500;&#20102;&#12290;</span><br></pre></td></tr></table></figure>
+<h2 id="u540E_u7AEF_u5B9E_u73B0"><a href="#u540E_u7AEF_u5B9E_u73B0" class="headerlink" title="后端实现"></a>后端实现</h2><p><em>因项目历史原因，没有使用es6</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">......&#10;// &#20998;&#20139;ID&#65292;&#22914;&#26524;&#26159;&#31532;&#19968;&#27425;&#20998;&#20139;&#65292;&#21017;&#20026;&#29992;&#25143;ID&#10;var parent_id = this.request.query.share_id || &#39;&#39;;&#10;// &#29983;&#25104;&#19968;&#20010;&#19979;&#32423;&#20998;&#20139;ID&#10;var share_id = md5(parent_id + Date.now());&#10;var WeixinShareLogModel = mongoose.model(&#39;weixinsharelog&#39;);&#10;// &#23558;&#24403;&#21069;&#30340;&#20998;&#20139;ID&#32622;&#20026;&#24050;&#35835;&#10;var e_weixin_share_log = yield WeixinShareLogModel.findOne(&#123;_id: parent_id&#125;).exec();&#10;if (e_weixin_share_log) &#123;&#10;    e_weixin_share_log.is_read = true;&#10;    yield e_weixin_share_log.save();&#10;&#125;&#10;e_weixin_share_log = new WeixinShareLogModel(&#123;&#10;    _id: share_id,&#10;    parent_id: parent_id,&#10;    article_id: article_id,&#10;    created_by: user_id&#10;&#125;);&#10;yield e_weixin_share_log.save();&#10;// url&#23450;&#20041;&#24494;&#20449;&#35201;&#27714;&#30340;&#29992;&#20110;&#33719;&#21462;&#31614;&#21517;&#30340;&#22320;&#22336;&#65292;&#38500;#&#21495;&#20043;&#21518;&#30340;&#21097;&#20313;&#37096;&#20998;&#10;var url = Tools.format(&#39;&#123;protocol&#125;://&#123;host&#125;&#123;url&#125;&#39;, &#123;&#10;    protocol: config.protocol,&#10;    host: config.host,&#10;    url: this.url.split(&#39;#&#39;).shift()&#10;&#125;);&#10;// &#33719;&#21462;&#24494;&#20449;&#31614;&#21517;&#10;var sign = yield Tools.getWeixinSignature(url);&#10;// &#29983;&#25104;&#19979;&#32423;&#20998;&#20139;&#22320;&#22336;&#10;var share_url = Tools.format(&#39;&#123;url&#125;?share_id=&#123;share_id&#125;&#39;, &#123;&#10;    url: url.split(&#39;?&#39;).shift(),&#10;    share_id: share_id&#10;&#125;);&#10;......</span><br></pre></td></tr></table></figure></p>
+<p>获取微信签名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**&#10; * &#33719;&#21462;&#24494;&#20449;&#31614;&#21517;&#10; */&#10;var getWeixinSignature = function* (url) &#123;&#10;    function* getWeixinTicket() &#123;&#10;        var data = yield request.get(format(config.weixin.path.access_token, config.weixin));&#10;        return yield request.get(format(config.weixin.path.ticket, &#123;access_token: data.access_token&#125;));&#10;    &#125;&#10;    try &#123;&#10;        var data, expire, nonce_str, timestamp, jsapi_ticket, signature;&#10;        // &#22914;&#26524;&#36807;&#26399;&#26102;&#38388;&#19981;&#23384;&#22312;&#25110;&#20165;&#23384;200&#31186;&#65292;&#21017;&#37325;&#26032;&#33719;&#21462;jsapi_ticket&#65292;&#24182;&#37325;&#32622;&#36807;&#26399;&#26102;&#38388;&#10;        if (!getWeixinSignature.expire || getWeixinSignature.expire &#62; new Date() - 200 * 1000) &#123;&#10;            data = yield getWeixinTicket();&#10;            getWeixinSignature.expire = data.expires_in * 1000 + new Date().getTime();&#10;            getWeixinSignature.jsapi_ticket = data.ticket;&#10;        &#125;&#10;        if (!getWeixinSignature.jsapi_ticket) return false;&#10;        nonce_str = randomString(16);&#10;        timestamp = Math.floor(new Date().getTime() / 1000);&#10;        signature = sha1(format(&#34;jsapi_ticket=&#123;jsapi_ticket&#125;&#38;noncestr=&#123;nonce_str&#125;&#38;timestamp=&#123;timestamp&#125;&#38;url=&#123;url&#125;&#34;, &#123;&#10;            jsapi_ticket: getWeixinSignature.jsapi_ticket,&#10;            nonce_str: nonce_str,&#10;            timestamp: timestamp,&#10;            url: url&#10;        &#125;));&#10;        return &#123;&#10;            appId: config.weixin.app_id,&#10;            timestamp: timestamp,&#10;            nonceStr: nonce_str,&#10;            signature: signature&#10;        &#125;&#10;    &#125; catch (e) &#123;&#10;        console.log(e.stack);&#10;        return false;&#10;    &#125;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="u524D_u7AEF_u914D_u7F6E"><a href="#u524D_u7AEF_u914D_u7F6E" class="headerlink" title="前端配置"></a>前端配置</h2><ul>
+<li>引入文件<a href="https://res.wx.qq.com/open/js/jweixin-1.0.0.js" target="_blank" rel="external">https://res.wx.qq.com/open/js/jweixin-1.0.0.js</a></li>
+<li>定义配置信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx.config(&#123;&#10;    debug: false, &#10;    appId: &#39;&#60;%= sign.appId %&#62;&#39;,&#10;    nonceStr: &#39;&#60;%= sign.nonceStr %&#62;&#39;,&#10;    timestamp: &#39;&#60;%= sign.timestamp %&#62;&#39;,&#10;    signature: &#39;&#60;%= sign.signature %&#62;&#39;,&#10;    jsApiList: [&#10;        &#34;onMenuShareTimeline&#34;,&#10;        &#34;onMenuShareAppMessage&#34;,&#10;        &#34;onMenuShareQQ&#34;,&#10;        &#34;onMenuShareWeibo&#34;,&#10;        &#34;hideOptionMenu&#34;,&#10;        &#34;showOptionMenu&#34;&#10;    ]&#10;&#125;);&#10;wx.ready(function() &#123;&#10;&#9;var desc = $(&#39;meta[name=description]&#39;).attr(&#39;content&#39;) || $(&#39;body&#39;).find(&#39;h1,h2,h3,h4,p&#39;).eq(0).text() || &#39;&#32654;&#20029;&#38405;&#35835;&#25991;&#31456;&#20998;&#20139;&#39;;&#10;&#9;var image_url = $(&#39;body&#39;).find(&#39;img&#39;).get(0).src;&#10;    var shareInfo = &#123;&#10;        title: &#39;&#60;%= article_title %&#62;&#39;,&#10;        desc: desc,&#10;        imgUrl: image_url,&#10;        link: &#39;&#60;%= share_url %&#62;&#39;&#10;    &#125;;&#10;    /*&#20998;&#20139;&#21040;&#26379;&#21451;&#22280;*/&#10;    wx.onMenuShareTimeline(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#32473;&#26379;&#21451;&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareAppMessage(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#21040;QQ&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareQQ(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#21040;&#33150;&#35759;&#24494;&#21338;&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareWeibo(shareInfo);&#10;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>具体JSSDK配置请参考<a href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html" target="_blank" rel="external">微信官方文档</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/微信/">微信</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-nodejs-stream" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/09/nodejs-stream/" class="article-date">
+  	<time datetime="2016-03-09T00:56:50.000Z" itemprop="datePublished">2016-03-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/09/nodejs-stream/">node.js使用stream处理大文件</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u57FA_u7840_u7684_u6D41_u5904_u7406"><a href="#u57FA_u7840_u7684_u6D41_u5904_u7406" class="headerlink" title="基础的流处理"></a>基础的流处理</h2><p>当文件比较大的时候，例如GB级的日志文件，直接把文件整个读进来显然不太合适，这时候我们需要用到流的处理。</p>
+<h3 id="u8BFB"><a href="#u8BFB" class="headerlink" title="读"></a>读</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;use strict&#39;;&#10;&#10;let fs = require(&#39;fs&#39;);&#10;let file = &#39;image_info.csv&#39;;&#10;let readerStream = fs.createReadStream(__dirname + &#39;/&#39; + file);&#10;readerStream.setEncoding(&#39;utf8&#39;);&#10;&#10;let _data;&#10;readerStream.on(&#39;data&#39;, function(data) &#123;&#10;&#9;var data = (_data + data).split(&#34;\n&#34;);&#10;&#9;_data = data.pop();&#10;&#9;// console.log(&#39;-----------------------&#39;);&#10;&#9;data.forEach(function(item) &#123;&#10;&#9;&#9;console.log(item);&#10;&#9;&#125;)&#10;&#125;)&#10;&#10;readerStream.on(&#39;end&#39;, function() &#123;&#10;&#9;console.log(&#39;end&#39;);&#10;&#125;)&#10;&#10;readerStream.on(&#39;error&#39;, function(err)&#123;&#10;   console.log(err.stack);&#10;&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream-node-js/">stream node.js</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/node-js/">node.js</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascript-proto-prototype-constructor" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/08/javascript-proto-prototype-constructor/" class="article-date">
+  	<time datetime="2016-03-08T02:35:59.000Z" itemprop="datePublished">2016-03-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/08/javascript-proto-prototype-constructor/">Javascript继承之理解__proto__、prototype、constructor三者的含义与用法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u5982_u4F55_u5199_u51FA_u6CA1_u6709_u6C61_u67D3_u7684_u7EE7_u627F"><a href="#u5982_u4F55_u5199_u51FA_u6CA1_u6709_u6C61_u67D3_u7684_u7EE7_u627F" class="headerlink" title="如何写出没有污染的继承"></a>如何写出没有污染的继承</h2><p>1.javascript中一切都是对象，每个对象都是基于原型对象创建的，每个对象中都有<strong>proto</strong>属性，这个属性指向的就是它基于的原型对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo(); </span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    Foo.__proto__ === <span class="built_in">Function</span>.prototype, <span class="comment">// true</span></span><br><span class="line">    foo.__proto__ === Foo.prototype, <span class="comment">// true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>2.只有构造函数对象才有prototype属性，构造函数的作用是创建对象，创建对象的时候，它要知道这个对象基于哪个原型来创建，这个prototype指向的就是这个原型。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="comment">// Foo.prototype 指向 Foo.prototype;</span></span><br></pre></td></tr></table></figure></p>
+<p>3.只有原型对象才有constructor属性，而且也是系统（浏览器）给创建的。前面说过构造函数对象的prototype属性会指向一个原型对象，那么这个原型对象中的constructor属性指向的就是这个构造函数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo(); </span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    foo.constructor === Foo, <span class="comment">// true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>4.思想合并<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Parent = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'parent'</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Parent.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Son = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    Parent.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'son'</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Son.prototype.__proto__ = Parent.prototype;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> parent = <span class="keyword">new</span> Parent();</span><br><span class="line"><span class="keyword">var</span> son = <span class="keyword">new</span> Son();</span><br><span class="line">parent.sayName();</span><br><span class="line">son.sayName();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    Parent.__proto__ === <span class="built_in">Function</span>.prototype,</span><br><span class="line">    parent.__proto__ === Parent.prototype,</span><br><span class="line">    parent.constructor === Parent,</span><br><span class="line">    Son.__proto__ === <span class="built_in">Function</span>.prototype,</span><br><span class="line">    son.__proto__ === Son.prototype,</span><br><span class="line">    son.constructor === Son</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html</a></li>
+<li><a href="http://blogzhoubo.iteye.com/blog/1685368" target="_blank" rel="external">http://blogzhoubo.iteye.com/blog/1685368</a></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascript-es5-useless-tech" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/08/javascript-es5-useless-tech/" class="article-date">
+  	<time datetime="2016-03-08T02:18:38.000Z" itemprop="datePublished">2016-03-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/08/javascript-es5-useless-tech/">Javascript中一些可能是用较少的语法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="set/get"><a href="#set/get" class="headerlink" title="set/get"></a>set/get</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;&#10;&#9;items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;],&#10;&#9;get length () &#123;&#10;&#9;&#9;return this.items.length;&#10;&#9;&#125;,&#10;&#9;set first (val) &#123;&#10;&#9;&#9;this.items[0] = val;&#10;&#9;&#125;&#10;&#125;;&#10;console.log(data.length); // 3&#10;data.length = 4; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25253;&#38169;&#65306;Uncaught TypeError: Cannot set property length of #&#60;Object&#62; which has only a getter(&#8230;)&#10;console.log(data.first = &#39;d&#39;);&#10;console.log(data.items); // [&#34;d&#34;, &#34;b&#34;, &#34;c&#34;]&#10;&#10;var MyDate = function() &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="defineGetter/defineSetter"><a href="#defineGetter/defineSetter" class="headerlink" title="defineGetter/defineSetter"></a><strong>defineGetter</strong>/<strong>defineSetter</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;&#10;&#9;items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&#10;&#125;;&#10;data.__defineGetter__(&#39;length&#39;, function() &#123;return this.items.length;&#125;);&#10;data.__defineSetter__(&#39;first&#39;, function(val) &#123;this.items[0] = val;&#125;)&#10;console.log(data.length); // 3&#10;console.log(data.first = &#39;d&#39;);&#10;console.log(data.items); // [&#34;d&#34;, &#34;b&#34;, &#34;c&#34;]</span><br></pre></td></tr></table></figure>
+<h2 id="Object-freeze"><a href="#Object-freeze" class="headerlink" title="Object.freeze"></a>Object.freeze</h2><p>将某个对象<em>冻住</em>，好形象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;a:1, b: 2&#125;; &#10;Object.freeze(a); &#10;a.c =3;&#10;console.log(a); // &#123;a: 1, b: 2&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;&#125;;&#10;Object.defineProperty(obj1, &#34;x&#34;, &#123; value: 42, writable: false &#125;);&#10;obj1.x = 9; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25243;&#20986;TypeError&#38169;&#35823;&#10;console.log(obj1.x); // 42</span><br></pre></td></tr></table></figure>
+<h2 id="Object-preventExtensions"><a href="#Object-preventExtensions" class="headerlink" title="Object.preventExtensions"></a>Object.preventExtensions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#32473;&#19981;&#21487;&#25193;&#23637;&#23545;&#35937;&#30340;&#26032;&#23646;&#24615;&#36171;&#20540;&#10;var fixed = &#123;&#125;;&#10;Object.preventExtensions(fixed);&#10;fixed.newProp = &#34;ohai&#34;; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25243;&#20986;TypeError&#38169;&#35823;&#10;console.log(fixed); // &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(new Function(&#39;a&#39;, &#39;b&#39;, &#39;return a + b;&#39;)(1, 2)) // 3</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-npm-useful-logs" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/08/npm-useful-logs/" class="article-date">
+  	<time datetime="2016-03-07T23:48:25.000Z" itemprop="datePublished">2016-03-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/08/npm-useful-logs/">npm命令使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>npm install</code> will install both “dependencies” and “devDependencies”</p>
+<p><code>npm install --production</code> will only install “dependencies”</p>
+<p><code>npm install --dev</code> will only install “devDependencies”</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/npm/">npm</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-nginx-config" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -397,7 +734,7 @@
       
         <h2 id="u4EC5_u4EC5_u6539_u53D8Key"><a href="#u4EC5_u4EC5_u6539_u53D8Key" class="headerlink" title="仅仅改变Key"></a>仅仅改变Key</h2><p>如果你的值没有问题，只是你的key出现了问题，需要修改key，可以使用$rename来做简单的处理<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// init&#10;db.events.insert(&#123; &#39;lat&#39;: 1, &#39;lon&#39;: 2, someotherdata: [] &#125;)&#10;db.events.insert(&#123; &#39;lat&#39;: 4, &#39;lon&#39;: 1, someotherdata: [] &#125;)&#10;// doit&#10;db.events.update(&#123;&#125;, &#123;$rename: &#123;&#39;lat&#39;: &#39;coords.lat&#39;, &#39;lon&#39;: &#39;coords.lon&#39;&#125;&#125;, false, true)</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// result&#10;db.events.find()&#10;&#123;&#10;    &#34;_id&#34; : ObjectId(&#34;5113c82dd28c4e8b79971add&#34;),&#10;    &#34;coords&#34; : &#123;&#10;        &#34;lat&#34; : 1,&#10;        &#34;lon&#34; : 2&#10;    &#125;,&#10;    &#34;someotherdata&#34; : [ ]&#10;&#125;&#10;&#123;&#10;    &#34;_id&#34; : ObjectId(&#34;5113c82ed28c4e8b79971ade&#34;),&#10;    &#34;coords&#34; : &#123;&#10;        &#34;lat&#34; : 4,&#10;        &#34;lon&#34; : 1&#10;    &#125;,&#10;    &#34;someotherdata&#34; : [ ]&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u4FEE_u590DKey_u548CValue"><a href="#u4FEE_u590DKey_u548CValue" class="headerlink" title="修复Key和Value"></a>修复Key和Value</h2><p>如果你的value也出现问题，那么仅仅rename是无济于事的，你可以用下面的方法来处理整个doc。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.events.find().snapshot().forEach(&#10;  function (e) &#123;&#10;    // update document, using its own properties&#10;    e.coords = &#123; lat: e.lat, lon: e.lon &#125;;&#10;&#10;    // remove old properties&#10;    delete e.lat;&#10;    delete e.lon;&#10;&#10;    // save the updated document&#10;    db.events.save(e);&#10;  &#125;&#10;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="u4FEE_u590DKey_u548CValue"><a href="#u4FEE_u590DKey_u548CValue" class="headerlink" title="修复Key和Value"></a>修复Key和Value</h2><p>如果你的value也出现问题，那么仅仅rename是无济于事的，你可以用下面的方法来处理整个collection。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.events.find().snapshot().forEach(&#10;  function (e) &#123;&#10;    // update document, using its own properties&#10;    e.coords = &#123; lat: e.lat, lon: e.lon &#125;;&#10;&#10;    // remove old properties&#10;    delete e.lat;&#10;    delete e.lon;&#10;&#10;    // save the updated document&#10;    db.events.save(e);&#10;  &#125;&#10;)</span><br></pre></td></tr></table></figure></p>
 <p>查看<a href="http://stackoverflow.com/questions/3788256/mongodb-updating-documents-using-data-from-the-same-document/3792958#3792958" target="_blank" rel="external">stackoverflow</a></p>
 
       
@@ -459,7 +796,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var merge = function(ary, p, q, r) &#123;&#10;&#9;// eg. ary = [4, 1], p = 0, q = 0, r = 1&#10;&#9;var l_ary = ary.slice(p, q + 1);&#10;&#9;var r_ary = ary.slice(q + 1, r + 1);&#10;&#9;var b_ary;&#10;&#10;&#9;while (l_ary.length &#38;&#38; r_ary.length) &#123;&#10;&#9;&#9;ary[p++] = l_ary[0] &#60;= r_ary[0] ? l_ary.shift() : r_ary.shift();&#9;&#10;&#9;&#125;&#10;&#10;&#9;b_ary = l_ary.length ? l_ary : r_ary;&#10;&#9;while (b_ary.length) &#123;&#10;&#9;&#9;ary[p++] = b_ary.shift();&#10;&#9;&#125;&#10;&#10;&#9;console.log(ary);&#10;&#125;&#10;&#10;var merge_sort = function(ary, s, e) &#123;&#10;&#9;var m;&#10;&#9;if (s === e) return;&#10;&#9;m = Math.floor((s + e) / 2);&#10;&#10;&#9;merge_sort(ary, s, m);&#10;&#9;merge_sort(ary, m + 1, e);&#10;&#9;merge(ary, s, m, e);&#10;&#125;&#10;&#10;var do_merge_sort = function() &#123;&#10;&#9;var ary = [4, 3, 7, 1, 9, 2, 6, 5];&#10;&#10;&#9;console.log(ary);&#10;&#9;merge_sort(ary, 0, ary.length - 1);&#10;&#10;&#9;console.log(ary);&#10;&#125; &#10;&#10;do_merge_sort();</span><br></pre></td></tr></table></figure>
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">ary, p, q, r</span>) </span>&#123;</span><br><span class="line">	<span class="comment">// eg. ary = [4, 1], p = 0, q = 0, r = 1</span></span><br><span class="line">	<span class="keyword">var</span> l_ary = ary.slice(p, q + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">var</span> r_ary = ary.slice(q + <span class="number">1</span>, r + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">var</span> b_ary;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (l_ary.length &amp;&amp; r_ary.length) &#123;</span><br><span class="line">		ary[p++] = l_ary[<span class="number">0</span>] &lt;= r_ary[<span class="number">0</span>] ? l_ary.shift() : r_ary.shift();	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	b_ary = l_ary.length ? l_ary : r_ary;</span><br><span class="line">	<span class="keyword">while</span> (b_ary.length) &#123;</span><br><span class="line">		ary[p++] = b_ary.shift();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">console</span>.log(ary);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> merge_sort = <span class="function"><span class="keyword">function</span>(<span class="params">ary, s, e</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> m;</span><br><span class="line">	<span class="keyword">if</span> (s === e) <span class="keyword">return</span>;</span><br><span class="line">	m = <span class="built_in">Math</span>.floor((s + e) / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	merge_sort(ary, s, m);</span><br><span class="line">	merge_sort(ary, m + <span class="number">1</span>, e);</span><br><span class="line">	merge(ary, s, m, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> do_merge_sort = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> ary = [<span class="number">4</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">	<span class="built_in">console</span>.log(ary);</span><br><span class="line">	merge_sort(ary, <span class="number">0</span>, ary.length - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">console</span>.log(ary);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">do_merge_sort();</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -473,347 +810,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-opencv-ippicv-macosx" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/19/opencv-ippicv-macosx/" class="article-date">
-  	<time datetime="2016-02-18T16:12:35.000Z" itemprop="datePublished">2016-02-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/opencv-ippicv-macosx/">用cmake安装opencv遇到缺少ippicv-macosx-*.*文件的解决方案</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>既然出错，那么你一定可以看到报错提示，大致如下。这里面你收获了第一个关键信息<em>expected hash: [4ff1fde9a7cfdfe7250bfcd8334e0f2f]</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for file: [/Users/CoderQ/Downloads/opencv-3.1.0/3rdparty/ippicv/downloads/macosx-4ff1fde9a7cfdfe7250bfcd8334e0f2f/ippicv_macosx_20151201.tgz]&#10;  expected hash: [4ff1fde9a7cfdfe7250bfcd8334e0f2f]&#10;    actual hash: [cc09c2a46b5dd28acea8e1e78e296670]&#10;         status: [28;&#34;Timeout was reached&#34;]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>上搜索引擎搜<em>4ff1fde9a7cfdfe7250bfcd8334e0f2f</em>，你会发现第一个搜索结果指向了<a href="http://code.metager.de/source/xref/lib/opencv/3rdparty/ippicv/downloader.cmake" target="_blank" rel="external">源码地址</a></p>
-</li>
-<li><p>代码里<em>OPENCV_ICV_PACKAGE_HASH</em>这个变量指向了<em>4ff1fde9a7cfdfe7250bfcd8334e0f2f</em>。</p>
-</li>
-<li><p>之后你会找到这行代码，他告诉你这个URL地址还需要另一个变量<em>OPENCV_ICV_URL</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file(DOWNLOAD &#34;$&#123;OPENCV_ICV_URL&#125;/$&#123;OPENCV_ICV_PACKAGE_NAME&#125;&#34; &#34;$&#123;OPENCV_ICV_PACKAGE_ARCHIVE&#125;&#34;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>之后根据源码你可以拼出这个地址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/Itseez/opencv_3rdparty/81a676001ca8075ada498583e4166079e5744668/ippicv/ippicv_macosx_20151201.tgz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>把文件下载后放在提示的地址，重新安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Users/CoderQ/Downloads/opencv-3.1.0/3rdparty/ippicv/downloads/macosx-4ff1fde9a7cfdfe7250bfcd8334e0f2f/ippicv_macosx_20151201.tgz</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/opencv/">opencv</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-deal-with-unicode" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/16/javascript-deal-with-unicode/" class="article-date">
-  	<time datetime="2016-02-16T07:52:47.000Z" itemprop="datePublished">2016-02-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/16/javascript-deal-with-unicode/">Unicode字符处理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近做爬虫程序，偶尔会在返回的内容中看到一堆类似这样的东西<em>&amp;#22825;&amp;#22530;&amp;#21521;&amp;#24038;,&amp;#28145;&amp;#22323;&amp;#21521;&amp;#21491;</em>，一时间不知道怎么把它们转成中文。于是上网求救，发现解决方案后感觉so easy。其实很多东西不明白之前都很难，明白了就很简单，我是不是在说废话呢？？？</p>
-<p>其实这串字符中的数字就是对应unicode字符的十进制表示方式，所以我们只要通过<em>String.fromCodePoint</em>进行简单的转化就可以得到想要的结果了。根据网友的提示，返回的内容还有可能是十六进制的，于是我自己写了个例子，备忘。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> code10, code16, zh;</span><br><span class="line"></span><br><span class="line">code10 = <span class="string">'&amp;#22825;&amp;#22530;&amp;#21521;&amp;#24038;,&amp;#28145;&amp;#22323;&amp;#21521;&amp;#21491;'</span>;</span><br><span class="line"></span><br><span class="line">zh = code10.replace(<span class="regexp">/&amp;#(\d+);/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$, $1</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">String</span>.fromCodePoint($<span class="number">1</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(zh);</span><br><span class="line"></span><br><span class="line">code16 = zh.replace(<span class="regexp">/[^\u0000-\u00ff]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">'&amp;#x'</span> + $.codePointAt(<span class="number">0</span>).toString(<span class="number">16</span>) + <span class="string">';'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(code16);</span><br><span class="line"></span><br><span class="line">zh = code16.replace(<span class="regexp">/&amp;#x(\w+);/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$, $1</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">String</span>.fromCodePoint(<span class="built_in">parseInt</span>($<span class="number">1</span>, <span class="number">16</span>))</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(zh);</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-c-basic" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/14/c-basic/" class="article-date">
-  	<time datetime="2016-02-14T00:00:20.000Z" itemprop="datePublished">2016-02-14</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/14/c-basic/">C语言基础</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u6307_u9488"><a href="#u6307_u9488" class="headerlink" title="指针"></a>指针</h2><p>指针（Pointer）是编程语言中的一个对象，利用地址，它的值直接指向存在电脑存储器中另一个地方的值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#include &#34;stdio.h&#34;&#10;&#10;int main(int argc, char const *argv[])&#10;&#123;&#10;&#9;char* c = &#34;123&#34;; // c&#26159;&#19968;&#20010;&#25351;&#38024;&#21464;&#37327;&#65292;&#25351;&#21521;&#34;123&#34;&#36825;&#20010;&#23383;&#31526;&#20018;&#30340;&#20869;&#23384;&#22320;&#22336;&#10;&#9;printf(&#34;%s\n&#34;, c); // &#25171;&#21360;&#20986;c&#25351;&#38024;&#25351;&#21521;&#30340;&#23383;&#31526;&#20018;&#10;&#9;printf(&#34;%c\n&#34;, *c); // &#25171;&#21360;&#20986;c&#25351;&#38024;&#25351;&#21521;&#30340;&#31532;&#19968;&#20010;&#23383;&#31526;&#10;&#10;&#9;short s = 123; // &#23450;&#20041;&#19968;&#20010;&#30701;&#25972;&#24418;&#21464;&#37327;s&#10;&#9;short* p = &#38;s; // &#23450;&#20041;&#19968;&#20010;&#30701;&#25972;&#24418;&#25351;&#38024;&#65292;&#24182;&#35753;&#25351;&#38024;&#25351;&#21521;s&#25152;&#22312;&#30340;&#22320;&#22336;&#10;&#9;printf(&#34;%u\n&#34;, *p); // &#36755;&#20986;p&#25351;&#38024;&#25152;&#25351;&#21521;&#30340;&#20869;&#23384;&#24555;&#10;&#10;&#9;return 0;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>很多书籍，喜欢把*号放在变量前面，但是这容易让初学者误解，其实*放在类型后面或变量前面都是没问题的。如果加*，例如char* c，那么c就是一个指针变量，如果要取出它对应的值，必须使用*c，这样好理解很多了。如果写成char *c就容易搞不清楚定义的是个啥了。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/C/">C</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-what-is-node-js" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/09/what-is-node-js/" class="article-date">
-  	<time datetime="2016-02-08T23:15:19.000Z" itemprop="datePublished">2016-02-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/09/what-is-node-js/">正确理解node.js</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/node-js/">node.js</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-http-accept-encoding" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/06/http-accept-encoding/" class="article-date">
-  	<time datetime="2016-02-06T01:44:52.000Z" itemprop="datePublished">2016-02-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/06/http-accept-encoding/">Accept-Encoding</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u683C_u5F0F"><a href="#u683C_u5F0F" class="headerlink" title="格式"></a>格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding  = &#34;Accept-Encoding&#34; &#34;:&#34;&#10;                      1#( codings [ &#34;;&#34; &#34;q&#34; &#34;=&#34; qvalue ] )&#10;codings          = ( content-coding | &#34;*&#34; )</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept-Encoding: compress, gzip&#10;Accept-Encoding:&#10;Accept-Encoding: *&#10;Accept-Encoding: compress;q=0.5, gzip;q=1.0&#10;Accept-Encoding: gzip;q=1.0, identity; q=0.5, *;q=0</span><br></pre></td></tr></table></figure>
-<h2 id="u89C4_u5219"><a href="#u89C4_u5219" class="headerlink" title="规则"></a>规则</h2><ul>
-<li>如果设置了一个编码方案，那么表明该方案是客户端可以接受的，除非设置了<em>;q=0</em></li>
-<li>特殊的*标记表示客户端可以接受所有的编码方案</li>
-<li>如果设置了多个编码方案，那么q值最高的方案成为首选方案</li>
-<li>纵使没有设置indentify类型，indentify类型依然会被认为是客接受的，除非设置了<em>indentify;q=0</em>或者<em>\</em>;q=0*。如果没有设置Accept-Encoding，那么默认为indentify。</li>
-</ul>
-<h2 id="u9009_u9879"><a href="#u9009_u9879" class="headerlink" title="选项"></a>选项</h2><h3 id="indentity"><a href="#indentity" class="headerlink" title="indentity"></a>indentity</h3><p>总是可以被接受的encoding类型，Accept-Encoding默认选项。</p>
-<h3 id="compress"><a href="#compress" class="headerlink" title="compress"></a>compress</h3><p>compress是一个相当古老的 unix 档案压缩指令，压缩后的档案会加上一个 .Z 延伸档名以区别未压缩的档案，压缩后的档案可以以 uncompress 解压。若要将数个档案压成一个压缩档，必须先将档案 tar 起来再压缩。由于 gzip 可以产生更理想的压缩比例，一般人多已改用 gzip 为档案压缩工具。</p>
-<h3 id="deflate"><a href="#deflate" class="headerlink" title="deflate"></a>deflate</h3><p>deflate是最基础的算法，gzip在deflate的raw data前增加了10个字节的gzheader，尾部添加了8个字节的校验字节（可选crc32 和adler32）和长度标识字节。deflate是一种压缩算法,是huffman编码的一种加强。gzip是一种数据格式，默认且目前仅使用deflate算法压缩data部分。</p>
-<h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><p>GZIP最早由Jean-loup Gailly和Mark Adler创建，用于UNIX系统的文件压缩。我们在Linux中经常会用到后缀为.gz的文件，它们就是GZIP格式的。现今已经成为Internet 上使用非常普遍的一种数据压缩格式，或者说一种文件格式。HTTP协议上的GZIP编码是一种用来改进WEB应用程序性能的技术。大流量的WEB站点常常使用GZIP压缩技术来让用户感受更快的速度。这一般是指WWW服务器中安装的一个功能,当有人来访问这个服务器中的网站时,服务器中的这个功能就将网页内容压缩后传输到来访的电脑浏览器中显示出来.一般对纯文本内容可压缩到原大小的40%.这样传输就快了,效果就是你点击网址后会很快的显示出来.当然这也会增加服务器的负载. 一般服务器中都安装有这个功能模块的.</p>
-<p><a href="/2016/02/06/nginx-gzip/">在nginx中配置gzip</a></p>
-<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3" target="_blank" rel="external">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3</a></li>
-<li><a href="http://baike.baidu.com/link?url=xWxjsQkPTkOPD7CMnSUQCM_MTtORJ2xMxbKmaeX1WEi2MmFUjQP_JRdWMxBumkc5WO_0m-2_sPMCHhClk6U_nK" target="_blank" rel="external">http://baike.baidu.com/link?url=xWxjsQkPTkOPD7CMnSUQCM_MTtORJ2xMxbKmaeX1WEi2MmFUjQP_JRdWMxBumkc5WO_0m-2_sPMCHhClk6U_nK</a></li>
-<li><a href="http://blog.csdn.net/zhangxinrun/article/details/5711307" target="_blank" rel="external">http://blog.csdn.net/zhangxinrun/article/details/5711307</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/DEFLATE" target="_blank" rel="external">https://zh.wikipedia.org/wiki/DEFLATE</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/HTTP-TCP-IP/">HTTP/TCP/IP</a>
 	</div>
 
 
@@ -836,7 +832,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
