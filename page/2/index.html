@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 17.5px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12.5px;">orientdb</a> <a href="/tags/redis/" style="font-size: 17.5px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/stream-node-js/" style="font-size: 10px;">stream node.js</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 16.67px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node-js/" style="font-size: 13.33px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 13.33px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16.67px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
 					</div>
 				</section>
 				
@@ -223,67 +223,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/微信/">微信</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-nodejs-stream" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/09/nodejs-stream/" class="article-date">
-  	<time datetime="2016-03-09T00:56:50.000Z" itemprop="datePublished">2016-03-09</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/09/nodejs-stream/">node.js使用stream处理大文件</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u57FA_u7840_u7684_u6D41_u5904_u7406"><a href="#u57FA_u7840_u7684_u6D41_u5904_u7406" class="headerlink" title="基础的流处理"></a>基础的流处理</h2><p>当文件比较大的时候，例如GB级的日志文件，直接把文件整个读进来显然不太合适，这时候我们需要用到流的处理。</p>
-<h3 id="u8BFB"><a href="#u8BFB" class="headerlink" title="读"></a>读</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;use strict&#39;;&#10;&#10;let fs = require(&#39;fs&#39;);&#10;let file = &#39;image_info.csv&#39;;&#10;let readerStream = fs.createReadStream(__dirname + &#39;/&#39; + file);&#10;readerStream.setEncoding(&#39;utf8&#39;);&#10;&#10;let _data;&#10;readerStream.on(&#39;data&#39;, function(data) &#123;&#10;&#9;var data = (_data + data).split(&#34;\n&#34;);&#10;&#9;_data = data.pop();&#10;&#9;// console.log(&#39;-----------------------&#39;);&#10;&#9;data.forEach(function(item) &#123;&#10;&#9;&#9;console.log(item);&#10;&#9;&#125;)&#10;&#125;)&#10;&#10;readerStream.on(&#39;end&#39;, function() &#123;&#10;&#9;console.log(&#39;end&#39;);&#10;&#125;)&#10;&#10;readerStream.on(&#39;error&#39;, function(err)&#123;&#10;   console.log(err.stack);&#10;&#125;);</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stream-node-js/">stream node.js</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/node-js/">node.js</a>
 	</div>
 
 
@@ -830,9 +769,87 @@
 
 
   
+    <article id="post-opencv-ippicv-macosx" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/19/opencv-ippicv-macosx/" class="article-date">
+  	<time datetime="2016-02-18T16:12:35.000Z" itemprop="datePublished">2016-02-19</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/02/19/opencv-ippicv-macosx/">用cmake安装opencv遇到缺少ippicv-macosx-*.*文件的解决方案</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>既然出错，那么你一定可以看到报错提示，大致如下。这里面你收获了第一个关键信息<em>expected hash: [4ff1fde9a7cfdfe7250bfcd8334e0f2f]</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for file: [/Users/CoderQ/Downloads/opencv-3.1.0/3rdparty/ippicv/downloads/macosx-4ff1fde9a7cfdfe7250bfcd8334e0f2f/ippicv_macosx_20151201.tgz]&#10;  expected hash: [4ff1fde9a7cfdfe7250bfcd8334e0f2f]&#10;    actual hash: [cc09c2a46b5dd28acea8e1e78e296670]&#10;         status: [28;&#34;Timeout was reached&#34;]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上搜索引擎搜<em>4ff1fde9a7cfdfe7250bfcd8334e0f2f</em>，你会发现第一个搜索结果指向了<a href="http://code.metager.de/source/xref/lib/opencv/3rdparty/ippicv/downloader.cmake" target="_blank" rel="external">源码地址</a></p>
+</li>
+<li><p>代码里<em>OPENCV_ICV_PACKAGE_HASH</em>这个变量指向了<em>4ff1fde9a7cfdfe7250bfcd8334e0f2f</em>。</p>
+</li>
+<li><p>之后你会找到这行代码，他告诉你这个URL地址还需要另一个变量<em>OPENCV_ICV_URL</em></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file(DOWNLOAD &#34;$&#123;OPENCV_ICV_URL&#125;/$&#123;OPENCV_ICV_PACKAGE_NAME&#125;&#34; &#34;$&#123;OPENCV_ICV_PACKAGE_ARCHIVE&#125;&#34;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>之后根据源码你可以拼出这个地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/Itseez/opencv_3rdparty/81a676001ca8075ada498583e4166079e5744668/ippicv/ippicv_macosx_20151201.tgz</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>把文件下载后放在提示的地址，重新安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Users/CoderQ/Downloads/opencv-3.1.0/3rdparty/ippicv/downloads/macosx-4ff1fde9a7cfdfe7250bfcd8334e0f2f/ippicv_macosx_20151201.tgz</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/opencv/">opencv</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </div>
