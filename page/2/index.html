@@ -163,6 +163,69 @@
 
       <div class="body-wrap">
   
+    <article id="post-javascript-skill" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/13/javascript-skill/" class="article-date">
+  	<time datetime="2016-04-12T23:33:29.000Z" itemprop="datePublished">2016-04-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/13/javascript-skill/">javascript的一些常用技能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32"><a href="#u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32" class="headerlink" title="反转一个字符串"></a>反转一个字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'123456789'</span>.split(<span class="string">''</span>).revert().join(<span class="string">''</span>); <span class="comment">// '987654321';</span></span><br></pre></td></tr></table></figure>
+<h2 id="u53BB_u91CD"><a href="#u53BB_u91CD" class="headerlink" title="去重"></a>去重</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'11122213434'</span>.split(<span class="string">''</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, ary</span>) </span>&#123;<span class="keyword">return</span> index == ary.indexOf(item)&#125;).join(<span class="string">''</span>); <span class="comment">// '1234'</span></span><br></pre></td></tr></table></figure>
+<h2 id="u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32"><a href="#u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32" class="headerlink" title="多维数组-&gt;字符串"></a>多维数组-&gt;字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[[<span class="number">1</span>], <span class="number">2</span>], [<span class="number">3</span>], <span class="number">4</span>].join(); <span class="comment">// '1,2,3,4'</span></span><br></pre></td></tr></table></figure>
+<h2 id="u8FD4_u56DE_u968F_u673A_u5143_u7D20"><a href="#u8FD4_u56DE_u968F_u673A_u5143_u7D20" class="headerlink" title="返回随机元素"></a>返回随机元素</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ary = [<span class="string">'male'</span>, <span class="string">'female'</span>];</span><br><span class="line"><span class="keyword">let</span> ret = ary[~~(<span class="built_in">Math</span>.random() * ary.length)];</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-mac-server-cmd" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -746,69 +809,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-npm-useful-logs" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/08/npm-useful-logs/" class="article-date">
-  	<time datetime="2016-03-07T23:48:25.000Z" itemprop="datePublished">2016-03-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/08/npm-useful-logs/">npm命令使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>npm install</code> will install both “dependencies” and “devDependencies”</p>
-<p><code>npm install --production</code> will only install “dependencies”</p>
-<p><code>npm install --dev</code> will only install “devDependencies”</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/npm/">npm</a>
 	</div>
 
 
