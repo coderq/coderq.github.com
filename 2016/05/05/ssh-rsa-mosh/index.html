@@ -4,19 +4,18 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>如何构建快速响应API接口 | CoderQ·博客</title>
+  <title>通过RSA实现SSH免密登录及mosh替换SSH避免断网断线 | CoderQ·博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="这是一张没有经过任何论证的图，但一直在大脑浮现，先画下来。当然了，这里面还需要依据项目需要，自行脑补一堆负载均衡，数据库分片的画面。只是这样的架构能够更好的整合资源，当前提示有这么多资源可以整合。">
+  <meta name="description" content="1.SSH是我们常用的连接服务器的工具，频繁的输入账号密码会很麻烦，通过RSA的公私钥机制，可以实现免密登录。方法是将客户端的公钥放到服务器的~/.ssh目录下，并重命名为authorized_keys；2.SSH工具采用的是TCP连接，在网络断开的情况下SSH就会自动断开，于是终端会变成假死状态，必须关了重开，很麻烦。mosh使用UDP连接，不用担心断网重连的问题。mosh的使用，必须拥有服务端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何构建快速响应API接口">
-<meta property="og:url" content="http://coderq.github.io/2016/04/26/how-to-build-fast-api/index.html">
+<meta property="og:title" content="通过RSA实现SSH免密登录及mosh替换SSH避免断网断线">
+<meta property="og:url" content="http://coderq.github.io/2016/05/05/ssh-rsa-mosh/index.html">
 <meta property="og:site_name" content="CoderQ·博客">
-<meta property="og:description" content="这是一张没有经过任何论证的图，但一直在大脑浮现，先画下来。当然了，这里面还需要依据项目需要，自行脑补一堆负载均衡，数据库分片的画面。只是这样的架构能够更好的整合资源，当前提示有这么多资源可以整合。">
-<meta property="og:image" content="http://7xqex1.com1.z0.glb.clouddn.com/framework.png">
-<meta property="og:updated_time" content="2016-04-26T08:11:32.000Z">
+<meta property="og:description" content="1.SSH是我们常用的连接服务器的工具，频繁的输入账号密码会很麻烦，通过RSA的公私钥机制，可以实现免密登录。方法是将客户端的公钥放到服务器的~/.ssh目录下，并重命名为authorized_keys；2.SSH工具采用的是TCP连接，在网络断开的情况下SSH就会自动断开，于是终端会变成假死状态，必须关了重开，很麻烦。mosh使用UDP连接，不用担心断网重连的问题。mosh的使用，必须拥有服务端">
+<meta property="og:updated_time" content="2016-05-05T03:09:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何构建快速响应API接口">
-<meta name="twitter:description" content="这是一张没有经过任何论证的图，但一直在大脑浮现，先画下来。当然了，这里面还需要依据项目需要，自行脑补一堆负载均衡，数据库分片的画面。只是这样的架构能够更好的整合资源，当前提示有这么多资源可以整合。">
+<meta name="twitter:title" content="通过RSA实现SSH免密登录及mosh替换SSH避免断网断线">
+<meta name="twitter:description" content="1.SSH是我们常用的连接服务器的工具，频繁的输入账号密码会很麻烦，通过RSA的公私钥机制，可以实现免密登录。方法是将客户端的公钥放到服务器的~/.ssh目录下，并重命名为authorized_keys；2.SSH工具采用的是TCP连接，在网络断开的情况下SSH就会自动断开，于是终端会变成假死状态，必须关了重开，很麻烦。mosh使用UDP连接，不用担心断网重连的问题。mosh的使用，必须拥有服务端">
   
   
     <link rel="icon" href="/favicon.png">
@@ -103,7 +102,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 13.33px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 16.67px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node-js/" style="font-size: 13.33px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 13.33px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16.67px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 12.5px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 17.5px;">mongodb</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12.5px;">orientdb</a> <a href="/tags/redis/" style="font-size: 17.5px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
 					</div>
 				</section>
 				
@@ -163,11 +162,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-how-to-build-fast-api" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ssh-rsa-mosh" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/26/how-to-build-fast-api/" class="article-date">
-  	<time datetime="2016-04-26T07:53:57.000Z" itemprop="datePublished">2016-04-26</time>
+      <a href="/2016/05/05/ssh-rsa-mosh/" class="article-date">
+  	<time datetime="2016-05-04T17:27:51.000Z" itemprop="datePublished">2016-05-05</time>
 </a>
     </div>
   
@@ -180,7 +179,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      如何构建快速响应API接口
+      通过RSA实现SSH免密登录及mosh替换SSH避免断网断线
     </h1>
   
 
@@ -189,12 +188,12 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构/">架构</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mosh/">mosh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rsa/">rsa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
 	</div>
 
         
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/架构/">架构</a>
+	<a class="article-category-link" href="/categories/ssh/">ssh</a>
 	</div>
 
 
@@ -204,8 +203,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这是一张没有经过任何论证的图，但一直在大脑浮现，先画下来。当然了，这里面还需要依据项目需要，自行脑补一堆负载均衡，数据库分片的画面。只是这样的架构能够更好的整合资源，当前提示有这么多资源可以整合。</p>
-<p><img src="http://7xqex1.com1.z0.glb.clouddn.com/framework.png" alt="架构图" title="架构图"></p>
+        <p>1.SSH是我们常用的连接服务器的工具，频繁的输入账号密码会很麻烦，通过RSA的公私钥机制，可以实现免密登录。方法是将客户端的公钥放到服务器的~/.ssh目录下，并重命名为<code>authorized_keys</code>；<br>2.SSH工具采用的是TCP连接，在网络断开的情况下SSH就会自动断开，于是终端会变成假死状态，必须关了重开，很麻烦。mosh使用UDP连接，不用担心断网重连的问题。mosh的使用，必须拥有服务端，即除了客户端需要安装mosh外，服务端也需要装mosh，之后通过命令<code>mosh root@&lt;your host&gt;</code>即可完成连接。</p>
 
       
     </div>
@@ -215,18 +213,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/04/28/git/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/05/05/how-to-build-fast-api/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          git踩坑记录
+          node.js在项目中应该放在哪个位置
         
       </div>
     </a>
   
   
-    <a href="/2016/04/25/javascript-async-order/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Javascript异步调用顺序执行方法</div>
+    <a href="/2016/05/04/data-structure/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构的一些基本概念</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -261,7 +259,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="how-to-build-fast-api" data-title="如何构建快速响应API接口" data-url="http://coderq.github.io/2016/04/26/how-to-build-fast-api/"></div>
+	<div class="ds-thread" data-thread-key="ssh-rsa-mosh" data-title="通过RSA实现SSH免密登录及mosh替换SSH避免断网断线" data-url="http://coderq.github.io/2016/05/05/ssh-rsa-mosh/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

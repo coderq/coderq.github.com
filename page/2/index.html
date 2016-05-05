@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 13.33px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16.67px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 16.67px;">mongodb</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node-js/" style="font-size: 13.33px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 13.33px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16.67px;">redis</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 12.5px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 17.5px;">mongodb</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12.5px;">orientdb</a> <a href="/tags/redis/" style="font-size: 17.5px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
 					</div>
 				</section>
 				
@@ -162,6 +162,122 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-mongodb-command" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/18/mongodb-command/" class="article-date">
+  	<time datetime="2016-04-18T09:26:52.000Z" itemprop="datePublished">2016-04-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/18/mongodb-command/">自己平时使用过的一些mongodb命令记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u6839_u636E_u65E5_u671F_u7EDF_u8BA1_u51FA_u67D0_u4E9B_u624B_u673A_u53F7_u8BB0_u5F55_u6570"><a href="#u6839_u636E_u65E5_u671F_u7EDF_u8BA1_u51FA_u67D0_u4E9B_u624B_u673A_u53F7_u8BB0_u5F55_u6570" class="headerlink" title="根据日期统计出某些手机号记录数"></a>根据日期统计出某些手机号记录数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = db.spinetmp.aggregate([</span><br><span class="line">	&#123;$match: &#123;status: <span class="string">'visable'</span>, checkuserid: &#123;$<span class="keyword">in</span>: [<span class="string">'156****5285'</span>, <span class="string">'156****5194'</span>, <span class="string">'137****8875'</span>, <span class="string">'158****1125'</span>]&#125;&#125;&#125;,</span><br><span class="line">	&#123;$project: &#123;mobile: <span class="string">'$checkuserid'</span>, date: &#123;$dateToString: &#123;format: <span class="string">"%Y-%m-%d"</span>, date: <span class="string">"$version"</span> &#125;&#125;&#125;&#125;,</span><br><span class="line">	&#123;$group: &#123;_id: &#123;mobile: <span class="string">'$mobile'</span>, date: <span class="string">"$date"</span>&#125;, count: &#123;$sum: <span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">	&#123;$sort: &#123;<span class="string">'_id.mobile'</span>: <span class="number">1</span>, <span class="string">'_id.date'</span>: －<span class="number">1</span>&#125;&#125;</span><br><span class="line">]);</span><br><span class="line"><span class="comment">// 将数据转为csv格式</span></span><br><span class="line">data.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item._id.mobile + <span class="string">','</span> + item._id.date + <span class="string">','</span> + item.count;</span><br><span class="line">&#125;).join(<span class="string">"\n"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="u5012_u51FA_u7528_u6237_u4E66_u5355_u7684_u63CF_u8FF0_u548C_u4E66_u7684_u63A8_u8350_u8BED"><a href="#u5012_u51FA_u7528_u6237_u4E66_u5355_u7684_u63CF_u8FF0_u548C_u4E66_u7684_u63A8_u8350_u8BED" class="headerlink" title="倒出用户书单的描述和书的推荐语"></a>倒出用户书单的描述和书的推荐语</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users = db.user.find(&#123;mobile_number: &#123;$<span class="keyword">in</span>: [<span class="string">'156****6041'</span>, <span class="string">'155****4511'</span>, <span class="string">'136****5641'</span>]&#125;&#125;, &#123;_id: <span class="number">0</span>, mobile_number: <span class="number">1</span>, user_id: <span class="number">1</span>&#125;);</span><br><span class="line"></span><br><span class="line">users.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	item.floors = db.floor.find(&#123;user_id: item.user_id, type: &#123;$exists: <span class="literal">false</span>&#125;&#125;, &#123;user_id: <span class="number">1</span>, name: <span class="number">1</span>, desc: <span class="number">1</span>, item_list: <span class="number">1</span>&#125;).toArray();</span><br><span class="line">	item.floors = item.floors.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">		item.item_list = item.item_list.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> db.item.findOne(&#123;bid: item&#125;, &#123;bid: <span class="number">1</span>, title: <span class="number">1</span>, remark: <span class="number">1</span>&#125;);</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="keyword">return</span> item;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">return</span> item;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="u6839_u636E_u51FA_u7248_u793E_u548C_u4E66_u6392_u51FA_u7528_u6237_u6536_u85CF_u6700_u591A_u7684_u4E66"><a href="#u6839_u636E_u51FA_u7248_u793E_u548C_u4E66_u6392_u51FA_u7528_u6237_u6536_u85CF_u6700_u591A_u7684_u4E66" class="headerlink" title="根据出版社和书排出用户收藏最多的书"></a>根据出版社和书排出用户收藏最多的书</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk();</span><br><span class="line"><span class="keyword">var</span> data = db.library.aggregate([</span><br><span class="line">	&#123;$group: &#123;_id: &#123;publisher: <span class="string">'$publisher'</span>, bid: <span class="string">'$bid'</span>, title: <span class="string">'$title'</span>&#125;, count: &#123;$sum: <span class="number">1</span>&#125;&#125;&#125;</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// to csv</span></span><br><span class="line">data</span><br><span class="line">.toArray()</span><br><span class="line">.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b.count - a.count;</span><br><span class="line">&#125;)</span><br><span class="line">.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item._id.publisher + <span class="string">','</span> + item._id.bid + <span class="string">','</span> + item._id.title + <span class="string">','</span> + item.count; </span><br><span class="line">&#125;)</span><br><span class="line">.join(<span class="string">"\n"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="u67E5_u51FA_u6307_u5B9A_u51FA_u7248_u793E_u524D10_u540D_u7684_u4E66_u7C4D"><a href="#u67E5_u51FA_u6307_u5B9A_u51FA_u7248_u793E_u524D10_u540D_u7684_u4E66_u7C4D" class="headerlink" title="查出指定出版社前10名的书籍"></a>查出指定出版社前10名的书籍</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk();</span><br><span class="line"><span class="keyword">var</span> publishers = [</span><br><span class="line">	<span class="string">'人民文学出版社'</span>,</span><br><span class="line">	<span class="string">'上海译文出版社'</span>,</span><br><span class="line">	<span class="string">'中华书局'</span>,</span><br><span class="line">	<span class="string">'中信出版社'</span>,</span><br><span class="line">	<span class="string">'商务印书馆'</span>,</span><br><span class="line">	<span class="string">'生活·读书·新知三联书店'</span>,</span><br><span class="line">	<span class="string">'广西师范大学出版社'</span>,</span><br><span class="line">	<span class="string">'译林出版社'</span>,</span><br><span class="line">	<span class="string">'新星出版社'</span>,</span><br><span class="line">	<span class="string">'南海出版公司'</span></span><br><span class="line">];</span><br><span class="line"><span class="keyword">var</span> data = db.library.aggregate([</span><br><span class="line">	&#123;$match: &#123;publisher: &#123;$<span class="keyword">in</span>: publishers&#125;&#125;&#125;,</span><br><span class="line">	&#123;$group: &#123;_id: &#123;publisher: <span class="string">'$publisher'</span>, title: <span class="string">'$title'</span>&#125;, count: &#123;$sum: <span class="number">1</span>&#125;&#125;&#125;</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//findIndex是es6的函数，自己写。。。</span></span><br><span class="line"><span class="keyword">var</span> findIndex = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> i = <span class="number">0</span>, r;</span><br><span class="line">	<span class="keyword">while</span> (<span class="keyword">this</span>.length &gt; i &amp;&amp; !(r = fn(<span class="keyword">this</span>[i], i, <span class="keyword">this</span>))) i++;</span><br><span class="line">	<span class="keyword">return</span> r ? i : -<span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// to csv</span></span><br><span class="line">data</span><br><span class="line"><span class="comment">// 对象数组化</span></span><br><span class="line">.toArray()</span><br><span class="line"><span class="comment">// 按出版社归类排序</span></span><br><span class="line">.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (publishers.indexOf(a._id.publisher) - publishers.indexOf(b._id.publisher)) || (b.count - a.count);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 过滤出前10的书籍，这里可以用另一个数组对象来存储数据，减少运算步骤。</span></span><br><span class="line">.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, ary</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> index &lt; (findIndex.call(ary, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> item._id.publisher === data._id.publisher;</span><br><span class="line">	&#125;) + <span class="number">10</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 格式化</span></span><br><span class="line">.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item._id.publisher + <span class="string">','</span> + item._id.title + <span class="string">','</span> + item.count; </span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// toString</span></span><br><span class="line">.join(<span class="string">"\n"</span>);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/mongodb/">mongodb</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mysql-commander" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/18/mysql-commander/" class="article-date">
+  	<time datetime="2016-04-17T23:41:59.000Z" itemprop="datePublished">2016-04-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/18/mysql-commander/">Mysql的一些语法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>添加一个主键并将其放到表的最前<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE `test`.`user` &#10;ADD COLUMN `id` INT UNSIGNED NOT NULL COMMENT &#39;&#20027;&#38190;&#39; FIRST,&#10;ADD PRIMARY KEY (`id`);</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-javascript-skill" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -676,139 +792,6 @@
       
 	<div class="article-category tagcloud">
 	<a class="article-category-link" href="/categories/微信/">微信</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-proto-prototype-constructor" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/08/javascript-proto-prototype-constructor/" class="article-date">
-  	<time datetime="2016-03-08T02:35:59.000Z" itemprop="datePublished">2016-03-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/08/javascript-proto-prototype-constructor/">Javascript继承之理解__proto__、prototype、constructor三者的含义与用法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u5982_u4F55_u5199_u51FA_u6CA1_u6709_u6C61_u67D3_u7684_u7EE7_u627F"><a href="#u5982_u4F55_u5199_u51FA_u6CA1_u6709_u6C61_u67D3_u7684_u7EE7_u627F" class="headerlink" title="如何写出没有污染的继承"></a>如何写出没有污染的继承</h2><p>1.javascript中一切都是对象，每个对象都是基于原型对象创建的，每个对象中都有<strong>proto</strong>属性，这个属性指向的就是它基于的原型对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo(); </span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    Foo.__proto__ === <span class="built_in">Function</span>.prototype, <span class="comment">// true</span></span><br><span class="line">    foo.__proto__ === Foo.prototype, <span class="comment">// true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<p>2.只有构造函数对象才有prototype属性，构造函数的作用是创建对象，创建对象的时候，它要知道这个对象基于哪个原型来创建，这个prototype指向的就是这个原型。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="comment">// Foo.prototype 指向 Foo.prototype;</span></span><br></pre></td></tr></table></figure></p>
-<p>3.只有原型对象才有constructor属性，而且也是系统（浏览器）给创建的。前面说过构造函数对象的prototype属性会指向一个原型对象，那么这个原型对象中的constructor属性指向的就是这个构造函数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo(); </span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    foo.constructor === Foo, <span class="comment">// true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<p>4.思想合并<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Parent = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'parent'</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Parent.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Son = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    Parent.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'son'</span>;</span><br><span class="line">&#125;;</span><br><span class="line">Son.prototype.__proto__ = Parent.prototype;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> parent = <span class="keyword">new</span> Parent();</span><br><span class="line"><span class="keyword">var</span> son = <span class="keyword">new</span> Son();</span><br><span class="line">parent.sayName();</span><br><span class="line">son.sayName();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    Parent.__proto__ === <span class="built_in">Function</span>.prototype,</span><br><span class="line">    parent.__proto__ === Parent.prototype,</span><br><span class="line">    parent.constructor === Parent,</span><br><span class="line">    Son.__proto__ === <span class="built_in">Function</span>.prototype,</span><br><span class="line">    son.__proto__ === Son.prototype,</span><br><span class="line">    son.constructor === Son</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
-<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2011/06/designing_ideas_of_inheritance_mechanism_in_javascript.html</a></li>
-<li><a href="http://blogzhoubo.iteye.com/blog/1685368" target="_blank" rel="external">http://blogzhoubo.iteye.com/blog/1685368</a></li>
-</ul>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-es5-useless-tech" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/08/javascript-es5-useless-tech/" class="article-date">
-  	<time datetime="2016-03-08T02:18:38.000Z" itemprop="datePublished">2016-03-08</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/08/javascript-es5-useless-tech/">Javascript中一些可能是用较少的语法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="set/get"><a href="#set/get" class="headerlink" title="set/get"></a>set/get</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;&#10;&#9;items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;],&#10;&#9;get length () &#123;&#10;&#9;&#9;return this.items.length;&#10;&#9;&#125;,&#10;&#9;set first (val) &#123;&#10;&#9;&#9;this.items[0] = val;&#10;&#9;&#125;&#10;&#125;;&#10;console.log(data.length); // 3&#10;data.length = 4; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25253;&#38169;&#65306;Uncaught TypeError: Cannot set property length of #&#60;Object&#62; which has only a getter(&#8230;)&#10;console.log(data.first = &#39;d&#39;);&#10;console.log(data.items); // [&#34;d&#34;, &#34;b&#34;, &#34;c&#34;]&#10;&#10;var MyDate = function() &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="defineGetter/defineSetter"><a href="#defineGetter/defineSetter" class="headerlink" title="defineGetter/defineSetter"></a><strong>defineGetter</strong>/<strong>defineSetter</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;&#10;&#9;items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&#10;&#125;;&#10;data.__defineGetter__(&#39;length&#39;, function() &#123;return this.items.length;&#125;);&#10;data.__defineSetter__(&#39;first&#39;, function(val) &#123;this.items[0] = val;&#125;)&#10;console.log(data.length); // 3&#10;console.log(data.first = &#39;d&#39;);&#10;console.log(data.items); // [&#34;d&#34;, &#34;b&#34;, &#34;c&#34;]</span><br></pre></td></tr></table></figure>
-<h2 id="Object-freeze"><a href="#Object-freeze" class="headerlink" title="Object.freeze"></a>Object.freeze</h2><p>将某个对象<em>冻住</em>，好形象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;a:1, b: 2&#125;; &#10;Object.freeze(a); &#10;a.c =3;&#10;console.log(a); // &#123;a: 1, b: 2&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty"></a>Object.defineProperty</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;&#125;;&#10;Object.defineProperty(obj1, &#34;x&#34;, &#123; value: 42, writable: false &#125;);&#10;obj1.x = 9; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25243;&#20986;TypeError&#38169;&#35823;&#10;console.log(obj1.x); // 42</span><br></pre></td></tr></table></figure>
-<h2 id="Object-preventExtensions"><a href="#Object-preventExtensions" class="headerlink" title="Object.preventExtensions"></a>Object.preventExtensions</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#32473;&#19981;&#21487;&#25193;&#23637;&#23545;&#35937;&#30340;&#26032;&#23646;&#24615;&#36171;&#20540;&#10;var fixed = &#123;&#125;;&#10;Object.preventExtensions(fixed);&#10;fixed.newProp = &#34;ohai&#34;; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25243;&#20986;TypeError&#38169;&#35823;&#10;console.log(fixed); // &#123;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(new Function(&#39;a&#39;, &#39;b&#39;, &#39;return a + b;&#39;)(1, 2)) // 3</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
 	</div>
 
 
