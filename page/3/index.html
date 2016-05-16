@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 12.5px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 17.5px;">mongodb</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12.5px;">orientdb</a> <a href="/tags/redis/" style="font-size: 17.5px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 14px;">nginx</a> <a href="/tags/node-js/" style="font-size: 14px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
 					</div>
 				</section>
 				
@@ -162,6 +162,476 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-mac-server-cmd" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/11/mac-server-cmd/" class="article-date">
+  	<time datetime="2016-04-10T22:29:46.000Z" itemprop="datePublished">2016-04-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/11/mac-server-cmd/">MAC上的各种服务命令备忘</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># start&#10;sudo /usr/local/mysql/support-files/mysql.server start&#10;# stop&#10;sudo /usr/local/mysql/support-files/mysql.server stop&#10;# restart &#10;sudo /usr/local/mysql/support-files/mysql.server restart</span><br></pre></td></tr></table></figure>
+<h2 id="mongo"><a href="#mongo" class="headerlink" title="mongo"></a>mongo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath ~/mongodb_path</span><br></pre></td></tr></table></figure>
+<h2 id="orientdb"><a href="#orientdb" class="headerlink" title="orientdb"></a>orientdb</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/server.sh&#10;./bin/console.sh (or http://localhost:2424)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/orientdb/">orientdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/mac/">mac</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-orientdb-note-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/08/orientdb-note-1/" class="article-date">
+  	<time datetime="2016-04-08T09:05:56.000Z" itemprop="datePublished">2016-04-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/08/orientdb-note-1/">OrientDB学习笔记（一）</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u4E0B_u8F7D_u3001_u5B89_u88C5_u548C_u542F_u52A8"><a href="#u4E0B_u8F7D_u3001_u5B89_u88C5_u548C_u542F_u52A8" class="headerlink" title="下载、安装和启动"></a>下载、安装和启动</h2><p>下载地址<a href="http://orientdb.com/download/" target="_blank" rel="external">http://orientdb.com/download/</a>，下载后解压进入bin目录，执行<code>./server.sh</code>命令，搞定。</p>
+<p>你可以通过<a href="http://localhost:2480访问web地址，也可以执行`./console.sh`启动客户端。" target="_blank" rel="external">http://localhost:2480访问web地址，也可以执行`./console.sh`启动客户端。</a></p>
+<h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>OrientDB是一款开源的非关系数据库系统，使用Java实现的，他是一个符合模型的数据库，支持文档、图和键值三种模型。记录间的关系以直接联系的方式存储在图数据库。</p>
+<h2 id="u7279_u8D28"><a href="#u7279_u8D28" class="headerlink" title="特质"></a>特质</h2><p>支持ACID事务保证。<br>图数据库的管理，采用Apache的TinkerPop开源图计算框架。</p>
+<p>Schema Class Cluster Record</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/orientdb/">orientdb</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/图数据库/">图数据库</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-msgpack" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/08/msgpack/" class="article-date">
+  	<time datetime="2016-04-08T00:00:52.000Z" itemprop="datePublished">2016-04-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/08/msgpack/">msgpack使用记录</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>我们平时做接口调接口，总会遇到一些接口返回的数据量特别庞大的问题，这容易导致客户端流量增加，也影响响应时间。msgpack可以将数据压缩，通过<a href="http://msgpack.org/" target="_blank" rel="external">msgpack</a>，我们一般可以讲原始数据压缩一半左右，当数量很大时，非常赞！<br>步骤也很简单，如下：<br>1.安装模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install msgpack5 --save</span><br></pre></td></tr></table></figure></p>
+<p>2.压缩/解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let msgpack = require(&#39;msgpack5&#39;)()&#10;  , encode  = msgpack.encode&#10;  , decode  = msgpack.decode;&#10;&#10;console.log(decode(encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;))) // &#123; hello: &#39;world&#39; &#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>encode</code>的结果是Buffer对象，你可以直接返回二进制编码，也可以通过toString(‘hex’)返回十六进制编码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#36820;&#22238;&#20108;&#36827;&#21046;&#10;this.body = encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;);&#10;// &#36820;&#22238;&#21313;&#20845;&#36827;&#21046;&#10;this.body = encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;).toString(&#39;hex&#39;);</span><br></pre></td></tr></table></figure></p>
+<p>如果你用二进制，用request测试，记得必须将encoding设为null<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request(&#123;&#10;&#9;method: &#39;post&#39;,&#10;&#9;url:&#39;http://localhost:3000/sign_in&#39;, &#10;&#9;form: &#123;account: &#39;11111121123&#39;, password: &#39;123456&#39;&#125;,&#10;&#9;encoding: null&#10;&#125;, function(err, res, body) &#123;&#10;&#9;if (err) throw err;&#10;&#9;console.log(msgpack.decode(body));&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>如果你用十六进制，需要将结果转为二进制后才能正常解码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request(&#123;&#10;&#9;method: &#39;post&#39;,&#10;&#9;url:&#39;http://localhost:3000/sign_in&#39;, &#10;&#9;form: &#123;account: &#39;11111121123&#39;, password: &#39;123456&#39;&#125;,&#10;&#125;, function(err, res, body) &#123;&#10;&#9;if (err) throw err;&#10;&#9;console.log(msgpack.decode(Buffer(body, &#39;hex&#39;)));&#10;&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><em>注意</em> 对数据进行encode操作的时候，如果encode的内容是类似于mongoose返回的实体对象这一类的数据的话，这个对象是存在某些读写限制的，encode遇到这类数据后抛出<code>not implemented yet</code>的异常。如果是mongoose的实体对象，可以使用其内置的toObject方法将对象转换为普通对象再执行encode操作。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/msgpack/">msgpack</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/node-js/">node.js</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-highlight-build" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/06/highlight-build/" class="article-date">
+  	<time datetime="2016-04-05T23:38:50.000Z" itemprop="datePublished">2016-04-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/06/highlight-build/">highlight使用前的构建操作</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>highlight</code>是一个很好的代码高亮工具，但是官方似乎没有太好的使用说明，以至于一开始使用的时候搞了有点久，这里做个简单的记录。<br>1.你需要引入css文件，这个很简单，样式文件都在<code>src/styles</code>下面<br>2.如果你跟我一样是使用bower安装的话，一开始是没有<code>highlight.pack.js</code>文件的，你需要build一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#20551;&#35774;&#20320;&#21482;&#38656;&#35201;javascript&#20195;&#30721;&#30340;&#39640;&#20142;&#10;node tools/build.js javascript</span><br></pre></td></tr></table></figure></p>
+<p>3.之后你会看到根目录下面多了一个build的文件夹，打开就会发现<code>highlight.pack.js</code>文件了，引入该文件，再按官方指引就可以正常使用了。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/highlight/">highlight</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-redis-basic" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/25/redis-basic/" class="article-date">
+  	<time datetime="2016-03-25T05:34:21.000Z" itemprop="datePublished">2016-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/25/redis-basic/">redis基础操作指令</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>预置数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sadd user1:follow &#39;user2&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user1:follow &#39;user3&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user1:follow &#39;user5&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user1&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user4&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user5&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+<p>删除集合中的某个元素（SREM）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; srem user4:follow user3&#10;(integer) 0&#10;127.0.0.1:6379&#62; srem user4:follow user1&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user4&#34;&#10;127.0.0.1:6379&#62;</span><br></pre></td></tr></table></figure></p>
+<p>计算出两个集合的交集（SINTER）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sinter user1:follow user2:follow&#10;1) &#34;user5&#34;</span><br></pre></td></tr></table></figure></p>
+<p>将一个元素从一个集合移动到另一个集合（SMOVE）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smove user2:follow user1:follow &#39;user6&#39;&#10;(integer) 0&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user4&#34;&#10;127.0.0.1:6379&#62; smove user2:follow user1:follow &#39;user5&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; smove user2:follow user1:follow &#39;user4&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;4) &#34;user4&#34;&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user1&#34;&#10;127.0.0.1:6379&#62; sinter user1:follow user2:follow&#10;(empty list or set)</span><br></pre></td></tr></table></figure></p>
+<p>返回所有集合的并集（SUNION）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sunion user1:follow user2:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user5&#34;&#10;3) &#34;user2&#34;&#10;4) &#34;user4&#34;&#10;5) &#34;user1&#34;</span><br></pre></td></tr></table></figure></p>
+<p>返回集合的基数（SCARD）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; scard user1:follow&#10;(integer) 4&#10;127.0.0.1:6379&#62; scard user2:follow&#10;(integer) 1</span><br></pre></td></tr></table></figure></p>
+<p>将两个集合的交集成为另一个key的值（SINTERSTORE）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sadd user3:follow &#39;user2&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user3:follow &#39;user4&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user3:follow&#10;1) &#34;user2&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; sinterstore user4:follow user1:follow user3:follow&#10;(integer) 2&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user2&#34;&#10;2) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+<p>移除集合中的一个随机元素（SPOP）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; spop user1:follow&#10;&#34;user4&#34;&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; spop user1:follow&#10;&#34;user5&#34;&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user2&#34;</span><br></pre></td></tr></table></figure></p>
+<p>将集合的并集作为另一个键的值（SUNIONSTORE）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sunionstore user5:follow user1:follow user2:follow user3:follow&#10;(integer) 4&#10;127.0.0.1:6379&#62; smembers user5:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user2&#34;&#10;4) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+<p>计算两个集合的差集（SDIFF）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user2&#34;&#10;127.0.0.1:6379&#62; sdiff user5:follow user1:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+<p>判断一个元素是否为某个集合内的元素（ISMEMBER）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user2&#34;&#10;127.0.0.1:6379&#62; sismember user1:follow user1&#10;(integer) 0&#10;127.0.0.1:6379&#62; sismember user1:follow user3&#10;(integer) 1</span><br></pre></td></tr></table></figure></p>
+<p>返回集合中的一个随机元素（SRANDMEMBER）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; srandmember user1:follow&#10;&#34;user2&#34;</span><br></pre></td></tr></table></figure></p>
+<p>计算两个集合的差集并将结果作为值赋值给一个键（SDIFFSTORE）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user2&#34;&#10;127.0.0.1:6379&#62; smembers user5:follow&#10;1) &#34;user3&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user2&#34;&#10;4) &#34;user4&#34;&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user2&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; sdiffstore user4:follow user5:follow user1:follow&#10;(integer) 2&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/redis/">redis</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascript-useful-functions" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/18/javascript-useful-functions/" class="article-date">
+  	<time datetime="2016-03-18T00:55:24.000Z" itemprop="datePublished">2016-03-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/18/javascript-useful-functions/">自己写的一些常用函数</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570"><a href="#u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570" class="headerlink" title="随机字符串函数"></a>随机字符串函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 生成随机字符串</span><br><span class="line"> *</span><br><span class="line"> * @param total 字符串长度</span><br><span class="line"> * @param method 字符串类型，数字／小写字母／大写字母</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> randomString = <span class="function"><span class="keyword">function</span>(<span class="params">total, method</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> codes = [], ret = <span class="string">''</span>;</span><br><span class="line">    method = method || <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.number) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">48</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.lower) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">26</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">97</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.upper) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">26</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">65</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (total--) &#123;</span><br><span class="line">        ret += <span class="built_in">String</span>.fromCharCode(codes[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * codes.length)]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 数字</span><br><span class="line"> */</span></span><br><span class="line">randomString.number = <span class="number">1</span>;</span><br><span class="line"><span class="comment">/** </span><br><span class="line"> * 小写字母</span><br><span class="line"> */</span></span><br><span class="line">randomString.lower = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 大写字母</span><br><span class="line"> */</span></span><br><span class="line">randomString.upper = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="u7EE7_u627F_u51FD_u6570"><a href="#u7EE7_u627F_u51FD_u6570" class="headerlink" title="继承函数"></a>继承函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> extend = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> params = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>),</span><br><span class="line">        method = <span class="string">'number'</span> == <span class="keyword">typeof</span> params[params.length - <span class="number">1</span>] ? params.pop() : <span class="number">0</span>,</span><br><span class="line">        ret = method &amp; extend.replaceFirst ? params.shift() : &#123;&#125;,</span><br><span class="line">        deep = method &amp; extend.deepExtend,</span><br><span class="line">        rmNull = method &amp; extend.removeNull,</span><br><span class="line">        obj;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (params.length) &#123;</span><br><span class="line">        obj = params.shift();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="literal">null</span> === obj[k]) &#123;</span><br><span class="line">                rmNull ? <span class="keyword">delete</span> ret[k] : ret[k] = obj[k];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!ret[k] || ret[k].constructor !== <span class="built_in">Object</span> || obj[k].constructor !== <span class="built_in">Object</span>) &#123;</span><br><span class="line">                ret[k] = obj[k];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ret[k] = deep ? extend(ret[k], obj[k], method) : obj[k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 将结果赋值给第一个对象</span><br><span class="line"> */</span></span><br><span class="line">extend.replaceFirst = extend.RF = <span class="number">1</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 深度合并</span><br><span class="line"> */</span></span><br><span class="line">extend.deepExtend = extend.DE = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 删除值为null的键</span><br><span class="line"> */</span></span><br><span class="line">extend.removeNull = extend.RN = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570"><a href="#u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570" class="headerlink" title="字符串及时间格式化函数"></a>字符串及时间格式化函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 字符串格式化方法</span><br><span class="line"> * @params null</span><br><span class="line"> * @example _.format('我是&#123;0&#125;', 'CoderQ') =&gt; '我是CoderQ'; '我是&#123;name&#125;'.format(&#123;name:'CoderQ'&#125;) =&gt; '我是CoderQ';</span><br><span class="line"> * @depends null</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> string_format = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>),</span><br><span class="line">        string = args.shift(),</span><br><span class="line">        params = <span class="string">'object'</span> == <span class="keyword">typeof</span> args[<span class="number">0</span>] ? args[<span class="number">0</span>] : args;</span><br><span class="line">    <span class="keyword">return</span> string.replace(<span class="regexp">/\&#123;(\w+)(\|([^&#125;]+))?\&#125;/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$, $1, $2, $3</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'undefined'</span> == <span class="keyword">typeof</span> params[$<span class="number">1</span>] ? <span class="built_in">eval</span>($<span class="number">3</span>) : params[$<span class="number">1</span>];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 时间格式化函数</span><br><span class="line"> * @params</span><br><span class="line"> *    format 格式</span><br><span class="line"> *    language 语言</span><br><span class="line"> * @example new Date().format('Y-m-d H:i:s')</span><br><span class="line"> * @depends toString</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> date_format = <span class="function"><span class="keyword">function</span>(<span class="params">format, date, lang</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _format = format || <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> _lang = lang || <span class="string">'zh'</span>;</span><br><span class="line">    <span class="keyword">var</span> _month_text = &#123;</span><br><span class="line">        <span class="string">'zh'</span>: [<span class="string">'一'</span>, <span class="string">'二'</span>, <span class="string">'三'</span>, <span class="string">'四'</span>, <span class="string">'五'</span>, <span class="string">'六'</span>, <span class="string">'七'</span>, <span class="string">'八'</span>, <span class="string">'九'</span>, <span class="string">'十'</span>, <span class="string">'十一'</span>, <span class="string">'十二'</span>],</span><br><span class="line">        <span class="string">'en'</span>: [<span class="string">'Jan'</span>, <span class="string">'Feb'</span>, <span class="string">'Mar'</span>, <span class="string">'Apr'</span>, <span class="string">'May'</span>, <span class="string">'Jun'</span>, <span class="string">'Jul'</span>, <span class="string">'Aug'</span>, <span class="string">'Sep'</span>, <span class="string">'Oct'</span>, <span class="string">'Nov'</span>, <span class="string">'Dec'</span>]</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> _day_text = &#123;</span><br><span class="line">        <span class="string">'zh'</span>: [<span class="string">'日'</span>, <span class="string">'一'</span>, <span class="string">'二'</span>, <span class="string">'三'</span>, <span class="string">'四'</span>, <span class="string">'五'</span>, <span class="string">'六'</span>],</span><br><span class="line">        <span class="string">'en'</span>: [<span class="string">'Sun'</span>, <span class="string">'Mon'</span>, <span class="string">'Tues'</span>, <span class="string">'Wed'</span>, <span class="string">'Thur'</span>, <span class="string">'Fri'</span>, <span class="string">'Sat'</span>]</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> _year = date.getFullYear();</span><br><span class="line">    <span class="keyword">var</span> _month = date.getMonth() + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> _date = date.getDate();</span><br><span class="line">    <span class="keyword">var</span> _day = date.getDay();</span><br><span class="line">    <span class="keyword">var</span> _hour = date.getHours();</span><br><span class="line">    <span class="keyword">var</span> _minute = date.getMinutes();</span><br><span class="line">    <span class="keyword">var</span> _second = date.getSeconds();</span><br><span class="line">    <span class="keyword">return</span> _format.replace(<span class="regexp">/Y/g</span>, _year)</span><br><span class="line">        .replace(<span class="regexp">/y/g</span>, _year.toString().substr(<span class="number">2</span>))</span><br><span class="line">        .replace(<span class="regexp">/M/g</span>, _month_text[_lang][_month - <span class="number">1</span>])</span><br><span class="line">        .replace(<span class="regexp">/m/g</span>, _month &gt; <span class="number">9</span> ? _month : <span class="string">'0'</span> + _month)</span><br><span class="line">        .replace(<span class="regexp">/n/g</span>, _month)</span><br><span class="line">        .replace(<span class="regexp">/D/g</span>, _day_text[_lang][_day])</span><br><span class="line">        .replace(<span class="regexp">/d/g</span>, _date &gt; <span class="number">9</span> ? _date : <span class="string">'0'</span> + _date)</span><br><span class="line">        .replace(<span class="regexp">/j/g</span>, _date)</span><br><span class="line">        .replace(<span class="regexp">/H/g</span>, _hour &gt; <span class="number">9</span> ? _hour : <span class="string">'0'</span> + _hour)</span><br><span class="line">        .replace(<span class="regexp">/G/g</span>, _hour)</span><br><span class="line">        .replace(<span class="regexp">/h/g</span>, (_hour % <span class="number">12</span>) &gt; <span class="number">9</span> ? (_hour % <span class="number">12</span>) : <span class="string">'0'</span> + (_hour % <span class="number">12</span>))</span><br><span class="line">        .replace(<span class="regexp">/g/g</span>, _hour % <span class="number">12</span>)</span><br><span class="line">        .replace(<span class="regexp">/i/g</span>, _minute &gt; <span class="number">9</span> ? _minute : <span class="string">'0'</span> + _minute)</span><br><span class="line">        .replace(<span class="regexp">/s/g</span>, _second &gt; <span class="number">9</span> ? _second : <span class="string">'0'</span> + _second);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 数据格式化</span><br><span class="line"> * @param format</span><br><span class="line"> * @param obj</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> format = <span class="function"><span class="keyword">function</span>(<span class="params">format, obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Object</span>.prototype.toString.call(obj) == <span class="string">'[object Date]'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> date_format.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> string_format.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-weixin-jssdk" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/18/weixin-jssdk/" class="article-date">
+  	<time datetime="2016-03-17T23:58:57.000Z" itemprop="datePublished">2016-03-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/18/weixin-jssdk/">实现记录微信分享路径树的功能</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u80CC_u666F"><a href="#u80CC_u666F" class="headerlink" title="背景"></a>背景</h2><p>接运营要求，希望记录文章被某个人分享出去之后的路径树，但因为微信分享时是无法获取到用户信息的，所以能记录的信息只有原始分享用户以及他分享出去后的路径树。</p>
+<h2 id="u5B9E_u73B0_u65B9_u6CD5"><a href="#u5B9E_u73B0_u65B9_u6CD5" class="headerlink" title="实现方法"></a>实现方法</h2><p>当文章被分享出去时，我们的URL里记录有文章ID及用户ID，当页面被打开时，后端会生成一个share_id，以query的方式加到当前URL的后面，当页面被再次分享出去时，后端会根据这个share_id再生成一个下级的share_id，并记录他们之间的关系，而之前的share_id在数据库里的记录会被更新为已读。</p>
+<h2 id="u5FAE_u4FE1_u7B7E_u540D_u751F_u6210_u89C4_u5219"><a href="#u5FAE_u4FE1_u7B7E_u540D_u751F_u6210_u89C4_u5219" class="headerlink" title="微信签名生成规则"></a>微信签名生成规则</h2><p>签名的生成需要以下四个参数</p>
+<ul>
+<li>jsapi_ticket 先通过appId获取access_token，在通过access_token获取jsapi_ticket</li>
+<li>noncestr 随机字符串</li>
+<li>timestamp 时间戳（秒级）</li>
+<li>url 当前页面URL，<em>是当前页面URL，而不是要分享出去的URL</em><br>最后形成一段与此类似的字符串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jsapi_ticket=sM4AOVdWfPE4DxkXGEs8VMCPGGVi4C3VM0P37wVUCFvkVAy_90u5h9nbSlYy3-Sl-HhTdfl2fzFy1AOcHKP7qg&#38;noncestr=Wm3WZYTPz0wzccnW&#38;timestamp=1414587457&#38;url=http://mp.weixin.qq.com?params=value</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在经过sha1加密，得到signature</p>
+<h2 id="u6570_u636E_u6A21_u578B"><a href="#u6570_u636E_u6A21_u578B" class="headerlink" title="数据模型"></a>数据模型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var WeixinShareLogSchema = new Schema(&#123;&#10;    _id: &#123;type: String, unique: true, required: true&#125;,&#10;    parent_id: &#123;type: String, ref: &#39;weixin_share_log&#39;&#125;,&#10;    article_id: &#123;type: ObjectId, ref: &#39;article&#39;, required: true&#125;,&#10;    is_read: &#123;type: Boolean, default: false&#125;,&#10;    created_by : &#123;type : String, required: true&#125;,&#10;    created_at : &#123;type : Date, default : Date.now&#125;&#10;&#125;);&#10;&#36890;&#36807;&#36825;&#31181;&#32467;&#26500;&#65292;&#25105;&#20204;&#21482;&#35201;&#25628;&#32034;created_by&#20877;&#21152;&#19978;&#21069;&#31471;&#30340;&#24322;&#27493;&#23454;&#29616;&#23601;&#33021;&#30693;&#36947;&#34987;&#35813;&#29992;&#25143;&#20998;&#20139;&#20986;&#21435;&#30340;&#25991;&#31456;&#30340;&#26641;&#29366;&#32467;&#26500;&#20102;&#12290;</span><br></pre></td></tr></table></figure>
+<h2 id="u540E_u7AEF_u5B9E_u73B0"><a href="#u540E_u7AEF_u5B9E_u73B0" class="headerlink" title="后端实现"></a>后端实现</h2><p><em>因项目历史原因，没有使用es6</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">......&#10;// &#20998;&#20139;ID&#65292;&#22914;&#26524;&#26159;&#31532;&#19968;&#27425;&#20998;&#20139;&#65292;&#21017;&#20026;&#29992;&#25143;ID&#10;var parent_id = this.request.query.share_id || &#39;&#39;;&#10;// &#29983;&#25104;&#19968;&#20010;&#19979;&#32423;&#20998;&#20139;ID&#10;var share_id = md5(parent_id + Date.now());&#10;var WeixinShareLogModel = mongoose.model(&#39;weixinsharelog&#39;);&#10;// &#23558;&#24403;&#21069;&#30340;&#20998;&#20139;ID&#32622;&#20026;&#24050;&#35835;&#10;var e_weixin_share_log = yield WeixinShareLogModel.findOne(&#123;_id: parent_id&#125;).exec();&#10;if (e_weixin_share_log) &#123;&#10;    e_weixin_share_log.is_read = true;&#10;    yield e_weixin_share_log.save();&#10;&#125;&#10;e_weixin_share_log = new WeixinShareLogModel(&#123;&#10;    _id: share_id,&#10;    parent_id: parent_id,&#10;    article_id: article_id,&#10;    created_by: user_id&#10;&#125;);&#10;yield e_weixin_share_log.save();&#10;// url&#23450;&#20041;&#24494;&#20449;&#35201;&#27714;&#30340;&#29992;&#20110;&#33719;&#21462;&#31614;&#21517;&#30340;&#22320;&#22336;&#65292;&#38500;#&#21495;&#20043;&#21518;&#30340;&#21097;&#20313;&#37096;&#20998;&#10;var url = Tools.format(&#39;&#123;protocol&#125;://&#123;host&#125;&#123;url&#125;&#39;, &#123;&#10;    protocol: config.protocol,&#10;    host: config.host,&#10;    url: this.url.split(&#39;#&#39;).shift()&#10;&#125;);&#10;// &#33719;&#21462;&#24494;&#20449;&#31614;&#21517;&#10;var sign = yield Tools.getWeixinSignature(url);&#10;// &#29983;&#25104;&#19979;&#32423;&#20998;&#20139;&#22320;&#22336;&#10;var share_url = Tools.format(&#39;&#123;url&#125;?share_id=&#123;share_id&#125;&#39;, &#123;&#10;    url: url.split(&#39;?&#39;).shift(),&#10;    share_id: share_id&#10;&#125;);&#10;......</span><br></pre></td></tr></table></figure></p>
+<p>获取微信签名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/**&#10; * &#33719;&#21462;&#24494;&#20449;&#31614;&#21517;&#10; */&#10;var getWeixinSignature = function* (url) &#123;&#10;    function* getWeixinTicket() &#123;&#10;        var data = yield request.get(format(config.weixin.path.access_token, config.weixin));&#10;        return yield request.get(format(config.weixin.path.ticket, &#123;access_token: data.access_token&#125;));&#10;    &#125;&#10;    try &#123;&#10;        var data, expire, nonce_str, timestamp, jsapi_ticket, signature;&#10;        // &#22914;&#26524;&#36807;&#26399;&#26102;&#38388;&#19981;&#23384;&#22312;&#25110;&#20165;&#23384;200&#31186;&#65292;&#21017;&#37325;&#26032;&#33719;&#21462;jsapi_ticket&#65292;&#24182;&#37325;&#32622;&#36807;&#26399;&#26102;&#38388;&#10;        if (!getWeixinSignature.expire || getWeixinSignature.expire &#62; new Date() - 200 * 1000) &#123;&#10;            data = yield getWeixinTicket();&#10;            getWeixinSignature.expire = data.expires_in * 1000 + new Date().getTime();&#10;            getWeixinSignature.jsapi_ticket = data.ticket;&#10;        &#125;&#10;        if (!getWeixinSignature.jsapi_ticket) return false;&#10;        nonce_str = randomString(16);&#10;        timestamp = Math.floor(new Date().getTime() / 1000);&#10;        signature = sha1(format(&#34;jsapi_ticket=&#123;jsapi_ticket&#125;&#38;noncestr=&#123;nonce_str&#125;&#38;timestamp=&#123;timestamp&#125;&#38;url=&#123;url&#125;&#34;, &#123;&#10;            jsapi_ticket: getWeixinSignature.jsapi_ticket,&#10;            nonce_str: nonce_str,&#10;            timestamp: timestamp,&#10;            url: url&#10;        &#125;));&#10;        return &#123;&#10;            appId: config.weixin.app_id,&#10;            timestamp: timestamp,&#10;            nonceStr: nonce_str,&#10;            signature: signature&#10;        &#125;&#10;    &#125; catch (e) &#123;&#10;        console.log(e.stack);&#10;        return false;&#10;    &#125;&#10;&#125;;</span><br></pre></td></tr></table></figure></p>
+<h2 id="u524D_u7AEF_u914D_u7F6E"><a href="#u524D_u7AEF_u914D_u7F6E" class="headerlink" title="前端配置"></a>前端配置</h2><ul>
+<li>引入文件<a href="https://res.wx.qq.com/open/js/jweixin-1.0.0.js" target="_blank" rel="external">https://res.wx.qq.com/open/js/jweixin-1.0.0.js</a></li>
+<li>定义配置信息<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wx.config(&#123;&#10;    debug: false, &#10;    appId: &#39;&#60;%= sign.appId %&#62;&#39;,&#10;    nonceStr: &#39;&#60;%= sign.nonceStr %&#62;&#39;,&#10;    timestamp: &#39;&#60;%= sign.timestamp %&#62;&#39;,&#10;    signature: &#39;&#60;%= sign.signature %&#62;&#39;,&#10;    jsApiList: [&#10;        &#34;onMenuShareTimeline&#34;,&#10;        &#34;onMenuShareAppMessage&#34;,&#10;        &#34;onMenuShareQQ&#34;,&#10;        &#34;onMenuShareWeibo&#34;,&#10;        &#34;hideOptionMenu&#34;,&#10;        &#34;showOptionMenu&#34;&#10;    ]&#10;&#125;);&#10;wx.ready(function() &#123;&#10;&#9;var desc = $(&#39;meta[name=description]&#39;).attr(&#39;content&#39;) || $(&#39;body&#39;).find(&#39;h1,h2,h3,h4,p&#39;).eq(0).text() || &#39;&#32654;&#20029;&#38405;&#35835;&#25991;&#31456;&#20998;&#20139;&#39;;&#10;&#9;var image_url = $(&#39;body&#39;).find(&#39;img&#39;).get(0).src;&#10;    var shareInfo = &#123;&#10;        title: &#39;&#60;%= article_title %&#62;&#39;,&#10;        desc: desc,&#10;        imgUrl: image_url,&#10;        link: &#39;&#60;%= share_url %&#62;&#39;&#10;    &#125;;&#10;    /*&#20998;&#20139;&#21040;&#26379;&#21451;&#22280;*/&#10;    wx.onMenuShareTimeline(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#32473;&#26379;&#21451;&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareAppMessage(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#21040;QQ&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareQQ(shareInfo);&#10;    //&#33719;&#21462;&#8220;&#20998;&#20139;&#21040;&#33150;&#35759;&#24494;&#21338;&#8221;&#25353;&#38062;&#28857;&#20987;&#29366;&#24577;&#21450;&#33258;&#23450;&#20041;&#20998;&#20139;&#20869;&#23481;&#25509;&#21475;&#10;    wx.onMenuShareWeibo(shareInfo);&#10;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>具体JSSDK配置请参考<a href="https://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html" target="_blank" rel="external">微信官方文档</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/微信/">微信</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-javascript-proto-prototype-constructor" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -359,479 +829,9 @@
 
 
   
-    <article id="post-nginx-config" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/03/nginx-config/" class="article-date">
-  	<time datetime="2016-03-03T00:41:07.000Z" itemprop="datePublished">2016-03-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/03/nginx-config/">nginx配置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u5168_u5C40_u914D_u7F6E"><a href="#u5168_u5C40_u914D_u7F6E" class="headerlink" title="全局配置"></a>全局配置</h2><h3 id="user"><a href="#user" class="headerlink" title="user"></a>user</h3><p>用于指定nginx进程运行用户以及用户组，默认情况下将使用与用户名相同的组，除非编译时指定–user=USER和–group=GROUP</p>
-<h3 id="worker_processes"><a href="#worker_processes" class="headerlink" title="worker_processes"></a>worker_processes</h3><p>用于指定nginx的进程数，一般设置为与CPU核数一致即可。</p>
-<h3 id="error_log"><a href="#error_log" class="headerlink" title="error_log"></a>error_log</h3><p>用于指定全局错误日志文件，日志错误级别包括debug,info,notice,warn,error,crit，日志的信息量由debug到crit递减。</p>
-<p>nginx支持为每个虚拟主机配置不同的日志文件，如果在编译安装的时候加入–with-debug参数，可以使用以下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_log LOGFILE [debug_core | debug_alloc | debug_mutex | debug_event | debug_http | debug_imap];</span><br></pre></td></tr></table></figure></p>
-<p><strong>error_log off</strong>并不能关闭日志记录，而会将日志文件写入另一个文件名为off的文件中，如果你想关闭错误日志功能 ，应使用以下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_log  /dev/null crit;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;&#10;worker_processes  auto;&#10;&#10;#error_log  logs/error.log;&#10;#error_log  logs/error.log  notice;&#10;#error_log  logs/error.log  info;&#10;&#10;#pid        logs/nginx.pid;&#10;&#10;events &#123;&#10;    worker_connections  1024;&#10;    multi_accept on;&#10;&#125;&#10;&#10;http &#123;&#10;    include       mime.types;&#10;    default_type  application/octet-stream;&#10;&#10;    server_tokens   off;&#10;    sendfile        on;&#10;    tcp_nopush      on;&#10;    tcp_nodelay     on;&#10;&#10;    keepalive_timeout  65;&#10;    &#10;    server &#123;&#10;        listen 80;&#10;        server_name local.tms.shenba.com;&#10;&#10;        location / &#123;&#10;            proxy_set_header Host $host;&#10;            proxy_set_header X-Real-IP $remote_addr;&#10;            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#10;            proxy_buffering off;&#10;            proxy_pass           http://localhost:3445;&#10;        &#125;&#10;&#10;        &#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.h5.shenba.com;&#10;&#10;        location / &#123;&#10;            proxy_set_header Host $host;&#10;            proxy_set_header X-Real-IP $remote_addr;&#10;            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#10;            proxy_buffering off;&#10;            proxy_pass           http://localhost:3446;&#10;        &#125;&#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.h5statics.shenba.com;&#10;&#10;        root /Users/CoderQ/shenba/code/h5statics.shenba.com;&#10;    &#125;&#10;&#10;    server &#123;&#10;        listen 80;&#10;        server_name local.dian.shenba.com;&#10;        #access_log /var/log/nginx/node_h5site.log&#10;        location / &#123;&#10;            proxy_set_header    X-Real-IP           $remote_addr;&#10;            proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;&#10;            proxy_set_header    Host                $http_host;&#10;            proxy_set_header    X-NginX-Proxy       true;&#10;            proxy_set_header    Connection          &#34;&#34;;&#10;            proxy_http_version  1.1;&#10;            proxy_pass          http://localhost:3444;&#10;        &#125;&#10;    &#125;&#10;    server &#123;&#10;        listen       80;&#10;        server_name  local.dstatics.shenba.com;&#10;&#10;        root   /Users/CoderQ/shenba/code/dstatics.shenba.com;&#10;&#10;        #&#23383;&#20307;&#36328;&#22495;&#10;        location ~* \.(eot|ttf|woff|js)$ &#123;&#10;            add_header Access-Control-Allow-Origin *;&#10;        &#125;&#10;    &#125;&#10;&#10;    # another virtual host using mix of IP-, name-, and port-based configuration&#10;    #&#10;    #server &#123;&#10;    #    listen       8000;&#10;    #    listen       somename:8080;&#10;    #    server_name  somename  alias  another.alias;&#10;&#10;    #    location / &#123;&#10;    #        root   html;&#10;    #        index  index.html index.htm;&#10;    #    &#125;&#10;    #&#125;&#10;&#10;&#10;    # HTTPS server&#10;    #&#10;    #server &#123;&#10;    #    listen       443 ssl;&#10;    #    server_name  localhost;&#10;&#10;    #    ssl_certificate      cert.pem;&#10;    #    ssl_certificate_key  cert.key;&#10;&#10;    #    ssl_session_cache    shared:SSL:1m;&#10;    #    ssl_session_timeout  5m;&#10;&#10;    #    ssl_ciphers  HIGH:!aNULL:!MD5;&#10;    #    ssl_prefer_server_ciphers  on;&#10;&#10;    #    location / &#123;&#10;    #        root   html;&#10;    #        index  index.html index.htm;&#10;    #    &#125;&#10;    #&#125;&#10;&#10;&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/nginx/">nginx</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-create-openssl-certificate-for-https" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/03/02/create-openssl-certificate-for-https/" class="article-date">
-  	<time datetime="2016-03-02T11:59:33.000Z" itemprop="datePublished">2016-03-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/02/create-openssl-certificate-for-https/">通过OpenSSL创建证书文件构建https服务</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h2><p>以前用node.js构建过https服务，很简单，就是把两个文件的路径放在代码里，把http协议换成https就搞定了。不过今天我收到的是一个文件夹，两个文件怎么用都报错，于是有了自己生成证书文件来证实问题出在哪里的想法。最后发现问题在于这个文件夹里全是—–BEGIN CERTIFICATE—–的文件，找不到一个—–BEGIN RSA PRIVATE KEY—–的文件。</p>
-<h2 id="OpenSSL_u751F_u6210_u8BC1_u4E66"><a href="#OpenSSL_u751F_u6210_u8BC1_u4E66" class="headerlink" title="OpenSSL生成证书"></a>OpenSSL生成证书</h2><ul>
-<li><p>创建openssl.cnf文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[req]  &#10;    distinguished_name = req_distinguished_name  &#10;    req_extensions = v3_req  &#10;  &#10;    [req_distinguished_name]  &#10;    countryName = Country Name (2 letter code)  &#10;    countryName_default = CN  &#10;    stateOrProvinceName = State or Province Name (full name)  &#10;    stateOrProvinceName_default = BeiJing  &#10;    localityName = Locality Name (eg, city)  &#10;    localityName_default = YaYunCun  &#10;    organizationalUnitName  = Organizational Unit Name (eg, section)  &#10;    organizationalUnitName_default  = Domain Control Validated  &#10;    commonName = Internet Widgits Ltd  &#10;    commonName_max  = 64  &#10;  &#10;    [ v3_req ]  &#10;    # Extensions to add to a certificate request  &#10;    basicConstraints = CA:FALSE  &#10;    keyUsage = nonRepudiation, digitalSignature, keyEncipherment  &#10;    subjectAltName = @alt_names  &#10;  &#10;    [alt_names]  &#10;&#9;#&#27880;&#24847;&#36825;&#20010;IP.1&#30340;&#35774;&#32622;&#65292;IP&#22320;&#22336;&#38656;&#35201;&#21644;&#20320;&#30340;&#26381;&#21153;&#22120;&#30340;&#30417;&#21548;&#22320;&#22336;&#19968;&#26679;&#10;    IP.1 = 127.0.0.1</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>为CA生成私钥</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out ca-key.pem -des 1024</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过CA私钥生成CSR</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl req -new -key ca-key.pem -out ca-csr.pem</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过CSR文件和私钥生成CA证书</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -in ca-csr.pem -signkey ca-key.pem -out ca-cert.pem</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>通过服务器私钥文件和CSR文件生成服务器证书</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -CA ca-cert.pem -CAkey ca-key.pem -CAcreateserial -in server-csr.pem -out server-cert.pem -extensions v3_req -extfile openssl.cnf</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="node-js_u670D_u52A1_u7AEF"><a href="#node-js_u670D_u52A1_u7AEF" class="headerlink" title="node.js服务端"></a>node.js服务端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var https = require(&#39;https&#39;);&#10;var fs = require(&#39;fs&#39;);&#10;&#10;var options = &#123;&#10;&#9;key: fs.readFileSync(&#39;./keys/server-key.pem&#39;),&#10;&#9;// ca: [fs.readFileSync(&#39;./keys/ca-cert.pem&#39;)],&#10;&#9;cert: fs.readFileSync(&#39;./keys/server-cert.pem&#39;)&#10;&#125;;&#10;&#10;https.createServer(options,function(req,res)&#123;&#10;&#9;res.writeHead(200);&#10;&#9;res.end(&#39;hello world\n&#39;);&#10;&#125;).listen(3000,&#39;127.0.0.1&#39;);</span><br></pre></td></tr></table></figure>
-<h2 id="u53C2_u8003_u6587_u732E"><a href="#u53C2_u8003_u6587_u732E" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://cnodejs.org/topic/54745ac22804a0997d38b32d" target="_blank" rel="external">https://cnodejs.org/topic/54745ac22804a0997d38b32d</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssl/">ssl</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/ssl/">ssl</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-decode-utf8" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/29/decode-utf8/" class="article-date">
-  	<time datetime="2016-02-29T00:05:06.000Z" itemprop="datePublished">2016-02-29</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/29/decode-utf8/">html中UTF8编码的解码</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我们写爬虫爬回来的一些页面可能是编码后的utf8码，这时候我们需要对他们进行解码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var code10, code16, zh;&#10;&#10;code10 = &#39;&#38;#22825;&#38;#22530;&#38;#21521;&#38;#24038;,&#38;#28145;&#38;#22323;&#38;#21521;&#38;#21491;&#39;;&#10;&#10;zh = code10.replace(/&#38;#(\d+);/g, function($, $1) &#123;return String.fromCodePoint($1)&#125;);&#10;&#10;console.log(zh);&#10;&#10;code16 = zh.replace(/[^\u0000-\u00ff]/g, function($) &#123;return &#39;&#38;#x&#39; + $.codePointAt(0).toString(16) + &#39;;&#39;;&#125;);&#10;&#10;console.log(code16);&#10;&#10;zh = code16.replace(/&#38;#x(\w+);/g, function($, $1) &#123;return String.fromCodePoint(parseInt($1, 16))&#125;);&#10;&#10;console.log(zh);</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/html/">html</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mongodb-update-by-self-field" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/27/mongodb-update-by-self-field/" class="article-date">
-  	<time datetime="2016-02-27T00:09:14.000Z" itemprop="datePublished">2016-02-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/27/mongodb-update-by-self-field/">mongodb的文档如何通过自己的某些字段更新文档的方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="u4EC5_u4EC5_u6539_u53D8Key"><a href="#u4EC5_u4EC5_u6539_u53D8Key" class="headerlink" title="仅仅改变Key"></a>仅仅改变Key</h2><p>如果你的值没有问题，只是你的key出现了问题，需要修改key，可以使用$rename来做简单的处理<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// init</span></span><br><span class="line">db.events.insert(&#123; <span class="string">'lat'</span>: <span class="number">1</span>, <span class="string">'lon'</span>: <span class="number">2</span>, someotherdata: [] &#125;)</span><br><span class="line">db.events.insert(&#123; <span class="string">'lat'</span>: <span class="number">4</span>, <span class="string">'lon'</span>: <span class="number">1</span>, someotherdata: [] &#125;)</span><br><span class="line"><span class="comment">// doit</span></span><br><span class="line">db.events.update(&#123;&#125;, &#123;$rename: &#123;<span class="string">'lat'</span>: <span class="string">'coords.lat'</span>, <span class="string">'lon'</span>: <span class="string">'coords.lon'</span>&#125;&#125;, <span class="literal">false</span>, <span class="literal">true</span>)</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// result</span></span><br><span class="line">db.events.find()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5113c82dd28c4e8b79971add"</span>),</span><br><span class="line">    <span class="string">"coords"</span> : &#123;</span><br><span class="line">        <span class="string">"lat"</span> : <span class="number">1</span>,</span><br><span class="line">        <span class="string">"lon"</span> : <span class="number">2</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"someotherdata"</span> : [ ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"_id"</span> : ObjectId(<span class="string">"5113c82ed28c4e8b79971ade"</span>),</span><br><span class="line">    <span class="string">"coords"</span> : &#123;</span><br><span class="line">        <span class="string">"lat"</span> : <span class="number">4</span>,</span><br><span class="line">        <span class="string">"lon"</span> : <span class="number">1</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"someotherdata"</span> : [ ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u4FEE_u590DKey_u548CValue"><a href="#u4FEE_u590DKey_u548CValue" class="headerlink" title="修复Key和Value"></a>修复Key和Value</h2><p>如果你的value也出现问题，那么仅仅rename是无济于事的，你可以用下面的方法来处理整个collection。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">db.events.find().snapshot().forEach(</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// update document, using its own properties</span></span><br><span class="line">    e.coords = &#123; lat: e.lat, lon: e.lon &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// remove old properties</span></span><br><span class="line">    <span class="keyword">delete</span> e.lat;</span><br><span class="line">    <span class="keyword">delete</span> e.lon;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// save the updated document</span></span><br><span class="line">    db.events.save(e);</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<p>查看<a href="http://stackoverflow.com/questions/3788256/mongodb-updating-documents-using-data-from-the-same-document/3792958#3792958" target="_blank" rel="external">stackoverflow</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/mongodb/">mongodb</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-merge-sort" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/22/javascript-merge-sort/" class="article-date">
-  	<time datetime="2016-02-21T17:12:35.000Z" itemprop="datePublished">2016-02-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/22/javascript-merge-sort/">javascript实现合并排序</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> merge = <span class="function"><span class="keyword">function</span>(<span class="params">ary, p, q, r</span>) </span>&#123;</span><br><span class="line">	<span class="comment">// eg. ary = [4, 1], p = 0, q = 0, r = 1</span></span><br><span class="line">	<span class="keyword">var</span> l_ary = ary.slice(p, q + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">var</span> r_ary = ary.slice(q + <span class="number">1</span>, r + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">var</span> b_ary;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (l_ary.length &amp;&amp; r_ary.length) &#123;</span><br><span class="line">		ary[p++] = l_ary[<span class="number">0</span>] &lt;= r_ary[<span class="number">0</span>] ? l_ary.shift() : r_ary.shift();	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	b_ary = l_ary.length ? l_ary : r_ary;</span><br><span class="line">	<span class="keyword">while</span> (b_ary.length) &#123;</span><br><span class="line">		ary[p++] = b_ary.shift();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">console</span>.log(ary);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> merge_sort = <span class="function"><span class="keyword">function</span>(<span class="params">ary, s, e</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> m;</span><br><span class="line">	<span class="keyword">if</span> (s === e) <span class="keyword">return</span>;</span><br><span class="line">	m = <span class="built_in">Math</span>.floor((s + e) / <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">	merge_sort(ary, s, m);</span><br><span class="line">	merge_sort(ary, m + <span class="number">1</span>, e);</span><br><span class="line">	merge(ary, s, m, e);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> do_merge_sort = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> ary = [<span class="number">4</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">	<span class="built_in">console</span>.log(ary);</span><br><span class="line">	merge_sort(ary, <span class="number">0</span>, ary.length - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">console</span>.log(ary);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">do_merge_sort();</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-opencv-ippicv-macosx" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/19/opencv-ippicv-macosx/" class="article-date">
-  	<time datetime="2016-02-18T16:12:35.000Z" itemprop="datePublished">2016-02-19</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/opencv-ippicv-macosx/">用cmake安装opencv遇到缺少ippicv-macosx-*.*文件的解决方案</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>既然出错，那么你一定可以看到报错提示，大致如下。这里面你收获了第一个关键信息<em>expected hash: [4ff1fde9a7cfdfe7250bfcd8334e0f2f]</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for file: [/Users/CoderQ/Downloads/opencv-3.1.0/3rdparty/ippicv/downloads/macosx-4ff1fde9a7cfdfe7250bfcd8334e0f2f/ippicv_macosx_20151201.tgz]&#10;  expected hash: [4ff1fde9a7cfdfe7250bfcd8334e0f2f]&#10;    actual hash: [cc09c2a46b5dd28acea8e1e78e296670]&#10;         status: [28;&#34;Timeout was reached&#34;]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>上搜索引擎搜<em>4ff1fde9a7cfdfe7250bfcd8334e0f2f</em>，你会发现第一个搜索结果指向了<a href="http://code.metager.de/source/xref/lib/opencv/3rdparty/ippicv/downloader.cmake" target="_blank" rel="external">源码地址</a></p>
-</li>
-<li><p>代码里<em>OPENCV_ICV_PACKAGE_HASH</em>这个变量指向了<em>4ff1fde9a7cfdfe7250bfcd8334e0f2f</em>。</p>
-</li>
-<li><p>之后你会找到这行代码，他告诉你这个URL地址还需要另一个变量<em>OPENCV_ICV_URL</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file(DOWNLOAD &#34;$&#123;OPENCV_ICV_URL&#125;/$&#123;OPENCV_ICV_PACKAGE_NAME&#125;&#34; &#34;$&#123;OPENCV_ICV_PACKAGE_ARCHIVE&#125;&#34;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>之后根据源码你可以拼出这个地址</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.githubusercontent.com/Itseez/opencv_3rdparty/81a676001ca8075ada498583e4166079e5744668/ippicv/ippicv_macosx_20151201.tgz</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>把文件下载后放在提示的地址，重新安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/Users/CoderQ/Downloads/opencv-3.1.0/3rdparty/ippicv/downloads/macosx-4ff1fde9a7cfdfe7250bfcd8334e0f2f/ippicv_macosx_20151201.tgz</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/opencv/">opencv</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-deal-with-unicode" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/02/16/javascript-deal-with-unicode/" class="article-date">
-  	<time datetime="2016-02-16T07:52:47.000Z" itemprop="datePublished">2016-02-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/16/javascript-deal-with-unicode/">Unicode字符处理</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近做爬虫程序，偶尔会在返回的内容中看到一堆类似这样的东西<em>&amp;#22825;&amp;#22530;&amp;#21521;&amp;#24038;,&amp;#28145;&amp;#22323;&amp;#21521;&amp;#21491;</em>，一时间不知道怎么把它们转成中文。于是上网求救，发现解决方案后感觉so easy。其实很多东西不明白之前都很难，明白了就很简单，我是不是在说废话呢？？？</p>
-<p>其实这串字符中的数字就是对应unicode字符的十进制表示方式，所以我们只要通过<em>String.fromCodePoint</em>进行简单的转化就可以得到想要的结果了。根据网友的提示，返回的内容还有可能是十六进制的，于是我自己写了个例子，备忘。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> code10, code16, zh;</span><br><span class="line"></span><br><span class="line">code10 = <span class="string">'&amp;#22825;&amp;#22530;&amp;#21521;&amp;#24038;,&amp;#28145;&amp;#22323;&amp;#21521;&amp;#21491;'</span>;</span><br><span class="line"></span><br><span class="line">zh = code10.replace(<span class="regexp">/&amp;#(\d+);/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$, $1</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">String</span>.fromCodePoint($<span class="number">1</span>)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(zh);</span><br><span class="line"></span><br><span class="line">code16 = zh.replace(<span class="regexp">/[^\u0000-\u00ff]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">'&amp;#x'</span> + $.codePointAt(<span class="number">0</span>).toString(<span class="number">16</span>) + <span class="string">';'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(code16);</span><br><span class="line"></span><br><span class="line">zh = code16.replace(<span class="regexp">/&amp;#x(\w+);/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$, $1</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">String</span>.fromCodePoint(<span class="built_in">parseInt</span>($<span class="number">1</span>, <span class="number">16</span>))</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(zh);</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 </div>

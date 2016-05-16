@@ -101,7 +101,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 12.5px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 17.5px;">mongodb</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12.5px;">orientdb</a> <a href="/tags/redis/" style="font-size: 17.5px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 14px;">nginx</a> <a href="/tags/node-js/" style="font-size: 14px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
 					</div>
 				</section>
 				
@@ -162,6 +162,549 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="post-javascript-eslint-sublime" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/16/javascript-eslint-sublime/" class="article-date">
+  	<time datetime="2016-05-16T00:06:25.000Z" itemprop="datePublished">2016-05-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/16/javascript-eslint-sublime/">sublime中配置使用eslint</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前一直使用jshint，只从用上了<code>async</code>、<code>wait</code>这些语法糖之后，发现jshint无法识别了，于是准备换<code>eslint</code>。</p>
+<h2 id="u5B89_u88C5"><a href="#u5B89_u88C5" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install eslint -g&#10;npm install babel-eslint -g</span><br></pre></td></tr></table></figure>
+<h2 id="sublime_u63D2_u4EF6_u5B89_u88C5"><a href="#sublime_u63D2_u4EF6_u5B89_u88C5" class="headerlink" title="sublime插件安装"></a>sublime插件安装</h2><ul>
+<li>安装 SublimeLinter </li>
+<li>安装 SublimeLinter-contrib-eslint</li>
+</ul>
+<h2 id="u914D_u7F6E"><a href="#u914D_u7F6E" class="headerlink" title="配置"></a>配置</h2><p>在项目目录下新建<code>.eslintrc</code>文件<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "<span class="attribute">env</span>": <span class="value">&#123;</span><br><span class="line">        "<span class="attribute">browser</span>": <span class="value"><span class="literal">true</span></span>,</span><br><span class="line">        "<span class="attribute">node</span>": <span class="value"><span class="literal">true</span></span>,</span><br><span class="line">        "<span class="attribute">es6</span>": <span class="value"><span class="literal">true</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">parser</span>": <span class="value"><span class="string">"babel-eslint"</span></span>,</span><br><span class="line">    "<span class="attribute">ecmaFeatures</span>": <span class="value">&#123;</span><br><span class="line">       "<span class="attribute">jsx</span>": <span class="value"><span class="literal">true</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">rules</span>": <span class="value">&#123;</span><br><span class="line">        "<span class="attribute">semi</span>": <span class="value">[<span class="number">2</span>, <span class="string">"always"</span>]</span>,</span><br><span class="line">        "<span class="attribute">quotes</span>": <span class="value">[<span class="number">2</span>, <span class="string">"single"</span>]</span><br><span class="line">    </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="u6267_u884C"><a href="#u6267_u884C" class="headerlink" title="执行"></a>执行</h2><p>代码执行的时候，因为这些语法糖目前都还未被支持，所以需要使用babel进行降级。</p>
+<ul>
+<li><p>新建文件<code>.babelrc</code>写入以下内容</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">presets</span>": <span class="value">[<span class="string">"es2015"</span>]</span>,</span><br><span class="line">  "<span class="attribute">plugins</span>": <span class="value">[<span class="string">"syntax-async-functions"</span>,<span class="string">"transform-regenerator"</span>, <span class="string">"transform-runtime"</span>]</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建文件<code>package.json</code>写入以下内容</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    "<span class="attribute">babel-plugin-syntax-async-functions</span>": <span class="value"><span class="string">"^6.1.4"</span></span>,</span><br><span class="line">    "<span class="attribute">babel-plugin-transform-regenerator</span>": <span class="value"><span class="string">"^6.1.4"</span></span>,</span><br><span class="line">    "<span class="attribute">babel-plugin-transform-runtime</span>": <span class="value"><span class="string">"^6.1.4"</span></span>,</span><br><span class="line">    "<span class="attribute">babel-polyfill</span>": <span class="value"><span class="string">"^6.1.4"</span></span>,</span><br><span class="line">    "<span class="attribute">babel-preset-es2015</span>": <span class="value"><span class="string">"^6.1.4"</span></span>,</span><br><span class="line">    "<span class="attribute">request</span>": <span class="value"><span class="string">"^2.65.0"</span></span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行<code>npm i</code></p>
+</li>
+</ul>
+<h2 id="u6D4B_u8BD5"><a href="#u6D4B_u8BD5" class="headerlink" title="测试"></a>测试</h2><p>将下面代码存于项目中的一个文本文件中，暂且命名为test.es7<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">async</span> = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>((resolve, reject) =&gt; &#123;</span><br><span class="line">		setTimeout(() =&gt; resolve(<span class="string">'end'</span>), <span class="number">2000</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> test = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> ret = <span class="keyword">await</span> <span class="keyword">async</span>();</span><br><span class="line">	<span class="built_in">console</span>.log(ret);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure></p>
+<p>执行<code>babel-node test.es7</code>。会在2秒后看到<code>end</code>的输出。</p>
+<p><em>async与generator的区别在于，generator没有自动执行的功能，需要依赖co库才能执行，async有自动执行的功能，因此可以像普通函数一样执行。</em></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eslint/">eslint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/">sublime</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/javascript/">javascript</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mongoose-replica-set" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/16/mongoose-replica-set/" class="article-date">
+  	<time datetime="2016-05-15T23:26:25.000Z" itemprop="datePublished">2016-05-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/16/mongoose-replica-set/">mongodb replica set配置与mongoose连接实例</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mongodb的replica set是一个强大的功能，可以实现读写分离功能，有heartbeat功能，可以实现自动故障转移，比master-slave更强大。</p>
+<h2 id="u914D_u7F6E"><a href="#u914D_u7F6E" class="headerlink" title="配置"></a>配置</h2><h3 id="u4E3B_u673A1"><a href="#u4E3B_u673A1" class="headerlink" title="主机1"></a>主机1</h3><p>保存在/etc/mongodb_1.conf<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemLog:&#10;   path: &#34;/var/log/mongodb/mongodb_1.log&#34;&#10;   logAppend: true&#10;storage:&#10;   journal:&#10;      enabled: true&#10;   dbPath: &#34;/var/lib/mongodb_1&#34;&#10;processManagement:&#10;   fork: true&#10;   pidFilePath: &#34;/var/run/mongodb/mongodb_1.pid&#34;&#10;net:&#10;   bindIp: 127.0.0.1&#10;   port: 27017&#10;setParameter:&#10;   enableLocalhostAuthBypass: false&#10;replication:&#10;   oplogSizeMB: 1000&#10;   replSetName: &#39;local-test&#39;</span><br></pre></td></tr></table></figure></p>
+<h3 id="u4E3B_u673A2"><a href="#u4E3B_u673A2" class="headerlink" title="主机2"></a>主机2</h3><p>保存在/etc/mongodb_2.conf<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemLog:&#10;   path: &#34;/var/log/mongodb/mongodb_2.log&#34;&#10;   logAppend: true&#10;storage:&#10;   journal:&#10;      enabled: true&#10;   dbPath: &#34;/var/lib/mongodb_2&#34;&#10;processManagement:&#10;   fork: true&#10;   pidFilePath: &#34;/var/run/mongodb/mongodb_2.pid&#34;&#10;net:&#10;   bindIp: 127.0.0.1&#10;   port: 27017&#10;setParameter:&#10;   enableLocalhostAuthBypass: false&#10;replication:&#10;   oplogSizeMB: 1000&#10;   replSetName: &#39;local-test&#39;</span><br></pre></td></tr></table></figure></p>
+<h3 id="u4E3B_u673A3"><a href="#u4E3B_u673A3" class="headerlink" title="主机3"></a>主机3</h3><p>保存在/etc/mongodb_3.conf<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemLog:&#10;   path: &#34;/var/log/mongodb/mongodb_3.log&#34;&#10;   logAppend: true&#10;storage:&#10;   journal:&#10;      enabled: true&#10;   dbPath: &#34;/var/lib/mongodb_3&#34;&#10;processManagement:&#10;   fork: true&#10;   pidFilePath: &#34;/var/run/mongodb/mongodb_3.pid&#34;&#10;net:&#10;   bindIp: 127.0.0.1&#10;   port: 27017&#10;setParameter:&#10;   enableLocalhostAuthBypass: false&#10;replication:&#10;   oplogSizeMB: 1000&#10;   replSetName: &#39;local-test&#39;</span><br></pre></td></tr></table></figure></p>
+<h2 id="u542F_u52A8"><a href="#u542F_u52A8" class="headerlink" title="启动"></a>启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod -f /etc/mongodb.conf  &#10;mongod -f /etc/mongodb_2.conf  &#10;mongod -f /etc/mongodb_3.conf</span><br></pre></td></tr></table></figure>
+<h2 id="u8BBE_u7F6E"><a href="#u8BBE_u7F6E" class="headerlink" title="设置"></a>设置</h2><p>通过mongo命令，连接某一台机器，输入下面的配置命令，priority用来标示机器的优先权，优先权高的机器为primary机器，其他机器为secondary，当primary机器故障时，replica set 自动选择剩下机器中priority最高的作为primary机器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#37197;&#32622;&#20449;&#24687;&#10;var config = &#123;_id:&#34;repmore&#34;,members:[&#123;_id:0,host:&#39;127.0.0.1:27017&#39;,priority :2&#125;,&#123;_id:1,host:&#39;127.0.0.1:27018&#39;,priority:1&#125;,&#123;_id:2,host:&#39;127.0.0.1:27019&#39;,priority:1&#125;]&#125;;&#10;// replica set &#21021;&#22987;&#21270;&#10;rs.initiate(config);</span><br></pre></td></tr></table></figure></p>
+<h2 id="u6D4B_u8BD5"><a href="#u6D4B_u8BD5" class="headerlink" title="测试"></a>测试</h2><p>目前，通过mongo链接三台机器，会发现27017位primiary，其他为secondary。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">local-test:SECONDARY&gt; rs.slaveOk()</span><br><span class="line">local-test:SECONDARY&gt; rs.status()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"set"</span> : <span class="string">"local-test"</span>,</span><br><span class="line">	<span class="string">"date"</span> : ISODate(<span class="string">"2016-05-15T23:56:34.146Z"</span>),</span><br><span class="line">	<span class="string">"myState"</span> : <span class="number">2</span>,</span><br><span class="line">	<span class="string">"members"</span> : [</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">"_id"</span> : <span class="number">0</span>,</span><br><span class="line">			<span class="string">"name"</span> : <span class="string">"127.0.0.1:27017"</span>,</span><br><span class="line">			<span class="string">"health"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"state"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"stateStr"</span> : <span class="string">"PRIMARY"</span>,</span><br><span class="line">			<span class="string">"uptime"</span> : <span class="number">43848</span>,</span><br><span class="line">			<span class="string">"optime"</span> : Timestamp(<span class="number">1463323447</span>, <span class="number">1</span>),</span><br><span class="line">			<span class="string">"optimeDate"</span> : ISODate(<span class="string">"2016-05-15T14:44:07Z"</span>),</span><br><span class="line">			<span class="string">"lastHeartbeat"</span> : ISODate(<span class="string">"2016-05-15T23:56:32.643Z"</span>),</span><br><span class="line">			<span class="string">"lastHeartbeatRecv"</span> : ISODate(<span class="string">"2016-05-15T23:56:32.641Z"</span>),</span><br><span class="line">			<span class="string">"pingMs"</span> : <span class="number">0</span>,</span><br><span class="line">			<span class="string">"electionTime"</span> : Timestamp(<span class="number">1463312747</span>, <span class="number">1</span>),</span><br><span class="line">			<span class="string">"electionDate"</span> : ISODate(<span class="string">"2016-05-15T11:45:47Z"</span>),</span><br><span class="line">			<span class="string">"configVersion"</span> : <span class="number">1</span></span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">"_id"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"name"</span> : <span class="string">"127.0.0.1:27018"</span>,</span><br><span class="line">			<span class="string">"health"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"state"</span> : <span class="number">2</span>,</span><br><span class="line">			<span class="string">"stateStr"</span> : <span class="string">"SECONDARY"</span>,</span><br><span class="line">			<span class="string">"uptime"</span> : <span class="number">48134</span>,</span><br><span class="line">			<span class="string">"optime"</span> : Timestamp(<span class="number">1463323447</span>, <span class="number">1</span>),</span><br><span class="line">			<span class="string">"optimeDate"</span> : ISODate(<span class="string">"2016-05-15T14:44:07Z"</span>),</span><br><span class="line">			<span class="string">"configVersion"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"self"</span> : <span class="literal">true</span></span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">"_id"</span> : <span class="number">2</span>,</span><br><span class="line">			<span class="string">"name"</span> : <span class="string">"127.0.0.1:27019"</span>,</span><br><span class="line">			<span class="string">"health"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"state"</span> : <span class="number">2</span>,</span><br><span class="line">			<span class="string">"stateStr"</span> : <span class="string">"SECONDARY"</span>,</span><br><span class="line">			<span class="string">"uptime"</span> : <span class="number">45603</span>,</span><br><span class="line">			<span class="string">"optime"</span> : Timestamp(<span class="number">1463323447</span>, <span class="number">1</span>),</span><br><span class="line">			<span class="string">"optimeDate"</span> : ISODate(<span class="string">"2016-05-15T14:44:07Z"</span>),</span><br><span class="line">			<span class="string">"lastHeartbeat"</span> : ISODate(<span class="string">"2016-05-15T23:56:32.279Z"</span>),</span><br><span class="line">			<span class="string">"lastHeartbeatRecv"</span> : ISODate(<span class="string">"2016-05-15T23:56:32.279Z"</span>),</span><br><span class="line">			<span class="string">"pingMs"</span> : <span class="number">0</span>,</span><br><span class="line">			<span class="string">"configVersion"</span> : <span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	<span class="string">"ok"</span> : <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们kill掉primary机器后，27018、27019会随机选择一台变为primary，因为他们两者的priority是一样的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">local-test:SECONDARY&gt; rs.status()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"set"</span> : <span class="string">"local-test"</span>,</span><br><span class="line">	<span class="string">"date"</span> : ISODate(<span class="string">"2016-05-15T23:58:06.082Z"</span>),</span><br><span class="line">	<span class="string">"myState"</span> : <span class="number">2</span>,</span><br><span class="line">	<span class="string">"members"</span> : [</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">"_id"</span> : <span class="number">0</span>,</span><br><span class="line">			<span class="string">"name"</span> : <span class="string">"127.0.0.1:27017"</span>,</span><br><span class="line">			<span class="string">"health"</span> : <span class="number">0</span>,</span><br><span class="line">			<span class="string">"state"</span> : <span class="number">8</span>,</span><br><span class="line">			<span class="string">"stateStr"</span> : <span class="string">"(not reachable/healthy)"</span>,</span><br><span class="line">			<span class="string">"uptime"</span> : <span class="number">0</span>,</span><br><span class="line">			<span class="string">"optime"</span> : Timestamp(<span class="number">0</span>, <span class="number">0</span>),</span><br><span class="line">			<span class="string">"optimeDate"</span> : ISODate(<span class="string">"1970-01-01T00:00:00Z"</span>),</span><br><span class="line">			<span class="string">"lastHeartbeat"</span> : ISODate(<span class="string">"2016-05-15T23:58:04.925Z"</span>),</span><br><span class="line">			<span class="string">"lastHeartbeatRecv"</span> : ISODate(<span class="string">"2016-05-15T23:57:56.777Z"</span>),</span><br><span class="line">			<span class="string">"pingMs"</span> : <span class="number">0</span>,</span><br><span class="line">			<span class="string">"lastHeartbeatMessage"</span> : <span class="string">"Failed attempt to connect to 127.0.0.1:27017; couldn't connect to server 127.0.0.1:27017 (127.0.0.1), connection attempt failed"</span>,</span><br><span class="line">			<span class="string">"configVersion"</span> : -<span class="number">1</span></span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">"_id"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"name"</span> : <span class="string">"127.0.0.1:27018"</span>,</span><br><span class="line">			<span class="string">"health"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"state"</span> : <span class="number">2</span>,</span><br><span class="line">			<span class="string">"stateStr"</span> : <span class="string">"SECONDARY"</span>,</span><br><span class="line">			<span class="string">"uptime"</span> : <span class="number">48226</span>,</span><br><span class="line">			<span class="string">"optime"</span> : Timestamp(<span class="number">1463323447</span>, <span class="number">1</span>),</span><br><span class="line">			<span class="string">"optimeDate"</span> : ISODate(<span class="string">"2016-05-15T14:44:07Z"</span>),</span><br><span class="line">			<span class="string">"configVersion"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"self"</span> : <span class="literal">true</span></span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="string">"_id"</span> : <span class="number">2</span>,</span><br><span class="line">			<span class="string">"name"</span> : <span class="string">"127.0.0.1:27019"</span>,</span><br><span class="line">			<span class="string">"health"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"state"</span> : <span class="number">1</span>,</span><br><span class="line">			<span class="string">"stateStr"</span> : <span class="string">"PRIMARY"</span>,</span><br><span class="line">			<span class="string">"uptime"</span> : <span class="number">45695</span>,</span><br><span class="line">			<span class="string">"optime"</span> : Timestamp(<span class="number">1463323447</span>, <span class="number">1</span>),</span><br><span class="line">			<span class="string">"optimeDate"</span> : ISODate(<span class="string">"2016-05-15T14:44:07Z"</span>),</span><br><span class="line">			<span class="string">"lastHeartbeat"</span> : ISODate(<span class="string">"2016-05-15T23:58:04.452Z"</span>),</span><br><span class="line">			<span class="string">"lastHeartbeatRecv"</span> : ISODate(<span class="string">"2016-05-15T23:58:04.451Z"</span>),</span><br><span class="line">			<span class="string">"pingMs"</span> : <span class="number">0</span>,</span><br><span class="line">			<span class="string">"electionTime"</span> : Timestamp(<span class="number">1463356678</span>, <span class="number">1</span>),</span><br><span class="line">			<span class="string">"electionDate"</span> : ISODate(<span class="string">"2016-05-15T23:57:58Z"</span>),</span><br><span class="line">			<span class="string">"configVersion"</span> : <span class="number">1</span></span><br><span class="line">		&#125;</span><br><span class="line">	],</span><br><span class="line">	<span class="string">"ok"</span> : <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/mongodb/">mongodb</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-mongodb-seldom-command-note" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/13/mongodb-seldom-command-note/" class="article-date">
+  	<time datetime="2016-05-13T11:03:41.000Z" itemprop="datePublished">2016-05-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/13/mongodb-seldom-command-note/">Mongodb中一些不常用的命令备忘</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>查找的出和正则表达式不匹配的文档<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.favour.findOne(&#123;<span class="string">'floor_id'</span>: &#123;$not: <span class="regexp">/^[0-9A-Za-z]&#123;24,24&#125;$/</span>&#125;&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/mongodb/">mongodb</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-cross-domain" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/13/cross-domain/" class="article-date">
+  	<time datetime="2016-05-13T09:45:56.000Z" itemprop="datePublished">2016-05-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/13/cross-domain/">Nginx配置支持跨域</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司使用swagger作为接口文档容器，文档和接口的域名不同，需要跨域。遇到的最郁闷的坑是，没弄清楚各个属性的含义，导致Access-Control-Allow-Headers漏了两个key没加，一直请求失败。<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">if</span> (<span class="variable">$request_method</span> = <span class="string">'OPTIONS'</span>) &#123;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Origin'</span> <span class="string">'https://docs.domain.com'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Credentials'</span> <span class="string">'true'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Methods'</span> <span class="string">'GET, POST, PUT, DELETE, PATCH, OPTIONS'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Headers'</span> <span class="string">'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,token'</span>;  </span><br><span class="line">    <span class="title">return</span> <span class="number">204</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title">if</span> (<span class="variable">$request_method</span> = <span class="string">'POST'</span>) &#123;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Origin'</span> <span class="string">'https://docs.domain.com'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Credentials'</span> <span class="string">'true'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Methods'</span> <span class="string">'GET, POST, PUT, DELETE, PATCH, OPTIONS'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Headers'</span> <span class="string">'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,token'</span>;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="title">if</span> (<span class="variable">$request_method</span> = <span class="string">'GET'</span>) &#123;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Origin'</span> <span class="string">'https://docs.domain.com'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Credentials'</span> <span class="string">'true'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Methods'</span> <span class="string">'GET, POST, PUT, DELETE, PATCH, OPTIONS'</span>;  </span><br><span class="line">    <span class="title">add_header</span> <span class="string">'Access-Control-Allow-Headers'</span> <span class="string">'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization,token'</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="u8DE8_u57DF_u8D44_u6E90_u5171_u4EAB_u5934_u4FE1_u606F"><a href="#u8DE8_u57DF_u8D44_u6E90_u5171_u4EAB_u5934_u4FE1_u606F" class="headerlink" title="跨域资源共享头信息"></a>跨域资源共享头信息</h1><p>顺便学习下跨域共享的头信息</p>
+<h2 id="Access-Control-Allow-Origin"><a href="#Access-Control-Allow-Origin" class="headerlink" title="Access-Control-Allow-Origin"></a>Access-Control-Allow-Origin</h2><p>origin参数指定一个允许向该服务器提交请求的URI.对于一个不带有credentials的请求,可以指定为’*’,表示允许来自所有域的请求.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: &lt;origin&gt; | *</span><br></pre></td></tr></table></figure>
+<h2 id="Access-Control-Expose-Headers"><a href="#Access-Control-Expose-Headers" class="headerlink" title="Access-Control-Expose-Headers"></a>Access-Control-Expose-Headers</h2><p>设置浏览器允许访问的服务器的头信息的白名单</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Expose-Headers: X-My-Custom-Header, X-Another-Custom-Header</span><br></pre></td></tr></table></figure>
+<h2 id="Access-Control-Max-Age"><a href="#Access-Control-Max-Age" class="headerlink" title="Access-Control-Max-Age"></a>Access-Control-Max-Age</h2><p>这个头告诉我们这次预请求的结果的有效期是多久</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Max-Age: &lt;delta-seconds&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Access-Control-Allow-Credentials"><a href="#Access-Control-Allow-Credentials" class="headerlink" title="Access-Control-Allow-Credentials"></a>Access-Control-Allow-Credentials</h2><p>告知客户端,当请求的credientials属性是true的时候,响应是否可以被得到.当它作为预请求的响应的一部分时,它用来告知实际的请求是否使用了credentials.注意,简单的GET请求不会预检,所以如果一个请求是为了得到一个带有credentials的资源,而响应里又没有Access-Control-Allow-Credentials头信息,那么说明这个响应被忽略了.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Credentials: true | false</span><br></pre></td></tr></table></figure>
+<h2 id="Access-Control-Allow-Methods"><a href="#Access-Control-Allow-Methods" class="headerlink" title="Access-Control-Allow-Methods"></a>Access-Control-Allow-Methods</h2><p>指明资源可以被请求的方式有哪些(一个或者多个). 这个响应头信息在客户端发出预检请求的时候会被返回. 上面有相关的例子.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Methods: &lt;method&gt;[, &lt;method&gt;]*</span><br></pre></td></tr></table></figure>
+<h2 id="Access-Control-Allow-Headers"><a href="#Access-Control-Allow-Headers" class="headerlink" title="Access-Control-Allow-Headers"></a>Access-Control-Allow-Headers</h2><p>也是在响应预检请求的时候使用.用来指明在实际的请求中,可以使用哪些自定义HTTP请求头.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Headers: X-PINGOTHER</span><br></pre></td></tr></table></figure>
+<p>就像我遇到的坑，必须把request header中的key都写到这里，否则是无法成功的。</p>
+<h1 id="u9884_u8BF7_u6C42_u5934"><a href="#u9884_u8BF7_u6C42_u5934" class="headerlink" title="预请求头"></a>预请求头</h1><h2 id="Origin"><a href="#Origin" class="headerlink" title="Origin"></a>Origin</h2><p>表明发送请求或者预请求的域</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Origin: &lt;origin&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Access-Control-Request-Method"><a href="#Access-Control-Request-Method" class="headerlink" title="Access-Control-Request-Method"></a>Access-Control-Request-Method</h2><p>在发出预检请求时带有这个头信息,告诉服务器在实际请求时会使用的请求方式</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Request-Method: &lt;method&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="Access-Control-Request-Headers"><a href="#Access-Control-Request-Headers" class="headerlink" title="Access-Control-Request-Headers"></a>Access-Control-Request-Headers</h2><p>在发出预检请求时带有这个头信息,告诉服务器在实际请求时会携带的自定义头信息.如有多个,可以用逗号分开.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Request-Headers: &lt;field-name&gt;[, &lt;field-name&gt;]*</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/nginx/">nginx</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-sorting-algorithms" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/12/sorting-algorithms/" class="article-date">
+  	<time datetime="2016-05-12T06:41:02.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/12/sorting-algorithms/">排序算法</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="u63D2_u5165_u6392_u5E8F_28Insertion_29"><a href="#u63D2_u5165_u6392_u5E8F_28Insertion_29" class="headerlink" title="插入排序(Insertion)"></a>插入排序(Insertion)</h2><p>k为从2到n选取一个索引，将k和k-1的值比较，如果k小于k-1的值，则交换两者，之后k–，循环比较，直到k等于2，比较结束。</p>
+<p>空间复杂度为O(1)，时间复杂度为O(N^2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i = 2:n,&#10;    for (k = i; k &#62; 1 and a[k] &#60; a[k-1]; k--) &#10;        swap a[k,k-1]&#10;    &#8594; invariant: a[1..i] is sorted&#10;end</span><br></pre></td></tr></table></figure>
+<h2 id="u9009_u62E9_u6392_u5E8F_28Selection_29"><a href="#u9009_u62E9_u6392_u5E8F_28Selection_29" class="headerlink" title="选择排序(Selection)"></a>选择排序(Selection)</h2><p>选择排序需要三个变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for i = 1:n,&#10;    k = i&#10;    for j = i+1:n, if a[j] &#60; a[k], k = j&#10;    &#8594; invariant: a[k] smallest of a[i..n]&#10;    swap a[i,k]&#10;    &#8594; invariant: a[1..i] in final position&#10;end</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/算法/">算法</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-javascript-prototype" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/12/javascript-prototype/" class="article-date">
+  	<time datetime="2016-05-12T00:12:02.000Z" itemprop="datePublished">2016-05-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/12/javascript-prototype/">javascript-prototype</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-algorithm-rate-of-increase" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/11/algorithm-rate-of-increase/" class="article-date">
+  	<time datetime="2016-05-11T15:08:03.000Z" itemprop="datePublished">2016-05-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/11/algorithm-rate-of-increase/">算法中的增长率标记法及含义</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><code>T(N) = O(f(N))</code> 表示T(N)的增长率小于等于f(N)</li>
+<li><code>T(N) = Ω(g(N))</code> 表示T(N)的增长率大于等于f(N)</li>
+<li><code>T(N) = θ(h(N))</code> 表示T(N)的增长率等于h(N)</li>
+<li><code>T(N) = o(p(N))</code> 表示T(N)的增长率等于p(N)</li>
+</ul>
+<p>当且仅当<code>T(N) = O(f(N))</code>且<code>T(N) = Ω(f(N))</code>时，<code>T(N) = θ(h(N))</code>。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/算法/">算法</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-formula" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/06/formula/" class="article-date">
+  	<time datetime="2016-05-05T23:25:25.000Z" itemprop="datePublished">2016-05-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/06/formula/">常用数学公式</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近复习算法和数据结构，记录下一些数学公式，顺便了解下latex。</p>
+<h2 id="u6307_u6570"><a href="#u6307_u6570" class="headerlink" title="指数"></a>指数</h2><p><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/X%5E%7BA%7DX%5E%7BB%7D%20=%20X%5E%7BA+B%7D.png" alt="X^{A}X^{B} = X^{A+B}" title="X^{A}X^{B} = X^{A+B}"><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/%5Cfrac%7BX%5E%7BA%7D%7D%7BX%5E%7BB%7D%7D%20=%20X%5E%7BA-B%7D.png" alt="\frac{X^{A}}{X^{B}} = X^{A-B}" title="\frac{X^{A}}{X^{B}} = X^{A-B}"><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/%28X%5E%7BA%7D%29%5E%7BB%7D%20=%20X%5E%7BAB%7D.png" alt="(X^{A})^{B} = X^{AB}" title="(X^{A})^{B} = X^{AB}"><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/X%5E%7BN%7D%20+%20X%5E%7BN%7D%20=%202X%5E%7BN%7D%20%5Cneq%20X%5E%7B2N%7D.png" alt="X^{N} + X^{N} = 2X^{N} \neq X^{2N}" title="X^{N} + X^{N} = 2X^{N} \neq X^{2N}"><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/2%5E%7BN%7D%20+%202%5E%7BN%7D%20=%202%20%2A%202%5E%7BN%7D%20=%202%5E%7BN%20+%201%7D.png" alt="2^{N} + 2^{N} = 2 * 2^{N} = 2^{N + 1}" title="2^{N} + 2^{N} = 2 * 2^{N} = 2^{N + 1}"><br></p>
+<h2 id="u5BF9_u6570"><a href="#u5BF9_u6570" class="headerlink" title="对数"></a>对数</h2><p><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/%5Clog_%7BA%7D%7BB%7D%20=%20%5Cfrac%7B%5Clog_%7BC%7D%7BB%7D%7D%7B%5Clog_%7BC%7D%7BA%7D%7D;%20C%20%3E%200.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/%5Clog_%7B%20%7D%7BAB%7D%20=%20%5Clog_%7B%20%7D%7BA%7D%20+%20%5Clog_%7B%20%7D%7BB%7D.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/%5Clog_%7B%20%7D%7B%5Cfrac%7BA%7D%7BB%7D%7D%20=%20%5Clog_%7B%20%7D%7BA%7D%20-%20%5Clog_%7B%20%7D%7BB%7D.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/%5Clog_%7B%20%7D%7BA%5E%7BB%7D%7D%20=%20B%5Clog_%7B%20%7D%7BA%7D.png" alt=""><br></p>
+<h2 id="u7EA7_u6570"><a href="#u7EA7_u6570" class="headerlink" title="级数"></a>级数</h2><p><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula/%5Csum_%7Bi=0%7D%5E%7BN%7D%7BA%5E%7Bi%7D%7D%20=%20%5Cfrac%7BA%5E%7BN+1%7D%20-%201%7D%7BA%20-%201%7D%20.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formla/%5Csum_%7Bi=0%7D%5E%7BN%7D%7B2%5E%7Bi%7D%7D%20=%202%5E%7BN+1%7D%20-%201.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula%5Csum_%7Bi=0%7D%5E%7BN%7D%7Bi%7D%20=%20%5Cfrac%7BN%28N%20+%201%29%29%7D%7B2%7D%5Capprox%20%5Cfrac%7BN%5E%7B2%7D%7D%7B2%7D%20.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula%5Csum_%7Bi=1%7D%5E%7BN%7D%7Bi%5E%7B2%7D%7D%20=%20%5Cfrac%7BN%28N+1%29%282n+1%29%7D%7B6%7D%5Capprox%20%5Cfrac%7BN%5E%7B3%7D%7D%7B3%7D%20.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula%5Csum_%7Bi=1%7D%5E%7BN%7D%7Bi%5E%7Bk%7D%7D%20=%20%5Cfrac%7BN%5E%7Bk+1%7D%7D%7B%5Cleft%20%7C%20k+1%20%5Cright%20%7C%7D%20%5C,%5C,%5C,%5C,%20k%5Cneq-1.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formulaH_%7BN%7D=%20%5Csum_%7Bi=1%7D%5E%7BN%7D%7B%5Cfrac%7B1%7D%7Bi%7D%7D%5Capprox%20%5Clog_%7Be%7D%7BN%7D%5Cquad%20%5Cgamma%20%5Capprox%200.57721566.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula%5Csum_%7Bi=1%7D%5E%7BN%7D%7Bf%28N%29%7D=Nf%28N%29.png" alt=""><br><br><img src="http://7xqex1.com1.z0.glb.clouddn.com/formula%5Csum_%7Bi=n_%7B0%7D%7D%5E%7BN%7D%7Bf%28i%29%7D=%5Csum_%7Bi=1%7D%5E%7BN%7D%7Bf%28i%29%7D-%5Csum_%7Bi=1%7D%5E%7Bn_%7B0%7D-1%7D%7Bf%28i%29%7D.png" alt=""><br></p>
+<h2 id="u6A21_u8FD0_u7B97"><a href="#u6A21_u8FD0_u7B97" class="headerlink" title="模运算"></a>模运算</h2><p>如果N整除A-B，即(A-B)/N为整数，则认为A与B模N同余，记为A≡B(mod N)。例如：11≡7≡3(mod 4)</p>
+<p><img src="http://7xqex1.com1.z0.glb.clouddn.com/formulaA%5Cequiv%20B%28mod%20N%29%20%5C%5C%20%5CRightarrow%20A+C%5Cequiv%20B+C%28mod%20N%29%20%5C%5C%20%5CRightarrow%20AD%5Cequiv%20BD%28mod%20N%29.png" alt=""><br></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数学/">数学</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/数学/">数学</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-how-to-build-fast-api" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -295,506 +838,9 @@
 
 
   
-    <article id="post-data-structure" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/04/data-structure/" class="article-date">
-  	<time datetime="2016-05-04T00:07:48.000Z" itemprop="datePublished">2016-05-04</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/04/data-structure/">数据结构的一些基本概念</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/数据结构/">数据结构</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-fast-sort" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/03/javascript-fast-sort/" class="article-date">
-  	<time datetime="2016-05-03T15:21:35.000Z" itemprop="datePublished">2016-05-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/03/javascript-fast-sort/">javascript实现快速排序</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"><span class="comment">/* jshint node: true */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> len = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> ary = <span class="keyword">new</span> <span class="built_in">Array</span>(len).fill(<span class="number">0</span>).map(() =&gt; <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * len));</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ret = (<span class="function"><span class="keyword">function</span> <span class="title">fastsort</span>(<span class="params">ary</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ary.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> ary;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> k = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * ary.length);</span><br><span class="line">	<span class="keyword">let</span> l_ary = ary.filter((item, index) =&gt; (index != k) &amp;&amp; (item &lt; ary[k]));</span><br><span class="line">	<span class="keyword">let</span> r_ary = ary.filter((item, index) =&gt; (index != k) &amp;&amp; (item &gt;= ary[k]));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> fastsort(l_ary).concat(ary[k]).concat(fastsort(r_ary));</span><br><span class="line">&#125;(ary));</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ary);</span><br><span class="line"><span class="built_in">console</span>.log(ret);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-c-binary" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/02/c-binary/" class="article-date">
-  	<time datetime="2016-05-02T13:09:23.000Z" itemprop="datePublished">2016-05-02</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/02/c-binary/">C语言中整型的二进制表示</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>C语言中，正数的原码、反码和补码都是一样的，但是负数的的表示是其补码，补码是反码+1。</p>
-<p>int类型是4字节，表示-2^31 ~ 2^31-1</p>
-<p>我们设定一个变量60，看它各运算后的结果</p>
-<p>60的二进制表示为00000000 00000000 00000000 00111100</p>
-<p>~60，我们对60取反，得到这样的二进制11111111 11111111 11111111 11000011</p>
-<p>首位的比特位是1，表示这是一个负数，C语言中的负数是补码表示，我们需要讲补码转为原码才知道该二进制在C语言中表示什么编码</p>
-<p>补码是反码+1，因此反码为11111111 11111111 11111111 11000010</p>
-<p>原码为反码除符号位外其他位求反，因此，原码为10000000 00000000 00000000 00111101，即-61</p>
-<p>因此~60 == -61</p>
-<p>60 &lt;&lt; 2，我们对60左移两位，得到这样的二进制00000000 00000000 00000000 11110000</p>
-<p>这是一个符号位为0的二进制，表示的结果为正数，240</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/C/">C</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/28/git/" class="article-date">
-  	<time datetime="2016-04-28T09:01:58.000Z" itemprop="datePublished">2016-04-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/28/git/">git踩坑记录</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>我在我的机器上能够通过配置ssh key访问github管理代码，但是在公司的服务器上不管怎么配置都不行，实在搞不懂了，然后同事送我这行代码，只要输一次账号密码，然后敲上这句，搞定，下次不用再输入账号密码了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config credential.helper store</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/git/">git</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-async-order" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/25/javascript-async-order/" class="article-date">
-  	<time datetime="2016-04-24T17:45:17.000Z" itemprop="datePublished">2016-04-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/25/javascript-async-order/">Javascript异步调用顺序执行方法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在使用异步回调的时候，我们经常会接住async等模块的帮助，但是有时候我们仅仅只需要一个异步调用同步执行的方法，似乎没必要使用那么多的代码，那么，异步调用顺序执行的方法如果自己写要怎么写呢？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fns = [].slice.call(<span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">    fns.map(<span class="function"><span class="keyword">function</span>(<span class="params">fn, i, fns</span>)</span>&#123;</span><br><span class="line">        fns[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        	<span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">            fn.apply(<span class="literal">null</span>, i + <span class="number">1</span> === fns.length ? args : [fns[i + <span class="number">1</span>]].concat(args));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    fns[<span class="number">0</span>].call(<span class="literal">null</span>);</span><br><span class="line">&#125;(<span class="function"><span class="keyword">function</span>(<span class="params">next</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'method 1'</span>);</span><br><span class="line">        next(<span class="string">'method 1'</span>, <span class="string">'complete!'</span>);</span><br><span class="line">    &#125;, <span class="number">200</span>);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">next, a, b</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a, b);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'method 2'</span>);</span><br><span class="line">        next(<span class="string">'method 2'</span>, <span class="string">'complete!'</span>);</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a, b);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>);</span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// method 1</span></span><br><span class="line"><span class="comment">// method 1 complete!</span></span><br><span class="line"><span class="comment">// method 2</span></span><br><span class="line"><span class="comment">// method 2 complete!</span></span><br><span class="line"><span class="comment">// end</span></span><br></pre></td></tr></table></figure></p>
-<p>一开始我一直处理不好next和data混合在一起的处理方法，直到我看到了一段类似的代码才醒悟。当前函数执行完之后调用next函数时，只有实际数据部分，但是下一个函数的定义却有一个next的第一参数，因此，我们需要讲原有的函数做替换，让他可以正常的接受当前函数传递过来的参数，并且执行的时候加上next参数。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-access-token-and-refresh-token" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/22/access-token-and-refresh-token/" class="article-date">
-  	<time datetime="2016-04-22T07:15:54.000Z" itemprop="datePublished">2016-04-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/22/access-token-and-refresh-token/">access-token-and-refresh-token</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-mongoose-version" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/22/mongoose-version/" class="article-date">
-  	<time datetime="2016-04-22T03:26:47.000Z" itemprop="datePublished">2016-04-22</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/22/mongoose-version/">mongoose中document的版本控制（__v）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>技术债，待还。。。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-backend-build" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/20/backend-build/" class="article-date">
-  	<time datetime="2016-04-20T00:06:21.000Z" itemprop="datePublished">2016-04-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/20/backend-build/">我是如何构建我的后端服务器的</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近有空的时候一直在整理自己的后端代码，希望整理出一套较为通用的代码，可以运用到大多数的项目中去。现在的项目基本都是前后端分离的，后端只负责提供restful api接口，根据不同的项目，和前端会有不同的集成方式，例如app的后端，基本就是一个独立的项目，我个人的博客后端，我会考虑使用nginx做一个转发，当接收到<code>/</code>到请求时，转发给前端页面处理；当接受到<code>/service</code>请求时，转发给后端处理，这些请求基本上都是前端的ajax请求，避免了跨域的麻烦。后端的代码中我们只要用一个简单的use方法做转发可以将<code>/service</code>的请求转回原地址了。</p>
-<p>我的项目目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">controller // &#23384;&#20648;&#25511;&#21046;&#22120;&#30340;&#25991;&#20214;&#22841;&#10;library // &#23384;&#20648;&#36890;&#29992;&#20195;&#30721;&#30340;&#25991;&#20214;&#22841;&#10;- error.js // &#36890;&#29992;&#38169;&#35823;&#23450;&#20041;&#10;- helper.js // &#31995;&#32479;&#32423;&#36890;&#29992;&#20989;&#25968;&#23450;&#20041;&#65292;&#20363;&#22914;jwt&#20196;&#29260;&#29983;&#20135;&#21644;&#26657;&#39564;&#10;- middleware.js // &#20013;&#38388;&#20214;&#23450;&#20041;&#10;- util.js // &#24120;&#35268;&#36890;&#29992;&#20989;&#25968;&#23450;&#20041;&#65292;&#19968;&#33324;&#20197;lodash&#25110;&#31995;&#32479;&#20869;&#32622;&#30340;util&#27169;&#22359;&#20026;&#22522;&#30784;&#65292;md5&#31561;&#33258;&#24049;&#24120;&#29992;&#30340;&#26041;&#27861;&#10;model // &#23384;&#20648;mysql&#12289;mongo&#21450;redis&#25968;&#25454;&#27169;&#22411;&#30340;&#25991;&#20214;&#22841;&#10;- mysql // mysql&#10;- mongo // mongodb&#10;- redis // redis&#10;- index.js&#10;node_modules // node.js&#30340;&#27169;&#22359;&#10;router // &#31995;&#32479;&#36335;&#30001;&#10;- v1.js // &#29256;&#26412;1&#30340;&#36335;&#30001;&#10;- v1_1.js // &#29256;&#26412;1.1&#30340;&#36335;&#30001;&#10;- index.js // &#36890;&#36807;use&#26041;&#27861;&#35843;&#29992;&#21508;&#29256;&#26412;&#36335;&#30001;&#10;service // controller&#21644;model&#20043;&#38388;&#30340;&#19994;&#21153;&#36923;&#36753;&#20195;&#30721;&#10;test // &#21333;&#20803;&#27979;&#35797;&#25991;&#20214;&#22841;&#10;.gitignore&#10;app.js // &#21551;&#21160;&#25991;&#20214;&#10;config.js // &#37197;&#32622;&#25991;&#20214;&#10;package.json // &#27169;&#22359;&#37197;&#32622;&#25991;&#20214;&#10;readme.md</span><br></pre></td></tr></table></figure></p>
-<p>所有的请求都会经过路由再到达控制器，路由是所有代码内容的第一关，特别是在app项目里面，url一旦发布就难以修改（客户端也可以通过默写热修复的方法处理），url地址的设计好坏对于项目维护很重要。我在定义路由的时候，会有一个总的index.js文件，app.js只要引入这个文件即可，项目就可以访问到所有版本的api。</p>
-<p>index.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"><span class="comment">/* jshint node: true */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Mdl = <span class="built_in">require</span>(<span class="string">'../library/middleware'</span>);</span><br><span class="line"><span class="keyword">const</span> Ctr = <span class="built_in">require</span>(<span class="string">'../controller'</span>);</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="keyword">const</span> v_1 = <span class="built_in">require</span>(<span class="string">'./v1'</span>);</span><br><span class="line"><span class="keyword">const</span> v_1_1 = <span class="built_in">require</span>(<span class="string">'./v1_1'</span>);</span><br><span class="line"><span class="keyword">const</span> v_admin = <span class="built_in">require</span>(<span class="string">'./admin'</span>);</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">// restful api v1</span></span><br><span class="line">router.use(<span class="string">'/1'</span>, v_1.routes(), v_1.allowedMethods());</span><br><span class="line"><span class="comment">// restful api v1.1</span></span><br><span class="line">rotuer.use(<span class="string">'/1.1'</span>, v_1_1.routes(), v_1_1.allowedMethods());</span><br><span class="line"><span class="comment">// manage api</span></span><br><span class="line">router.use(<span class="string">'/admin'</span>, v_admin.routes(), v_admin.allowedMethods());</span><br><span class="line"></span><br><span class="line">router.all(<span class="string">'*'</span>, <span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.status = <span class="number">404</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure></p>
-<p>v1.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"><span class="comment">/* jshint node: true */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Ctr = <span class="built_in">require</span>(<span class="string">'../controller'</span>).v1;</span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">'koa-router'</span>);</span><br><span class="line"><span class="keyword">const</span> v1 = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 增加用户</span></span><br><span class="line">v1.post(<span class="string">'/user'</span>, Ctr.User.create);</span><br><span class="line"><span class="comment">// 删除用户</span></span><br><span class="line">v1.delete(<span class="string">'/user/:user_id'</span>, Ctr.User.delete);</span><br><span class="line"><span class="comment">// 查询用户信息</span></span><br><span class="line">v1.get(<span class="string">'/user/:user_id'</span>, Ctr.User.read);</span><br><span class="line">v1.get(<span class="string">'/user'</span>, Ctr.User.read);</span><br><span class="line"><span class="comment">// 修改用户信息</span></span><br><span class="line">v1.put(<span class="string">'/user/:user_id'</span>, Ctr.User.update);</span><br></pre></td></tr></table></figure></p>
-<p>在我的<code>controller</code> <code>service</code> <code>model</code>三个文件夹下，都会有一个<code>index.js</code>的文件，<code>controller</code>会被路由引入，<code>controller</code>又会引入<code>service</code>，<code>service</code>又引入<code>model</code>，最终到达数据库。我比较习惯用一个单独的大写字母来标示一些特殊的集合。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> U = <span class="built_in">require</span>(<span class="string">'../library/util'</span>);</span><br><span class="line"><span class="keyword">const</span> H = <span class="built_in">require</span>(<span class="string">'../library/helper'</span>);</span><br><span class="line"><span class="keyword">const</span> S = <span class="built_in">require</span>(<span class="string">'../library/service'</span>);</span><br><span class="line"><span class="keyword">const</span> M = <span class="built_in">require</span>(<span class="string">'../library/model'</span>);</span><br></pre></td></tr></table></figure>
-<p>一开始用这种方法的时候，总会担心别人的批评，因为这种看不出是什么鬼的定义很容易被喷，有点过不去心里的坎，不过后来想想，规则就是人定的，为什么一定要遵守别人的规则，自己觉得好久即可。以前做PHP用think PHP框架也有类似的语法。用一个字母表示一个集合，确实是蛮实用的。</p>
-<p><code>service</code>作为服务层，承载着所有增删改查的业务逻辑处理，虽然有模型层把控数据格式，但是模型层很多时候只会返回诸如<code>Validation error</code>之类的单一错误提示，这样的提示很难判定是哪个地方出了异常，所以在数据进入模型层之前，我会对参数做断言判断，而断言的异常情况，会统一定义在<code>library/error.js</code>文件里。</p>
-<p>登录验证的服务层<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">exports.verify = <span class="function"><span class="keyword">function</span>*(<span class="params">account, password</span>) </span>&#123;</span><br><span class="line">  assert(H.isAccount(account), <span class="string">'ACCOUNT_INVALID'</span>);</span><br><span class="line">  assert(U.isPassword(password), <span class="string">'PASSWORD_INVALID'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> rs = <span class="keyword">yield</span> M.Mysql.User.findOne(&#123;</span><br><span class="line">    where: &#123; $or: [&#123; mobile: account &#125;, &#123; email: account &#125;] &#125;,</span><br><span class="line">    include: [&#123;</span><br><span class="line">      model: M.Mysql.UserProfile,</span><br><span class="line">      through: &#123;</span><br><span class="line">        attributes: [<span class="string">'gender'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;]</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  assert(rs, <span class="string">'USER_GONE'</span>);</span><br><span class="line">  assert(rs.password == H.generatePassword(password, rs.password_salt), <span class="string">'PASSWORD_ERROR'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> access_token = <span class="keyword">yield</span> H.signToken(U.extend(rs, &#123; password_salt: <span class="literal">null</span> &#125;, U.extend.RN));</span><br><span class="line">  <span class="keyword">let</span> refresh_token = <span class="keyword">yield</span> H.signToken(&#123; user_id: rs._id &#125;, refresh_token_expires);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123; access_token: access_token, refresh_token: refresh_token &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>error.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"><span class="comment">/* jshint node: true */</span></span><br><span class="line"></span><br><span class="line">exports.ACCOUNT_INVALID = &#123;message: <span class="string">'账号无效'</span>, code: <span class="number">400</span>&#125;;</span><br><span class="line">exports.PASSWORD_INVALID = &#123;message: <span class="string">'密码无效'</span>, code: <span class="number">400</span>&#125;;</span><br><span class="line">exports.PASSWORD_ERROR = &#123;message: <span class="string">'密码错误'</span>, code: <span class="number">400</span>&#125;;</span><br><span class="line">exports.USER_GONE = &#123;message: <span class="string">'用户不存在'</span>, code: <span class="number">410</span>&#125;;</span><br><span class="line">exports.PARAM_INVALID = &#123;message: <span class="string">'参数错误'</span>, code: <span class="number">400</span>&#125;;</span><br><span class="line">exports.MOBILE_EXISTS = &#123;message: <span class="string">'手机号码已存在'</span>, code: <span class="number">409</span>&#125;;</span><br><span class="line">exports.EMAIL_EXISTS = &#123;message: <span class="string">'电子邮箱已存在'</span>, code: <span class="number">409</span>&#125;;</span><br><span class="line">exports.OBJECT_ID_INVALID = &#123;message: <span class="string">'无效的查询ID'</span>, code: <span class="number">400</span>&#125;;</span><br><span class="line">exports.EMAIL_INVALID = &#123;message: <span class="string">'电子邮箱格式错误'</span>, code: <span class="number">400</span>&#125;;</span><br><span class="line">exports.MOBILE_INVALID = &#123;message: <span class="string">'手机号码格式错误'</span>, code: <span class="number">400</span>&#125;;</span><br><span class="line">exports.BOOK_GONE = &#123;message: <span class="string">'书籍不存在'</span>, code: <span class="number">400</span>&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>有了<code>assert</code>，于是代码里必然要出现<code>try {} catch(e) {}</code>的代码。每个接口都写一遍<code>try catch</code>会很麻烦，既然error可以统一由error.js定义，那么统一处理也是可以的</p>
-<p>登录验证的controller<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">exports.verify = H.f(<span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> account = <span class="keyword">this</span>.request.body.account;</span><br><span class="line">	<span class="keyword">let</span> password = <span class="keyword">this</span>.request.body.password;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> ret = <span class="keyword">yield</span> S.Auth.verify.call(<span class="keyword">this</span>, account, password);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">this</span>.send(<span class="number">200</span>, ret);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>正常来讲，verify这个方法只要返回一个<code>Generator function</code>即可，为了把<code>try catch</code>的代码提取出来，我包多了一层函数用来处理异常。这个函数定义在我的<code>library/helper.js</code>文件里面</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">exports.f = <span class="function"><span class="keyword">function</span>(<span class="params">func, error</span>) </span>&#123;</span><br><span class="line">	error = error || &#123;&#125;;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>*(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">yield</span> func.call(<span class="keyword">this</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">			<span class="keyword">let</span> obj = error[e.message] || E[e.message] || &#123;message: C.debug ? e.stack : <span class="string">'未知异常'</span>, code: <span class="number">500</span>&#125;;</span><br><span class="line">			<span class="keyword">if</span> (<span class="keyword">typeof</span> obj.message === <span class="string">'string'</span>) &#123;</span><br><span class="line">				obj.message = &#123;</span><br><span class="line">					code: <span class="number">1</span>,</span><br><span class="line">					message: obj.message</span><br><span class="line">				&#125;;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">this</span>.send(obj.code, obj.message);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>函数的名字主要是为了简短，又想不出太好的命名，就直接给了个<code>f</code>，函数的两个参数，第一个就是传入进来的<code>generator function</code>，第二个是自定义的错误释义，因为有时候我们需要返回的错误解释也许不是error.js里面定义的那个，或者说有时候同样是401的状态码，但是可能是不同情况导致的，例如有可能是令牌过期，也有可能是用户修改了密码，要求重新登录，于是你必须给出不同的释义。</p>
-<p>模型层基本用的都是orm框架，较好的把控了数据问题，关系数据都存在mysql数据库，较少的数据存mongo，例如书籍这类树形的数据。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/node-js/">node.js</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </div>

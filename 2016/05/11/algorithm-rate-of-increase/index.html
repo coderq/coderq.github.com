@@ -4,18 +4,33 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>access-token-and-refresh-token | CoderQ·博客</title>
+  <title>算法中的增长率标记法及含义 | CoderQ·博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
+  <meta name="description" content="T(N) = O(f(N)) 表示T(N)的增长率小于等于f(N)
+T(N) = Ω(g(N)) 表示T(N)的增长率大于等于f(N)
+T(N) = θ(h(N)) 表示T(N)的增长率等于h(N)
+T(N) = o(p(N)) 表示T(N)的增长率等于p(N)
+
+当且仅当T(N) = O(f(N))且T(N) = Ω(f(N))时，T(N) = θ(h(N))。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="access-token-and-refresh-token">
-<meta property="og:url" content="http://coderq.github.io/2016/04/22/access-token-and-refresh-token/index.html">
+<meta property="og:title" content="算法中的增长率标记法及含义">
+<meta property="og:url" content="http://coderq.github.io/2016/05/11/algorithm-rate-of-increase/index.html">
 <meta property="og:site_name" content="CoderQ·博客">
-<meta property="og:description" content="个人博客">
-<meta property="og:updated_time" content="2016-04-22T07:15:54.000Z">
+<meta property="og:description" content="T(N) = O(f(N)) 表示T(N)的增长率小于等于f(N)
+T(N) = Ω(g(N)) 表示T(N)的增长率大于等于f(N)
+T(N) = θ(h(N)) 表示T(N)的增长率等于h(N)
+T(N) = o(p(N)) 表示T(N)的增长率等于p(N)
+
+当且仅当T(N) = O(f(N))且T(N) = Ω(f(N))时，T(N) = θ(h(N))。">
+<meta property="og:updated_time" content="2016-05-11T15:22:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="access-token-and-refresh-token">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="算法中的增长率标记法及含义">
+<meta name="twitter:description" content="T(N) = O(f(N)) 表示T(N)的增长率小于等于f(N)
+T(N) = Ω(g(N)) 表示T(N)的增长率大于等于f(N)
+T(N) = θ(h(N)) 表示T(N)的增长率等于h(N)
+T(N) = o(p(N)) 表示T(N)的增长率等于p(N)
+
+当且仅当T(N) = O(f(N))且T(N) = Ω(f(N))时，T(N) = θ(h(N))。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -102,7 +117,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 12.5px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 17.5px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 17.5px;">mongodb</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12.5px;">orientdb</a> <a href="/tags/redis/" style="font-size: 17.5px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a>
+						<a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 14px;">nginx</a> <a href="/tags/node-js/" style="font-size: 14px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
 					</div>
 				</section>
 				
@@ -162,11 +177,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="post-access-token-and-refresh-token" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-algorithm-rate-of-increase" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2016/04/22/access-token-and-refresh-token/" class="article-date">
-  	<time datetime="2016-04-22T07:15:54.000Z" itemprop="datePublished">2016-04-22</time>
+      <a href="/2016/05/11/algorithm-rate-of-increase/" class="article-date">
+  	<time datetime="2016-05-11T15:08:03.000Z" itemprop="datePublished">2016-05-11</time>
 </a>
     </div>
   
@@ -179,7 +194,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      access-token-and-refresh-token
+      算法中的增长率标记法及含义
     </h1>
   
 
@@ -187,7 +202,15 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+	</div>
+
         
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/算法/">算法</a>
+	</div>
+
 
         <div class="clearfix"></div>
       </div>
@@ -195,7 +218,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <ul>
+<li><code>T(N) = O(f(N))</code> 表示T(N)的增长率小于等于f(N)</li>
+<li><code>T(N) = Ω(g(N))</code> 表示T(N)的增长率大于等于f(N)</li>
+<li><code>T(N) = θ(h(N))</code> 表示T(N)的增长率等于h(N)</li>
+<li><code>T(N) = o(p(N))</code> 表示T(N)的增长率等于p(N)</li>
+</ul>
+<p>当且仅当<code>T(N) = O(f(N))</code>且<code>T(N) = Ω(f(N))</code>时，<code>T(N) = θ(h(N))</code>。</p>
+
       
     </div>
     
@@ -204,18 +234,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/04/25/javascript-async-order/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/05/12/javascript-prototype/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          Javascript异步调用顺序执行方法
+          javascript-prototype
         
       </div>
     </a>
   
   
-    <a href="/2016/04/22/mongoose-version/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">mongoose中document的版本控制（__v）</div>
+    <a href="/2016/05/06/formula/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">常用数学公式</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -250,7 +280,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="access-token-and-refresh-token" data-title="access-token-and-refresh-token" data-url="http://coderq.github.io/2016/04/22/access-token-and-refresh-token/"></div>
+	<div class="ds-thread" data-thread-key="algorithm-rate-of-increase" data-title="算法中的增长率标记法及含义" data-url="http://coderq.github.io/2016/05/11/algorithm-rate-of-increase/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
