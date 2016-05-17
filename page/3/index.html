@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>CoderQ·博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="个人博客">
@@ -16,158 +15,226 @@
 <meta name="twitter:title" content="CoderQ·博客">
 <meta name="twitter:description" content="个人博客">
   
+    <link rel="alternative" href="/atom.xml" title="CoderQ·博客" type="application/atom+xml">
+  
   
     <link rel="icon" href="/favicon.png">
   
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
   <link rel="stylesheet" href="/css/style.css" type="text/css">
-</head>
+  
+      <style> .article { opacity: 0;} </style>
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+    
+    
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: true,
+          isPost: false,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
 
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
 <body>
   <div id="container">
     <div class="left-col">
     <div class="overlay"></div>
 <div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="js-avatar">
-			
-		</a>
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">CoderQ</a></h1>
+        </hgroup>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">CoderQ</a></h1>
-		</hgroup>
+        
+        <p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
+        
+                
 
-		
-		<p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
-		
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>標籤</li>
-						
-						
-						<li>關於</li>
-						
-					</ul>
-				</div>
-			</div>
-		
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
 
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/coderq" title="github">github</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 14px;">nginx</a> <a href="/tags/node-js/" style="font-size: 14px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
-					</div>
-				</section>
-				
-				
-				
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/coderq" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 14px;">nginx</a> <a href="/tags/node-js/" style="font-size: 14px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
 
-				
-				
-				<section class="switch-part switch-part3">
-				
-					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
 </div>
-
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">CoderQ</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-			
-				<img lazy-src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="js-avatar">
-			
-			</div>
-			<hgroup>
-			  <h1 class="header-author">CoderQ</h1>
-			</hgroup>
-			
-			<p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/coderq" title="github">github</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">CoderQ</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">CoderQ</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/coderq" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
 </nav>
-
       <div class="body-wrap">
   
     <article id="post-mac-server-cmd" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/11/mac-server-cmd/" class="article-date">
-  	<time datetime="2016-04-10T22:29:46.000Z" itemprop="datePublished">2016-04-11</time>
+      <time datetime="2016-04-10T22:29:46.000Z" itemprop="datePublished">2016-04-11</time>
 </a>
     </div>
   
@@ -189,6 +256,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># start&#10;sudo /usr/local/mysql/support-files/mysql.server start&#10;# stop&#10;sudo /usr/local/mysql/support-files/mysql.server stop&#10;# restart &#10;sudo /usr/local/mysql/support-files/mysql.server restart</span><br></pre></td></tr></table></figure>
 <h2 id="mongo"><a href="#mongo" class="headerlink" title="mongo"></a>mongo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath ~/mongodb_path</span><br></pre></td></tr></table></figure>
 <h2 id="orientdb"><a href="#orientdb" class="headerlink" title="orientdb"></a>orientdb</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/server.sh&#10;./bin/console.sh (or http://localhost:2424)</span><br></pre></td></tr></table></figure>
@@ -198,15 +266,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/orientdb/">orientdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/mac/">mac</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/mac/">mac</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/orientdb/">orientdb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -223,13 +291,12 @@
 
 
 
-
   
     <article id="post-orientdb-note-1" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/08/orientdb-note-1/" class="article-date">
-  	<time datetime="2016-04-08T09:05:56.000Z" itemprop="datePublished">2016-04-08</time>
+      <time datetime="2016-04-08T09:05:56.000Z" itemprop="datePublished">2016-04-08</time>
 </a>
     </div>
   
@@ -251,6 +318,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="u4E0B_u8F7D_u3001_u5B89_u88C5_u548C_u542F_u52A8"><a href="#u4E0B_u8F7D_u3001_u5B89_u88C5_u548C_u542F_u52A8" class="headerlink" title="下载、安装和启动"></a>下载、安装和启动</h2><p>下载地址<a href="http://orientdb.com/download/" target="_blank" rel="external">http://orientdb.com/download/</a>，下载后解压进入bin目录，执行<code>./server.sh</code>命令，搞定。</p>
 <p>你可以通过<a href="http://localhost:2480访问web地址，也可以执行`./console.sh`启动客户端。" target="_blank" rel="external">http://localhost:2480访问web地址，也可以执行`./console.sh`启动客户端。</a></p>
 <h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>OrientDB是一款开源的非关系数据库系统，使用Java实现的，他是一个符合模型的数据库，支持文档、图和键值三种模型。记录间的关系以直接联系的方式存储在图数据库。</p>
@@ -263,15 +331,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/orientdb/">orientdb</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/图数据库/">图数据库</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/图数据库/">图数据库</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/orientdb/">orientdb</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -288,13 +356,12 @@
 
 
 
-
   
     <article id="post-msgpack" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/08/msgpack/" class="article-date">
-  	<time datetime="2016-04-08T00:00:52.000Z" itemprop="datePublished">2016-04-08</time>
+      <time datetime="2016-04-08T00:00:52.000Z" itemprop="datePublished">2016-04-08</time>
 </a>
     </div>
   
@@ -316,6 +383,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>我们平时做接口调接口，总会遇到一些接口返回的数据量特别庞大的问题，这容易导致客户端流量增加，也影响响应时间。msgpack可以将数据压缩，通过<a href="http://msgpack.org/" target="_blank" rel="external">msgpack</a>，我们一般可以讲原始数据压缩一半左右，当数量很大时，非常赞！<br>步骤也很简单，如下：<br>1.安装模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install msgpack5 --save</span><br></pre></td></tr></table></figure></p>
 <p>2.压缩/解压<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let msgpack = require(&#39;msgpack5&#39;)()&#10;  , encode  = msgpack.encode&#10;  , decode  = msgpack.decode;&#10;&#10;console.log(decode(encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;))) // &#123; hello: &#39;world&#39; &#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>encode</code>的结果是Buffer对象，你可以直接返回二进制编码，也可以通过toString(‘hex’)返回十六进制编码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#36820;&#22238;&#20108;&#36827;&#21046;&#10;this.body = encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;);&#10;// &#36820;&#22238;&#21313;&#20845;&#36827;&#21046;&#10;this.body = encode(&#123; &#39;hello&#39;: &#39;world&#39; &#125;).toString(&#39;hex&#39;);</span><br></pre></td></tr></table></figure></p>
@@ -329,15 +397,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/msgpack/">msgpack</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/node-js/">node.js</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/node-js/">node.js</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/msgpack/">msgpack</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -354,13 +422,12 @@
 
 
 
-
   
     <article id="post-highlight-build" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/06/highlight-build/" class="article-date">
-  	<time datetime="2016-04-05T23:38:50.000Z" itemprop="datePublished">2016-04-06</time>
+      <time datetime="2016-04-05T23:38:50.000Z" itemprop="datePublished">2016-04-06</time>
 </a>
     </div>
   
@@ -382,6 +449,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p><code>highlight</code>是一个很好的代码高亮工具，但是官方似乎没有太好的使用说明，以至于一开始使用的时候搞了有点久，这里做个简单的记录。<br>1.你需要引入css文件，这个很简单，样式文件都在<code>src/styles</code>下面<br>2.如果你跟我一样是使用bower安装的话，一开始是没有<code>highlight.pack.js</code>文件的，你需要build一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// &#20551;&#35774;&#20320;&#21482;&#38656;&#35201;javascript&#20195;&#30721;&#30340;&#39640;&#20142;&#10;node tools/build.js javascript</span><br></pre></td></tr></table></figure></p>
 <p>3.之后你会看到根目录下面多了一个build的文件夹，打开就会发现<code>highlight.pack.js</code>文件了，引入该文件，再按官方指引就可以正常使用了。</p>
 
@@ -391,15 +459,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/highlight/">highlight</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/highlight/">highlight</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -416,13 +484,12 @@
 
 
 
-
   
     <article id="post-redis-basic" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/25/redis-basic/" class="article-date">
-  	<time datetime="2016-03-25T05:34:21.000Z" itemprop="datePublished">2016-03-25</time>
+      <time datetime="2016-03-25T05:34:21.000Z" itemprop="datePublished">2016-03-25</time>
 </a>
     </div>
   
@@ -444,6 +511,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>预置数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sadd user1:follow &#39;user2&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user1:follow &#39;user3&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user1:follow &#39;user5&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user1:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user3&#34;&#10;3) &#34;user2&#34;&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user1&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user4&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; sadd user2:follow &#39;user5&#39;&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user2:follow&#10;1) &#34;user5&#34;&#10;2) &#34;user1&#34;&#10;3) &#34;user4&#34;</span><br></pre></td></tr></table></figure></p>
 <p>删除集合中的某个元素（SREM）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user1&#34;&#10;2) &#34;user4&#34;&#10;127.0.0.1:6379&#62; srem user4:follow user3&#10;(integer) 0&#10;127.0.0.1:6379&#62; srem user4:follow user1&#10;(integer) 1&#10;127.0.0.1:6379&#62; smembers user4:follow&#10;1) &#34;user4&#34;&#10;127.0.0.1:6379&#62;</span><br></pre></td></tr></table></figure></p>
 <p>计算出两个集合的交集（SINTER）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&#62; sinter user1:follow user2:follow&#10;1) &#34;user5&#34;</span><br></pre></td></tr></table></figure></p>
@@ -464,15 +532,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/redis/">redis</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/redis/">redis</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -489,13 +557,12 @@
 
 
 
-
   
     <article id="post-javascript-useful-functions" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/18/javascript-useful-functions/" class="article-date">
-  	<time datetime="2016-03-18T00:55:24.000Z" itemprop="datePublished">2016-03-18</time>
+      <time datetime="2016-03-18T00:55:24.000Z" itemprop="datePublished">2016-03-18</time>
 </a>
     </div>
   
@@ -517,6 +584,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570"><a href="#u968F_u673A_u5B57_u7B26_u4E32_u51FD_u6570" class="headerlink" title="随机字符串函数"></a>随机字符串函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 生成随机字符串</span><br><span class="line"> *</span><br><span class="line"> * @param total 字符串长度</span><br><span class="line"> * @param method 字符串类型，数字／小写字母／大写字母</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> randomString = <span class="function"><span class="keyword">function</span>(<span class="params">total, method</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> codes = [], ret = <span class="string">''</span>;</span><br><span class="line">    method = method || <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.number) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">48</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.lower) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">26</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">97</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (method &amp; randomString.upper) &#123;</span><br><span class="line">        <span class="keyword">var</span> number_codes = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">26</span>).fill(<span class="number">0</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">item, index</span>) </span>&#123;<span class="keyword">return</span> <span class="number">65</span> + index;&#125;);</span><br><span class="line">        codes = codes.concat(number_codes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (total--) &#123;</span><br><span class="line">        ret += <span class="built_in">String</span>.fromCharCode(codes[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * codes.length)]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 数字</span><br><span class="line"> */</span></span><br><span class="line">randomString.number = <span class="number">1</span>;</span><br><span class="line"><span class="comment">/** </span><br><span class="line"> * 小写字母</span><br><span class="line"> */</span></span><br><span class="line">randomString.lower = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 大写字母</span><br><span class="line"> */</span></span><br><span class="line">randomString.upper = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="u7EE7_u627F_u51FD_u6570"><a href="#u7EE7_u627F_u51FD_u6570" class="headerlink" title="继承函数"></a>继承函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> extend = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> params = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>),</span><br><span class="line">        method = <span class="string">'number'</span> == <span class="keyword">typeof</span> params[params.length - <span class="number">1</span>] ? params.pop() : <span class="number">0</span>,</span><br><span class="line">        ret = method &amp; extend.replaceFirst ? params.shift() : &#123;&#125;,</span><br><span class="line">        deep = method &amp; extend.deepExtend,</span><br><span class="line">        rmNull = method &amp; extend.removeNull,</span><br><span class="line">        obj;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (params.length) &#123;</span><br><span class="line">        obj = params.shift();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="literal">null</span> === obj[k]) &#123;</span><br><span class="line">                rmNull ? <span class="keyword">delete</span> ret[k] : ret[k] = obj[k];</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!ret[k] || ret[k].constructor !== <span class="built_in">Object</span> || obj[k].constructor !== <span class="built_in">Object</span>) &#123;</span><br><span class="line">                ret[k] = obj[k];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ret[k] = deep ? extend(ret[k], obj[k], method) : obj[k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 将结果赋值给第一个对象</span><br><span class="line"> */</span></span><br><span class="line">extend.replaceFirst = extend.RF = <span class="number">1</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 深度合并</span><br><span class="line"> */</span></span><br><span class="line">extend.deepExtend = extend.DE = <span class="number">2</span>;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 删除值为null的键</span><br><span class="line"> */</span></span><br><span class="line">extend.removeNull = extend.RN = <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570"><a href="#u5B57_u7B26_u4E32_u53CA_u65F6_u95F4_u683C_u5F0F_u5316_u51FD_u6570" class="headerlink" title="字符串及时间格式化函数"></a>字符串及时间格式化函数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * 字符串格式化方法</span><br><span class="line"> * @params null</span><br><span class="line"> * @example _.format('我是&#123;0&#125;', 'CoderQ') =&gt; '我是CoderQ'; '我是&#123;name&#125;'.format(&#123;name:'CoderQ'&#125;) =&gt; '我是CoderQ';</span><br><span class="line"> * @depends null</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> string_format = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>),</span><br><span class="line">        string = args.shift(),</span><br><span class="line">        params = <span class="string">'object'</span> == <span class="keyword">typeof</span> args[<span class="number">0</span>] ? args[<span class="number">0</span>] : args;</span><br><span class="line">    <span class="keyword">return</span> string.replace(<span class="regexp">/\&#123;(\w+)(\|([^&#125;]+))?\&#125;/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$, $1, $2, $3</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'undefined'</span> == <span class="keyword">typeof</span> params[$<span class="number">1</span>] ? <span class="built_in">eval</span>($<span class="number">3</span>) : params[$<span class="number">1</span>];</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 时间格式化函数</span><br><span class="line"> * @params</span><br><span class="line"> *    format 格式</span><br><span class="line"> *    language 语言</span><br><span class="line"> * @example new Date().format('Y-m-d H:i:s')</span><br><span class="line"> * @depends toString</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> date_format = <span class="function"><span class="keyword">function</span>(<span class="params">format, date, lang</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _format = format || <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">var</span> _lang = lang || <span class="string">'zh'</span>;</span><br><span class="line">    <span class="keyword">var</span> _month_text = &#123;</span><br><span class="line">        <span class="string">'zh'</span>: [<span class="string">'一'</span>, <span class="string">'二'</span>, <span class="string">'三'</span>, <span class="string">'四'</span>, <span class="string">'五'</span>, <span class="string">'六'</span>, <span class="string">'七'</span>, <span class="string">'八'</span>, <span class="string">'九'</span>, <span class="string">'十'</span>, <span class="string">'十一'</span>, <span class="string">'十二'</span>],</span><br><span class="line">        <span class="string">'en'</span>: [<span class="string">'Jan'</span>, <span class="string">'Feb'</span>, <span class="string">'Mar'</span>, <span class="string">'Apr'</span>, <span class="string">'May'</span>, <span class="string">'Jun'</span>, <span class="string">'Jul'</span>, <span class="string">'Aug'</span>, <span class="string">'Sep'</span>, <span class="string">'Oct'</span>, <span class="string">'Nov'</span>, <span class="string">'Dec'</span>]</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> _day_text = &#123;</span><br><span class="line">        <span class="string">'zh'</span>: [<span class="string">'日'</span>, <span class="string">'一'</span>, <span class="string">'二'</span>, <span class="string">'三'</span>, <span class="string">'四'</span>, <span class="string">'五'</span>, <span class="string">'六'</span>],</span><br><span class="line">        <span class="string">'en'</span>: [<span class="string">'Sun'</span>, <span class="string">'Mon'</span>, <span class="string">'Tues'</span>, <span class="string">'Wed'</span>, <span class="string">'Thur'</span>, <span class="string">'Fri'</span>, <span class="string">'Sat'</span>]</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">var</span> _year = date.getFullYear();</span><br><span class="line">    <span class="keyword">var</span> _month = date.getMonth() + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> _date = date.getDate();</span><br><span class="line">    <span class="keyword">var</span> _day = date.getDay();</span><br><span class="line">    <span class="keyword">var</span> _hour = date.getHours();</span><br><span class="line">    <span class="keyword">var</span> _minute = date.getMinutes();</span><br><span class="line">    <span class="keyword">var</span> _second = date.getSeconds();</span><br><span class="line">    <span class="keyword">return</span> _format.replace(<span class="regexp">/Y/g</span>, _year)</span><br><span class="line">        .replace(<span class="regexp">/y/g</span>, _year.toString().substr(<span class="number">2</span>))</span><br><span class="line">        .replace(<span class="regexp">/M/g</span>, _month_text[_lang][_month - <span class="number">1</span>])</span><br><span class="line">        .replace(<span class="regexp">/m/g</span>, _month &gt; <span class="number">9</span> ? _month : <span class="string">'0'</span> + _month)</span><br><span class="line">        .replace(<span class="regexp">/n/g</span>, _month)</span><br><span class="line">        .replace(<span class="regexp">/D/g</span>, _day_text[_lang][_day])</span><br><span class="line">        .replace(<span class="regexp">/d/g</span>, _date &gt; <span class="number">9</span> ? _date : <span class="string">'0'</span> + _date)</span><br><span class="line">        .replace(<span class="regexp">/j/g</span>, _date)</span><br><span class="line">        .replace(<span class="regexp">/H/g</span>, _hour &gt; <span class="number">9</span> ? _hour : <span class="string">'0'</span> + _hour)</span><br><span class="line">        .replace(<span class="regexp">/G/g</span>, _hour)</span><br><span class="line">        .replace(<span class="regexp">/h/g</span>, (_hour % <span class="number">12</span>) &gt; <span class="number">9</span> ? (_hour % <span class="number">12</span>) : <span class="string">'0'</span> + (_hour % <span class="number">12</span>))</span><br><span class="line">        .replace(<span class="regexp">/g/g</span>, _hour % <span class="number">12</span>)</span><br><span class="line">        .replace(<span class="regexp">/i/g</span>, _minute &gt; <span class="number">9</span> ? _minute : <span class="string">'0'</span> + _minute)</span><br><span class="line">        .replace(<span class="regexp">/s/g</span>, _second &gt; <span class="number">9</span> ? _second : <span class="string">'0'</span> + _second);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 数据格式化</span><br><span class="line"> * @param format</span><br><span class="line"> * @param obj</span><br><span class="line"> * @return string</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">var</span> format = <span class="function"><span class="keyword">function</span>(<span class="params">format, obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Object</span>.prototype.toString.call(obj) == <span class="string">'[object Date]'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> date_format.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> string_format.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -526,15 +594,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -551,13 +619,12 @@
 
 
 
-
   
     <article id="post-weixin-jssdk" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/18/weixin-jssdk/" class="article-date">
-  	<time datetime="2016-03-17T23:58:57.000Z" itemprop="datePublished">2016-03-18</time>
+      <time datetime="2016-03-17T23:58:57.000Z" itemprop="datePublished">2016-03-18</time>
 </a>
     </div>
   
@@ -579,6 +646,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="u80CC_u666F"><a href="#u80CC_u666F" class="headerlink" title="背景"></a>背景</h2><p>接运营要求，希望记录文章被某个人分享出去之后的路径树，但因为微信分享时是无法获取到用户信息的，所以能记录的信息只有原始分享用户以及他分享出去后的路径树。</p>
 <h2 id="u5B9E_u73B0_u65B9_u6CD5"><a href="#u5B9E_u73B0_u65B9_u6CD5" class="headerlink" title="实现方法"></a>实现方法</h2><p>当文章被分享出去时，我们的URL里记录有文章ID及用户ID，当页面被打开时，后端会生成一个share_id，以query的方式加到当前URL的后面，当页面被再次分享出去时，后端会根据这个share_id再生成一个下级的share_id，并记录他们之间的关系，而之前的share_id在数据库里的记录会被更新为已读。</p>
 <h2 id="u5FAE_u4FE1_u7B7E_u540D_u751F_u6210_u89C4_u5219"><a href="#u5FAE_u4FE1_u7B7E_u540D_u751F_u6210_u89C4_u5219" class="headerlink" title="微信签名生成规则"></a>微信签名生成规则</h2><p>签名的生成需要以下四个参数</p>
@@ -606,15 +674,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/微信/">微信</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/微信/">微信</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微信/">微信</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -631,13 +699,12 @@
 
 
 
-
   
     <article id="post-javascript-proto-prototype-constructor" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/08/javascript-proto-prototype-constructor/" class="article-date">
-  	<time datetime="2016-03-08T02:35:59.000Z" itemprop="datePublished">2016-03-08</time>
+      <time datetime="2016-03-08T02:35:59.000Z" itemprop="datePublished">2016-03-08</time>
 </a>
     </div>
   
@@ -659,6 +726,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="u5982_u4F55_u5199_u51FA_u6CA1_u6709_u6C61_u67D3_u7684_u7EE7_u627F"><a href="#u5982_u4F55_u5199_u51FA_u6CA1_u6709_u6C61_u67D3_u7684_u7EE7_u627F" class="headerlink" title="如何写出没有污染的继承"></a>如何写出没有污染的继承</h2><p>1.javascript中一切都是对象，每个对象都是基于原型对象创建的，每个对象中都有<strong>proto</strong>属性，这个属性指向的就是它基于的原型对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo(); </span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    Foo.__proto__ === <span class="built_in">Function</span>.prototype, <span class="comment">// true</span></span><br><span class="line">    foo.__proto__ === Foo.prototype, <span class="comment">// true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
 <p>2.只有构造函数对象才有prototype属性，构造函数的作用是创建对象，创建对象的时候，它要知道这个对象基于哪个原型来创建，这个prototype指向的就是这个原型。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="comment">// Foo.prototype 指向 Foo.prototype;</span></span><br></pre></td></tr></table></figure></p>
 <p>3.只有原型对象才有constructor属性，而且也是系统（浏览器）给创建的。前面说过构造函数对象的prototype属性会指向一个原型对象，那么这个原型对象中的constructor属性指向的就是这个构造函数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="keyword">new</span> Foo(); </span><br><span class="line"><span class="built_in">console</span>.log(</span><br><span class="line">    foo.constructor === Foo, <span class="comment">// true</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
@@ -674,15 +742,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -699,13 +767,12 @@
 
 
 
-
   
     <article id="post-javascript-es5-useless-tech" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/08/javascript-es5-useless-tech/" class="article-date">
-  	<time datetime="2016-03-08T02:18:38.000Z" itemprop="datePublished">2016-03-08</time>
+      <time datetime="2016-03-08T02:18:38.000Z" itemprop="datePublished">2016-03-08</time>
 </a>
     </div>
   
@@ -727,6 +794,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="set/get"><a href="#set/get" class="headerlink" title="set/get"></a>set/get</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;&#10;&#9;items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;],&#10;&#9;get length () &#123;&#10;&#9;&#9;return this.items.length;&#10;&#9;&#125;,&#10;&#9;set first (val) &#123;&#10;&#9;&#9;this.items[0] = val;&#10;&#9;&#125;&#10;&#125;;&#10;console.log(data.length); // 3&#10;data.length = 4; // &#20005;&#26684;&#27169;&#24335;&#19979;&#25253;&#38169;&#65306;Uncaught TypeError: Cannot set property length of #&#60;Object&#62; which has only a getter(&#8230;)&#10;console.log(data.first = &#39;d&#39;);&#10;console.log(data.items); // [&#34;d&#34;, &#34;b&#34;, &#34;c&#34;]&#10;&#10;var MyDate = function() &#123;&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="defineGetter/defineSetter"><a href="#defineGetter/defineSetter" class="headerlink" title="defineGetter/defineSetter"></a><strong>defineGetter</strong>/<strong>defineSetter</strong></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var data = &#123;&#10;&#9;items: [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]&#10;&#125;;&#10;data.__defineGetter__(&#39;length&#39;, function() &#123;return this.items.length;&#125;);&#10;data.__defineSetter__(&#39;first&#39;, function(val) &#123;this.items[0] = val;&#125;)&#10;console.log(data.length); // 3&#10;console.log(data.first = &#39;d&#39;);&#10;console.log(data.items); // [&#34;d&#34;, &#34;b&#34;, &#34;c&#34;]</span><br></pre></td></tr></table></figure>
 <h2 id="Object-freeze"><a href="#Object-freeze" class="headerlink" title="Object.freeze"></a>Object.freeze</h2><p>将某个对象<em>冻住</em>，好形象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;a:1, b: 2&#125;; &#10;Object.freeze(a); &#10;a.c =3;&#10;console.log(a); // &#123;a: 1, b: 2&#125;</span><br></pre></td></tr></table></figure></p>
@@ -739,15 +807,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -764,13 +832,12 @@
 
 
 
-
   
     <article id="post-npm-useful-logs" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/03/08/npm-useful-logs/" class="article-date">
-  	<time datetime="2016-03-07T23:48:25.000Z" itemprop="datePublished">2016-03-08</time>
+      <time datetime="2016-03-07T23:48:25.000Z" itemprop="datePublished">2016-03-08</time>
 </a>
     </div>
   
@@ -792,6 +859,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p><code>npm install</code> will install both “dependencies” and “devDependencies”</p>
 <p><code>npm install --production</code> will only install “dependencies”</p>
 <p><code>npm install --dev</code> will only install “devDependencies”</p>
@@ -802,15 +870,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/npm/">npm</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/npm/">npm</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -827,7 +895,6 @@
 
 
 
-
   
   
     <nav id="page-nav">
@@ -836,64 +903,69 @@
   
 </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2016 CoderQ
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 CoderQ
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
     </div>
-  </div>
 </footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
-
-
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
   </div>
 </body>
 </html>

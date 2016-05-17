@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>CoderQ·博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="个人博客">
@@ -16,158 +15,226 @@
 <meta name="twitter:title" content="CoderQ·博客">
 <meta name="twitter:description" content="个人博客">
   
+    <link rel="alternative" href="/atom.xml" title="CoderQ·博客" type="application/atom+xml">
+  
   
     <link rel="icon" href="/favicon.png">
   
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
   <link rel="stylesheet" href="/css/style.css" type="text/css">
-</head>
+  
+      <style> .article { opacity: 0;} </style>
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+    
+    
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: true,
+          isPost: false,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
 
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
 <body>
   <div id="container">
     <div class="left-col">
     <div class="overlay"></div>
 <div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="js-avatar">
-			
-		</a>
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">CoderQ</a></h1>
+        </hgroup>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">CoderQ</a></h1>
-		</hgroup>
+        
+        <p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
+        
+                
 
-		
-		<p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
-		
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>菜单</li>
-						<li>標籤</li>
-						
-						
-						<li>關於</li>
-						
-					</ul>
-				</div>
-			</div>
-		
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
 
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="https://github.com/coderq" title="github">github</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 14px;">nginx</a> <a href="/tags/node-js/" style="font-size: 14px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
-					</div>
-				</section>
-				
-				
-				
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/coderq" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 14px;">nginx</a> <a href="/tags/node-js/" style="font-size: 14px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
 
-				
-				
-				<section class="switch-part switch-part3">
-				
-					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
 </div>
-
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">CoderQ</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-			
-				<img lazy-src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="js-avatar">
-			
-			</div>
-			<hgroup>
-			  <h1 class="header-author">CoderQ</h1>
-			</hgroup>
-			
-			<p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="https://github.com/coderq" title="github">github</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">CoderQ</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">CoderQ</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:123@123.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/coderq" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
 </nav>
-
       <div class="body-wrap">
   
     <article id="post-data-structure" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/05/04/data-structure/" class="article-date">
-  	<time datetime="2016-05-04T00:07:48.000Z" itemprop="datePublished">2016-05-04</time>
+      <time datetime="2016-05-04T00:07:48.000Z" itemprop="datePublished">2016-05-04</time>
 </a>
     </div>
   
@@ -189,6 +256,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="u62BD_u8C61_u6570_u636E_u7C7B_u578B"><a href="#u62BD_u8C61_u6570_u636E_u7C7B_u578B" class="headerlink" title="抽象数据类型"></a>抽象数据类型</h2><p>抽象数据类型(abstract data type, ADT)是一些操作的集合。对诸如表、集合、图和它们的操作一起可以看作是抽象数据类型。</p>
 <h2 id="u8868"><a href="#u8868" class="headerlink" title="表"></a>表</h2><h3 id="u6570_u7EC4"><a href="#u6570_u7EC4" class="headerlink" title="数组"></a>数组</h3><p>使用数组实现表结构时，在元素的增删比较麻烦，例如在0位增加一个元素，需要将所有元素后移一位，删除一个元素，需要讲所有元素前移一位，时间复杂度位O(N)。</p>
 <h3 id="u94FE_u8868"><a href="#u94FE_u8868" class="headerlink" title="链表"></a>链表</h3><p>链表实现表结构时，增删操作的时间复杂度位O(1)。假设链表有5个节点，当需要在2和3之间增加一个节点时，只要创建一个新的节点空间，让2的next指针指向这个新创建的节点，再让新创建节点的指针指向3这个节点，则新增操作完成。删除某个节点时，讲节点的前一个节点的next指针指向当前节点的下个节点，并删除当前节点即可。</p>
@@ -201,15 +269,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/数据结构/">数据结构</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -226,13 +294,12 @@
 
 
 
-
   
     <article id="post-javascript-fast-sort" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/05/03/javascript-fast-sort/" class="article-date">
-  	<time datetime="2016-05-03T15:21:35.000Z" itemprop="datePublished">2016-05-03</time>
+      <time datetime="2016-05-03T15:21:35.000Z" itemprop="datePublished">2016-05-03</time>
 </a>
     </div>
   
@@ -254,6 +321,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"><span class="comment">/* jshint node: true */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> len = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> ary = <span class="keyword">new</span> <span class="built_in">Array</span>(len).fill(<span class="number">0</span>).map(() =&gt; <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * len));</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ret = (<span class="function"><span class="keyword">function</span> <span class="title">fastsort</span>(<span class="params">ary</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (ary.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> ary;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> k = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * ary.length);</span><br><span class="line">	<span class="keyword">let</span> l_ary = ary.filter((item, index) =&gt; (index != k) &amp;&amp; (item &lt; ary[k]));</span><br><span class="line">	<span class="keyword">let</span> r_ary = ary.filter((item, index) =&gt; (index != k) &amp;&amp; (item &gt;= ary[k]));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> fastsort(l_ary).concat(ary[k]).concat(fastsort(r_ary));</span><br><span class="line">&#125;(ary));</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ary);</span><br><span class="line"><span class="built_in">console</span>.log(ret);</span><br></pre></td></tr></table></figure>
 
       
@@ -262,15 +330,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -287,13 +355,12 @@
 
 
 
-
   
     <article id="post-c-binary" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/05/02/c-binary/" class="article-date">
-  	<time datetime="2016-05-02T13:09:23.000Z" itemprop="datePublished">2016-05-02</time>
+      <time datetime="2016-05-02T13:09:23.000Z" itemprop="datePublished">2016-05-02</time>
 </a>
     </div>
   
@@ -315,6 +382,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>C语言中，正数的原码、反码和补码都是一样的，但是负数的的表示是其补码，补码是反码+1。</p>
 <p>int类型是4字节，表示-2^31 ~ 2^31-1</p>
 <p>我们设定一个变量60，看它各运算后的结果</p>
@@ -333,15 +401,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/C/">C</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/C/">C</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -358,13 +426,12 @@
 
 
 
-
   
     <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/28/git/" class="article-date">
-  	<time datetime="2016-04-28T09:01:58.000Z" itemprop="datePublished">2016-04-28</time>
+      <time datetime="2016-04-28T09:01:58.000Z" itemprop="datePublished">2016-04-28</time>
 </a>
     </div>
   
@@ -386,6 +453,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>我在我的机器上能够通过配置ssh key访问github管理代码，但是在公司的服务器上不管怎么配置都不行，实在搞不懂了，然后同事送我这行代码，只要输一次账号密码，然后敲上这句，搞定，下次不用再输入账号密码了。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config credential.helper store</span><br></pre></td></tr></table></figure></p>
 <p>修改了了一堆文件后，偶尔会出现某个文件只是为了调试而加了console之类的代码，这时候你想把他还原<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &#60;file name&#62;</span><br></pre></td></tr></table></figure></p>
 
@@ -395,15 +463,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/git/">git</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/git/">git</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -420,13 +488,12 @@
 
 
 
-
   
     <article id="post-javascript-async-order" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/25/javascript-async-order/" class="article-date">
-  	<time datetime="2016-04-24T17:45:17.000Z" itemprop="datePublished">2016-04-25</time>
+      <time datetime="2016-04-24T17:45:17.000Z" itemprop="datePublished">2016-04-25</time>
 </a>
     </div>
   
@@ -448,6 +515,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>在使用异步回调的时候，我们经常会接住async等模块的帮助，但是有时候我们仅仅只需要一个异步调用同步执行的方法，似乎没必要使用那么多的代码，那么，异步调用顺序执行的方法如果自己写要怎么写呢？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> fns = [].slice.call(<span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">    fns.map(<span class="function"><span class="keyword">function</span>(<span class="params">fn, i, fns</span>)</span>&#123;</span><br><span class="line">        fns[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        	<span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">            fn.apply(<span class="literal">null</span>, i + <span class="number">1</span> === fns.length ? args : [fns[i + <span class="number">1</span>]].concat(args));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    fns[<span class="number">0</span>].call(<span class="literal">null</span>);</span><br><span class="line">&#125;(<span class="function"><span class="keyword">function</span>(<span class="params">next</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'method 1'</span>);</span><br><span class="line">        next(<span class="string">'method 1'</span>, <span class="string">'complete!'</span>);</span><br><span class="line">    &#125;, <span class="number">200</span>);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">next, a, b</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a, b);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'method 2'</span>);</span><br><span class="line">        next(<span class="string">'method 2'</span>, <span class="string">'complete!'</span>);</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a, b);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>);</span><br><span class="line">&#125;));</span><br><span class="line"></span><br><span class="line"><span class="comment">// method 1</span></span><br><span class="line"><span class="comment">// method 1 complete!</span></span><br><span class="line"><span class="comment">// method 2</span></span><br><span class="line"><span class="comment">// method 2 complete!</span></span><br><span class="line"><span class="comment">// end</span></span><br></pre></td></tr></table></figure></p>
 <p>一开始我一直处理不好next和data混合在一起的处理方法，直到我看到了一段类似的代码才醒悟。当前函数执行完之后调用next函数时，只有实际数据部分，但是下一个函数的定义却有一个next的第一参数，因此，我们需要讲原有的函数做替换，让他可以正常的接受当前函数传递过来的参数，并且执行的时候加上next参数。</p>
 
@@ -457,15 +525,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -482,13 +550,12 @@
 
 
 
-
   
     <article id="post-mongoose-version" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/22/mongoose-version/" class="article-date">
-  	<time datetime="2016-04-22T03:26:47.000Z" itemprop="datePublished">2016-04-22</time>
+      <time datetime="2016-04-22T03:26:47.000Z" itemprop="datePublished">2016-04-22</time>
 </a>
     </div>
   
@@ -510,6 +577,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>技术债，待还。。。</p>
 
       
@@ -518,8 +586,8 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
@@ -535,13 +603,12 @@
 
 
 
-
   
     <article id="post-backend-build" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/20/backend-build/" class="article-date">
-  	<time datetime="2016-04-20T00:06:21.000Z" itemprop="datePublished">2016-04-20</time>
+      <time datetime="2016-04-20T00:06:21.000Z" itemprop="datePublished">2016-04-20</time>
 </a>
     </div>
   
@@ -563,6 +630,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>最近有空的时候一直在整理自己的后端代码，希望整理出一套较为通用的代码，可以运用到大多数的项目中去。现在的项目基本都是前后端分离的，后端只负责提供restful api接口，根据不同的项目，和前端会有不同的集成方式，例如app的后端，基本就是一个独立的项目，我个人的博客后端，我会考虑使用nginx做一个转发，当接收到<code>/</code>到请求时，转发给前端页面处理；当接受到<code>/service</code>请求时，转发给后端处理，这些请求基本上都是前端的ajax请求，避免了跨域的麻烦。后端的代码中我们只要用一个简单的use方法做转发可以将<code>/service</code>的请求转回原地址了。</p>
 <p>我的项目目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">controller // &#23384;&#20648;&#25511;&#21046;&#22120;&#30340;&#25991;&#20214;&#22841;&#10;library // &#23384;&#20648;&#36890;&#29992;&#20195;&#30721;&#30340;&#25991;&#20214;&#22841;&#10;- error.js // &#36890;&#29992;&#38169;&#35823;&#23450;&#20041;&#10;- helper.js // &#31995;&#32479;&#32423;&#36890;&#29992;&#20989;&#25968;&#23450;&#20041;&#65292;&#20363;&#22914;jwt&#20196;&#29260;&#29983;&#20135;&#21644;&#26657;&#39564;&#10;- middleware.js // &#20013;&#38388;&#20214;&#23450;&#20041;&#10;- util.js // &#24120;&#35268;&#36890;&#29992;&#20989;&#25968;&#23450;&#20041;&#65292;&#19968;&#33324;&#20197;lodash&#25110;&#31995;&#32479;&#20869;&#32622;&#30340;util&#27169;&#22359;&#20026;&#22522;&#30784;&#65292;md5&#31561;&#33258;&#24049;&#24120;&#29992;&#30340;&#26041;&#27861;&#10;model // &#23384;&#20648;mysql&#12289;mongo&#21450;redis&#25968;&#25454;&#27169;&#22411;&#30340;&#25991;&#20214;&#22841;&#10;- mysql // mysql&#10;- mongo // mongodb&#10;- redis // redis&#10;- index.js&#10;node_modules // node.js&#30340;&#27169;&#22359;&#10;router // &#31995;&#32479;&#36335;&#30001;&#10;- v1.js // &#29256;&#26412;1&#30340;&#36335;&#30001;&#10;- v1_1.js // &#29256;&#26412;1.1&#30340;&#36335;&#30001;&#10;- index.js // &#36890;&#36807;use&#26041;&#27861;&#35843;&#29992;&#21508;&#29256;&#26412;&#36335;&#30001;&#10;service // controller&#21644;model&#20043;&#38388;&#30340;&#19994;&#21153;&#36923;&#36753;&#20195;&#30721;&#10;test // &#21333;&#20803;&#27979;&#35797;&#25991;&#20214;&#22841;&#10;.gitignore&#10;app.js // &#21551;&#21160;&#25991;&#20214;&#10;config.js // &#37197;&#32622;&#25991;&#20214;&#10;package.json // &#27169;&#22359;&#37197;&#32622;&#25991;&#20214;&#10;readme.md</span><br></pre></td></tr></table></figure></p>
 <p>所有的请求都会经过路由再到达控制器，路由是所有代码内容的第一关，特别是在app项目里面，url一旦发布就难以修改（客户端也可以通过默写热修复的方法处理），url地址的设计好坏对于项目维护很重要。我在定义路由的时候，会有一个总的index.js文件，app.js只要引入这个文件即可，项目就可以访问到所有版本的api。</p>
@@ -587,15 +655,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/node-js/">node.js</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/node-js/">node.js</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -612,13 +680,12 @@
 
 
 
-
   
     <article id="post-mongodb-command" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/18/mongodb-command/" class="article-date">
-  	<time datetime="2016-04-18T09:26:52.000Z" itemprop="datePublished">2016-04-18</time>
+      <time datetime="2016-04-18T09:26:52.000Z" itemprop="datePublished">2016-04-18</time>
 </a>
     </div>
   
@@ -640,6 +707,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="u6839_u636E_u65E5_u671F_u7EDF_u8BA1_u51FA_u67D0_u4E9B_u624B_u673A_u53F7_u8BB0_u5F55_u6570"><a href="#u6839_u636E_u65E5_u671F_u7EDF_u8BA1_u51FA_u67D0_u4E9B_u624B_u673A_u53F7_u8BB0_u5F55_u6570" class="headerlink" title="根据日期统计出某些手机号记录数"></a>根据日期统计出某些手机号记录数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = db.spinetmp.aggregate([</span><br><span class="line">	&#123;$match: &#123;status: <span class="string">'visable'</span>, checkuserid: &#123;$<span class="keyword">in</span>: [<span class="string">'156****5285'</span>, <span class="string">'156****5194'</span>, <span class="string">'137****8875'</span>, <span class="string">'158****1125'</span>]&#125;&#125;&#125;,</span><br><span class="line">	&#123;$project: &#123;mobile: <span class="string">'$checkuserid'</span>, date: &#123;$dateToString: &#123;format: <span class="string">"%Y-%m-%d"</span>, date: <span class="string">"$version"</span> &#125;&#125;&#125;&#125;,</span><br><span class="line">	&#123;$group: &#123;_id: &#123;mobile: <span class="string">'$mobile'</span>, date: <span class="string">"$date"</span>&#125;, count: &#123;$sum: <span class="number">1</span>&#125;&#125;&#125;,</span><br><span class="line">	&#123;$sort: &#123;<span class="string">'_id.mobile'</span>: <span class="number">1</span>, <span class="string">'_id.date'</span>: -<span class="number">1</span>&#125;&#125;</span><br><span class="line">]);</span><br><span class="line"><span class="comment">// 将数据转为csv格式</span></span><br><span class="line">data.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item._id.mobile + <span class="string">','</span> + item._id.date + <span class="string">','</span> + item.count;</span><br><span class="line">&#125;).join(<span class="string">"\n"</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="u5012_u51FA_u7528_u6237_u4E66_u5355_u7684_u63CF_u8FF0_u548C_u4E66_u7684_u63A8_u8350_u8BED"><a href="#u5012_u51FA_u7528_u6237_u4E66_u5355_u7684_u63CF_u8FF0_u548C_u4E66_u7684_u63A8_u8350_u8BED" class="headerlink" title="倒出用户书单的描述和书的推荐语"></a>倒出用户书单的描述和书的推荐语</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users = db.user.find(&#123;mobile_number: &#123;$<span class="keyword">in</span>: [<span class="string">'156****6041'</span>, <span class="string">'155****4511'</span>, <span class="string">'136****5641'</span>]&#125;&#125;, &#123;_id: <span class="number">0</span>, mobile_number: <span class="number">1</span>, user_id: <span class="number">1</span>&#125;);</span><br><span class="line"></span><br><span class="line">users.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	item.floors = db.floor.find(&#123;user_id: item.user_id, type: &#123;$exists: <span class="literal">false</span>&#125;&#125;, &#123;user_id: <span class="number">1</span>, name: <span class="number">1</span>, desc: <span class="number">1</span>, item_list: <span class="number">1</span>&#125;).toArray();</span><br><span class="line">	item.floors = item.floors.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">		item.item_list = item.item_list.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> db.item.findOne(&#123;bid: item&#125;, &#123;bid: <span class="number">1</span>, title: <span class="number">1</span>, remark: <span class="number">1</span>&#125;);</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="keyword">return</span> item;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">return</span> item;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h2 id="u6839_u636E_u51FA_u7248_u793E_u548C_u4E66_u6392_u51FA_u7528_u6237_u6536_u85CF_u6700_u591A_u7684_u4E66"><a href="#u6839_u636E_u51FA_u7248_u793E_u548C_u4E66_u6392_u51FA_u7528_u6237_u6536_u85CF_u6700_u591A_u7684_u4E66" class="headerlink" title="根据出版社和书排出用户收藏最多的书"></a>根据出版社和书排出用户收藏最多的书</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk();</span><br><span class="line"><span class="keyword">var</span> data = db.library.aggregate([</span><br><span class="line">	&#123;$group: &#123;_id: &#123;publisher: <span class="string">'$publisher'</span>, bid: <span class="string">'$bid'</span>, title: <span class="string">'$title'</span>&#125;, count: &#123;$sum: <span class="number">1</span>&#125;&#125;&#125;</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// to csv</span></span><br><span class="line">data</span><br><span class="line">.toArray()</span><br><span class="line">.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b.count - a.count;</span><br><span class="line">&#125;)</span><br><span class="line">.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item._id.publisher + <span class="string">','</span> + item._id.bid + <span class="string">','</span> + item._id.title + <span class="string">','</span> + item.count; </span><br><span class="line">&#125;)</span><br><span class="line">.join(<span class="string">"\n"</span>);</span><br></pre></td></tr></table></figure>
@@ -650,15 +718,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/mongodb/">mongodb</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/mongodb/">mongodb</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -675,13 +743,12 @@
 
 
 
-
   
     <article id="post-mysql-commander" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/18/mysql-commander/" class="article-date">
-  	<time datetime="2016-04-17T23:41:59.000Z" itemprop="datePublished">2016-04-18</time>
+      <time datetime="2016-04-17T23:41:59.000Z" itemprop="datePublished">2016-04-18</time>
 </a>
     </div>
   
@@ -703,6 +770,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <p>添加一个主键并将其放到表的最前<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE `test`.`user` &#10;ADD COLUMN `id` INT UNSIGNED NOT NULL COMMENT &#39;&#20027;&#38190;&#39; FIRST,&#10;ADD PRIMARY KEY (`id`);</span><br></pre></td></tr></table></figure></p>
 
       
@@ -711,8 +779,8 @@
     <div class="article-info article-info-index">
       
       
-      
 
+      
       
       <div class="clearfix"></div>
     </div>
@@ -728,13 +796,12 @@
 
 
 
-
   
     <article id="post-javascript-skill" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/04/13/javascript-skill/" class="article-date">
-  	<time datetime="2016-04-12T23:33:29.000Z" itemprop="datePublished">2016-04-13</time>
+      <time datetime="2016-04-12T23:33:29.000Z" itemprop="datePublished">2016-04-13</time>
 </a>
     </div>
   
@@ -756,6 +823,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+          
         <h2 id="u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32"><a href="#u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32" class="headerlink" title="反转一个字符串"></a>反转一个字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'123456789'</span>.split(<span class="string">''</span>).revert().join(<span class="string">''</span>); <span class="comment">// '987654321';</span></span><br></pre></td></tr></table></figure>
 <h2 id="u53BB_u91CD"><a href="#u53BB_u91CD" class="headerlink" title="去重"></a>去重</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'11122213434'</span>.split(<span class="string">''</span>).filter((item, index, ary) =&gt; index == ary.indexOf(item)).join(<span class="string">''</span>); <span class="comment">// '1234'</span></span><br></pre></td></tr></table></figure>
 <h2 id="u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32"><a href="#u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32" class="headerlink" title="多维数组-&gt;字符串"></a>多维数组-&gt;字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[[<span class="number">1</span>], <span class="number">2</span>], [<span class="number">3</span>], <span class="number">4</span>].join(); <span class="comment">// '1,2,3,4'</span></span><br></pre></td></tr></table></figure>
@@ -767,15 +835,15 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-	</div>
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
 
       
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/javascript/">javascript</a>
-	</div>
-
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+    </div>
 
       
       <div class="clearfix"></div>
@@ -792,7 +860,6 @@
 
 
 
-
   
   
     <nav id="page-nav">
@@ -801,64 +868,69 @@
   
 </div>
       <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2016 CoderQ
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 CoderQ
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
     </div>
-  </div>
 </footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
-<script src="/js/main.js" type="text/javascript"></script>
-
-
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
   </div>
 </body>
 </html>
