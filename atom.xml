@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://coderq.github.io/"/>
-  <updated>2016-06-16T03:13:11.000Z</updated>
+  <updated>2016-06-20T04:55:59.000Z</updated>
   <id>http://coderq.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://coderq.github.io/2016/06/13/structure-arithmetic/"/>
     <id>http://coderq.github.io/2016/06/13/structure-arithmetic/</id>
     <published>2016-06-13T13:40:28.000Z</published>
-    <updated>2016-06-16T03:13:11.000Z</updated>
+    <updated>2016-06-20T04:55:59.000Z</updated>
     
     <content type="html">&lt;h1 id=&quot;u56FE_u8BBA_u7B97_u6CD5&quot;&gt;&lt;a href=&quot;#u56FE_u8BBA_u7B97_u6CD5&quot; class=&quot;headerlink&quot; title=&quot;图论算法&quot;&gt;&lt;/a&gt;图论算法&lt;/h1&gt;&lt;p&gt;一个图（ graph ）G = ( V, E )由定点（ vertex ）集（ V ）和边（ edge ）集E组成。每一条边就是一个点对（ v, w ），其中 v, w ∈ V。有时也把边称作弧（ arc ）。如果点对是有序的，那么图就叫做是有向的（ directed ）。有向的图有时也叫做有向图（ digraph ）。顶点 v 和 w 邻接（ adjacent ）当且仅当（ v, w ）∈ E。在一个具有边（ v, w ）从而具有边（ w, v ）的无向图中，w 和 v 邻接且 v 也和 w 邻接。有时候边还具有第三种成分，称为权（ weight ）或值（ cose ）。&lt;/p&gt;
 &lt;p&gt;如果一个无向图中从每一个顶点到每个其他顶点都存在一条路径，则称该无向图是联通的（ connected ）。具有这样性质的有向图称为是强连通的（ strongly connected ）。如果一个有向图不是强连通的，但它的基础图（ underlying graph ），即其弧上去掉方向所形成的图，是连通的，那么该有向图成为弱连通图（ weakly connected ）。完全图（ complete graph ）是其每一对顶点间都存在一条边的图。&lt;/p&gt;
@@ -31,7 +31,7 @@
 &lt;p&gt;我们可以使用一个栈或队列来存储，不断地讲入度为0的顶点存入，当然，对于栈或队列的选择，就依你要的排序方向来选择了。&lt;/p&gt;
 &lt;p&gt;使用邻接表做拓扑排序的时候，如果每次都搜索整个数组，则花费的时间是平方级的，如果我们可以讲入度为0的顶点放入一个特殊的盒子中，从而避免重复检测，提高算法效率。使算法之行时间变为 O ( |E| + |V| )。&lt;/p&gt;
 &lt;h2 id=&quot;u6700_u77ED_u8DEF_u5F84_u7B97_u6CD5&quot;&gt;&lt;a href=&quot;#u6700_u77ED_u8DEF_u5F84_u7B97_u6CD5&quot; class=&quot;headerlink&quot; title=&quot;最短路径算法&quot;&gt;&lt;/a&gt;最短路径算法&lt;/h2&gt;&lt;h2 id=&quot;u6B27_u62C9_u56FE&quot;&gt;&lt;a href=&quot;#u6B27_u62C9_u56FE&quot; class=&quot;headerlink&quot; title=&quot;欧拉图&quot;&gt;&lt;/a&gt;欧拉图&lt;/h2&gt;&lt;p&gt;说到欧拉图，先了解&lt;/p&gt;
-&lt;h1 id=&quot;u7B97_u6CD5_u8BBE_u8BA1_u6280_u5DE7&quot;&gt;&lt;a href=&quot;#u7B97_u6CD5_u8BBE_u8BA1_u6280_u5DE7&quot; class=&quot;headerlink&quot; title=&quot;算法设计技巧&quot;&gt;&lt;/a&gt;算法设计技巧&lt;/h1&gt;&lt;h2 id=&quot;u8D2A_u5A6A_u7B97_u6CD5&quot;&gt;&lt;a href=&quot;#u8D2A_u5A6A_u7B97_u6CD5&quot; class=&quot;headerlink&quot; title=&quot;贪婪算法&quot;&gt;&lt;/a&gt;贪婪算法&lt;/h2&gt;</content>
+</content>
     
     <summary type="html">
     
@@ -413,17 +413,14 @@
     <link href="http://coderq.github.io/2016/05/04/data-structure/"/>
     <id>http://coderq.github.io/2016/05/04/data-structure/</id>
     <published>2016-05-04T00:07:48.000Z</published>
-    <updated>2016-06-20T03:08:35.000Z</updated>
+    <updated>2016-06-20T04:55:59.000Z</updated>
     
     <content type="html">&lt;h2 id=&quot;u62BD_u8C61_u6570_u636E_u7C7B_u578B&quot;&gt;&lt;a href=&quot;#u62BD_u8C61_u6570_u636E_u7C7B_u578B&quot; class=&quot;headerlink&quot; title=&quot;抽象数据类型&quot;&gt;&lt;/a&gt;抽象数据类型&lt;/h2&gt;&lt;p&gt;抽象数据类型(abstract data type, ADT)是一些操作的集合。对诸如表、集合、图和它们的操作一起可以看作是抽象数据类型。&lt;/p&gt;
 &lt;h2 id=&quot;u8868&quot;&gt;&lt;a href=&quot;#u8868&quot; class=&quot;headerlink&quot; title=&quot;表&quot;&gt;&lt;/a&gt;表&lt;/h2&gt;&lt;h3 id=&quot;u6570_u7EC4&quot;&gt;&lt;a href=&quot;#u6570_u7EC4&quot; class=&quot;headerlink&quot; title=&quot;数组&quot;&gt;&lt;/a&gt;数组&lt;/h3&gt;&lt;p&gt;使用数组实现表结构时，在元素的增删比较麻烦，例如在0位增加一个元素，需要将所有元素后移一位，删除一个元素，需要讲所有元素前移一位，时间复杂度位O(N)。&lt;/p&gt;
 &lt;h3 id=&quot;u94FE_u8868&quot;&gt;&lt;a href=&quot;#u94FE_u8868&quot; class=&quot;headerlink&quot; title=&quot;链表&quot;&gt;&lt;/a&gt;链表&lt;/h3&gt;&lt;p&gt;链表实现表结构时，增删操作的时间复杂度位O(1)。假设链表有5个节点，当需要在2和3之间增加一个节点时，只要创建一个新的节点空间，让2的next指针指向这个新创建的节点，再让新创建节点的指针指向3这个节点，则新增操作完成。删除某个节点时，讲节点的前一个节点的next指针指向当前节点的下个节点，并删除当前节点即可。&lt;/p&gt;
 &lt;h3 id=&quot;u53CC_u5411_u94FE_u8868&quot;&gt;&lt;a href=&quot;#u53CC_u5411_u94FE_u8868&quot; class=&quot;headerlink&quot; title=&quot;双向链表&quot;&gt;&lt;/a&gt;双向链表&lt;/h3&gt;&lt;p&gt;双向链表与链表的差别在于，双向链表出了有next指针指向下一个元素，还有prev指针指向前一个元素，形成了双向链。&lt;/p&gt;
 &lt;h3 id=&quot;u5FAA_u73AF_u94FE_u8868&quot;&gt;&lt;a href=&quot;#u5FAA_u73AF_u94FE_u8868&quot; class=&quot;headerlink&quot; title=&quot;循环链表&quot;&gt;&lt;/a&gt;循环链表&lt;/h3&gt;&lt;p&gt;循环链表的特别在于，最后一个元素的next指向第一个元素，而第一个元素的prev指向了最后一个元素。在双向链表中，这两个指针指向的都是null。&lt;/p&gt;
-&lt;h2 id=&quot;u6808&quot;&gt;&lt;a href=&quot;#u6808&quot; class=&quot;headerlink&quot; title=&quot;栈&quot;&gt;&lt;/a&gt;栈&lt;/h2&gt;&lt;p&gt;只能在栈顶做插入和删除的操作，跟桶一样，遵循后进先出的原则。&lt;/p&gt;
-&lt;h3 id=&quot;u548C_u5806_u7684_u533A_u522B&quot;&gt;&lt;a href=&quot;#u548C_u5806_u7684_u533A_u522B&quot; class=&quot;headerlink&quot; title=&quot;和堆的区别&quot;&gt;&lt;/a&gt;和堆的区别&lt;/h3&gt;&lt;p&gt;堆是指程序运行是申请的动态内存，而栈只是指一种使用堆的方法。&lt;/p&gt;
-&lt;h2 id=&quot;u961F_u5217&quot;&gt;&lt;a href=&quot;#u961F_u5217&quot; class=&quot;headerlink&quot; title=&quot;队列&quot;&gt;&lt;/a&gt;队列&lt;/h2&gt;&lt;p&gt;在队尾插入，在队头删除，遵循先进先出的原则。&lt;/p&gt;
-</content>
+&lt;h2 id=&quot;u6808&quot;&gt;&lt;a href=&quot;#u6808&quot; class=&quot;headerlink&quot; title=&quot;栈&quot;&gt;&lt;/a&gt;栈&lt;/h2&gt;&lt;h2 id=&quot;u961F_u5217&quot;&gt;&lt;a href=&quot;#u961F_u5217&quot; class=&quot;headerlink&quot; title=&quot;队列&quot;&gt;&lt;/a&gt;队列&lt;/h2&gt;</content>
     
     <summary type="html">
     
