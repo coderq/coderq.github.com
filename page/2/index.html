@@ -152,7 +152,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 14px;">nginx</a> <a href="/tags/node-js/" style="font-size: 14px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
+                        <a href="/tags/C/" style="font-size: 14px;">C</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/http-server/" style="font-size: 10px;">http-server</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 12px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 16px;">nginx</a> <a href="/tags/node-js/" style="font-size: 16px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/pm2/" style="font-size: 10px;">pm2</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 12px;">数据结构</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 14px;">算法</a>
                     </div>
                 </section>
                 
@@ -230,6 +230,139 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-how-to-build-fast-api" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/05/how-to-build-fast-api/" class="article-date">
+      <time datetime="2016-05-05T12:53:57.000Z" itemprop="datePublished">2016-05-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/05/how-to-build-fast-api/">node.js在项目中应该放在哪个位置</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>用了node.js这么长时间，对node.js擅长和不擅长的领域算是比较清晰了。</p>
+<h2 id="u8FDB_u7A0B_u4E0E_u7EBF_u7A0B"><a href="#u8FDB_u7A0B_u4E0E_u7EBF_u7A0B" class="headerlink" title="进程与线程"></a>进程与线程</h2><p>进程是计算机中已运行程序的实体，一个进程可以包含多个线程，多个线程共同某个进程的工作。一个CPU同一时间只能处理某个进程的任务。所有的<em>线程</em>共享着计算机的内存，没有做任何的隔离。但是，为了保证某些数据的安全，会在内存中使用<code>互斥锁（Mutual exclusion，缩写 Mutex）</code>及<code>信号量（Semaphore）</code>。互斥锁允许且只允许同一时间只有一个线程操作共享内存，其它线程必须等待该线程处理完成后再对该内存块进行处理；信号量的逻辑与互斥锁相似，只是同一时间允许N个线程对共享内存进行操作，当名额满了之后其他线程必须等待。<br>这篇<a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="external">文章</a>很好的解释了进程与线程的关系，以及他们对CPU和内存的使用方式。</p>
+<h2 id="u963B_u585EI/O_u548C_u975E_u963B_u585EI/O"><a href="#u963B_u585EI/O_u548C_u975E_u963B_u585EI/O" class="headerlink" title="阻塞I/O和非阻塞I/O"></a>阻塞I/O和非阻塞I/O</h2><p>写程序，操作文件、读写数据库和请求第三方服务等都是常有的事，这些都是I/O，I/O是非常耗时间的。</p>
+<p>当程序采用阻塞I/O的策略时，线程遇到I/O操作就会等待，直到I/O操作结束，再继续执行，例如PHP语言，就是采用这种机制。那么PHP采用这种机制，如果一个请求由于I/O操作导致线程被阻塞，是否会影响其它请求的响应时间呢，答案是不会的，看<code>多线程与单线程</code>里面的解释。</p>
+<p>当程序采用非阻塞I/O的策略时，线程遇到I/O操作时，会通知另外的线程去处理，然后主线程挂起一个回调函数，并继续执行其他的任务，不会做任何的等待，直到这个I/O操作完成，另外的线程将结果返回给主线程，主线程调用之前挂起的回到函数，继续执行接下来的操作。</p>
+<p>node.js就是采用非阻塞I/O和事件轮询的方式。我们知道Javascript单进程单线程的语言，但是所谓的单线程只是说他执行任务时用的是一个线程，我们称之为主线程，既然有主线程，那就说明肯定还有其他线程，是的，就是任务队列，专门负责处理I/O操作，当node.js的主线程发现了一个异步行为，他会将该任务挂起，将他提交给任务队列去处理，直到任务队列处理完该任务并返回处理结果时，主线程再调用处理该结果的回调函数继续执行。通过这样的方式，主线程不需要等待任何I/O操作，使主线程的资源利用率成倍提升。</p>
+<h2 id="u5355_u7EBF_u7A0B_u4E0E_u591A_u7EBF_u7A0B"><a href="#u5355_u7EBF_u7A0B_u4E0E_u591A_u7EBF_u7A0B" class="headerlink" title="单线程与多线程"></a>单线程与多线程</h2><p>上面的内容中提到，PHP采用了阻塞I/O的方案，该方案会等待I/O操作结束再继续执行接下来的代码。那么这样的方式，如果同时多个请求进来了，由于I/O阻塞的原因会不会出现某个请求执行了很久，导致后面的请求响应慢的问题，答案是不会的。因为PHP采用了多线程的处理方案，当有一个请求进来的时候，PHP就会开启一个线程来处理一个请求，一个请求对应一个线程，那么一个请求所出现的问题是不会影响到另一个请求的（CPU和内存富足的情况下）。PHP的这种方案使得各线程之间相对安全，不会互相影响，但是弊端也是明显的，当I/O出现时，PHP始终处于等待状态，这导致CPU的利用率低，并且，一个请求进来就创建一个线程，这对内存的要求较高，因此，在高并发的情况下，需要横向扩展PHP服务器以满足高并发的需求，很多时候都是因为线程过多导致内存不足的问题。</p>
+<p>node.js的非阻塞I/O和事件轮询机制很好的优化了这个问题，通过非阻塞I/O提高了CPU的利用率，并且单个线程对内存的需求肯定比PHP少得多，因此node.js更能扛得住高并发。但任何事情都是双面的，有优点就必然有确定，单线程的javascript，如果某个请求出现了异常，就会导致整个进程不用了，当然，我们有解决方案可以让程序在出现异常的情况下自动重启。还有就是如果你在node.js的主线程执行了高CPU运算的操作，那将是灾难。因为在主线程中，除了I/O是异步的，其他运算都是同步的，一个高CPU运算的操作会导致后续的请求全部被卡住。</p>
+<p>因此，node.js虽然被很多人追捧，但是，如果用的不好，还不如写PHP。<em>node.js更适合做任务的分发者而不是执行者！！！</em></p>
+<p><img src="http://7xqex1.com1.z0.glb.clouddn.com/framework.png" alt="架构图" title="架构图"></p>
+<p>如果我有一个团队，我更愿意这样去搭建一个后端的服务，node.js不太适合出现在数据层，除非真的只是增删查改而没有其他高耗CPU的操作，node.js更适合作为前端的路由去分发请求，他自身不应该出现过多的CPU操作，如果有，请用fork。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/node-js/">node.js</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/">node.js</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-ssh-rsa-mosh" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/05/ssh-rsa-mosh/" class="article-date">
+      <time datetime="2016-05-04T17:27:51.000Z" itemprop="datePublished">2016-05-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/05/ssh-rsa-mosh/">通过RSA实现SSH免密登录及mosh替换SSH避免断网断线</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>1.SSH是我们常用的连接服务器的工具，频繁的输入账号密码会很麻烦，通过RSA的公私钥机制，可以实现免密登录。方法是将客户端的公钥放到服务器的~/.ssh目录下，并重命名为<code>authorized_keys</code>；</p>
+<p>2.SSH工具采用的是TCP连接，在网络断开的情况下SSH就会自动断开，于是终端会变成假死状态，必须关了重开，很麻烦。mosh使用UDP连接，不用担心断网重连的问题。mosh的使用，必须拥有服务端，即除了客户端需要安装mosh外，服务端也需要装mosh，之后通过命令<code>mosh root@&lt;your host&gt;</code>即可完成连接。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/ssh/">ssh</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mosh/">mosh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rsa/">rsa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-data-structure" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -262,7 +395,10 @@
 <h3 id="u94FE_u8868"><a href="#u94FE_u8868" class="headerlink" title="链表"></a>链表</h3><p>链表实现表结构时，增删操作的时间复杂度位O(1)。假设链表有5个节点，当需要在2和3之间增加一个节点时，只要创建一个新的节点空间，让2的next指针指向这个新创建的节点，再让新创建节点的指针指向3这个节点，则新增操作完成。删除某个节点时，讲节点的前一个节点的next指针指向当前节点的下个节点，并删除当前节点即可。</p>
 <h3 id="u53CC_u5411_u94FE_u8868"><a href="#u53CC_u5411_u94FE_u8868" class="headerlink" title="双向链表"></a>双向链表</h3><p>双向链表与链表的差别在于，双向链表出了有next指针指向下一个元素，还有prev指针指向前一个元素，形成了双向链。</p>
 <h3 id="u5FAA_u73AF_u94FE_u8868"><a href="#u5FAA_u73AF_u94FE_u8868" class="headerlink" title="循环链表"></a>循环链表</h3><p>循环链表的特别在于，最后一个元素的next指向第一个元素，而第一个元素的prev指向了最后一个元素。在双向链表中，这两个指针指向的都是null。</p>
-<h2 id="u6808"><a href="#u6808" class="headerlink" title="栈"></a>栈</h2><h2 id="u961F_u5217"><a href="#u961F_u5217" class="headerlink" title="队列"></a>队列</h2>
+<h2 id="u6808"><a href="#u6808" class="headerlink" title="栈"></a>栈</h2><p>只能在栈顶做插入和删除的操作，跟桶一样，遵循后进先出的原则。</p>
+<h3 id="u548C_u5806_u7684_u533A_u522B"><a href="#u548C_u5806_u7684_u533A_u522B" class="headerlink" title="和堆的区别"></a>和堆的区别</h3><p>堆是指程序运行是申请的动态内存，而栈只是指一种使用堆的方法。</p>
+<h2 id="u961F_u5217"><a href="#u961F_u5217" class="headerlink" title="队列"></a>队列</h2><p>在队尾插入，在队头删除，遵循先进先出的原则。</p>
+
       
     </div>
     
@@ -712,6 +848,7 @@
 <h2 id="u5012_u51FA_u7528_u6237_u4E66_u5355_u7684_u63CF_u8FF0_u548C_u4E66_u7684_u63A8_u8350_u8BED"><a href="#u5012_u51FA_u7528_u6237_u4E66_u5355_u7684_u63CF_u8FF0_u548C_u4E66_u7684_u63A8_u8350_u8BED" class="headerlink" title="倒出用户书单的描述和书的推荐语"></a>倒出用户书单的描述和书的推荐语</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users = db.user.find(&#123;mobile_number: &#123;$<span class="keyword">in</span>: [<span class="string">'156****6041'</span>, <span class="string">'155****4511'</span>, <span class="string">'136****5641'</span>]&#125;&#125;, &#123;_id: <span class="number">0</span>, mobile_number: <span class="number">1</span>, user_id: <span class="number">1</span>&#125;);</span><br><span class="line"></span><br><span class="line">users.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	item.floors = db.floor.find(&#123;user_id: item.user_id, type: &#123;$exists: <span class="literal">false</span>&#125;&#125;, &#123;user_id: <span class="number">1</span>, name: <span class="number">1</span>, desc: <span class="number">1</span>, item_list: <span class="number">1</span>&#125;).toArray();</span><br><span class="line">	item.floors = item.floors.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">		item.item_list = item.item_list.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">return</span> db.item.findOne(&#123;bid: item&#125;, &#123;bid: <span class="number">1</span>, title: <span class="number">1</span>, remark: <span class="number">1</span>&#125;);</span><br><span class="line">		&#125;);</span><br><span class="line">		<span class="keyword">return</span> item;</span><br><span class="line">	&#125;);</span><br><span class="line">	<span class="keyword">return</span> item;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h2 id="u6839_u636E_u51FA_u7248_u793E_u548C_u4E66_u6392_u51FA_u7528_u6237_u6536_u85CF_u6700_u591A_u7684_u4E66"><a href="#u6839_u636E_u51FA_u7248_u793E_u548C_u4E66_u6392_u51FA_u7528_u6237_u6536_u85CF_u6700_u591A_u7684_u4E66" class="headerlink" title="根据出版社和书排出用户收藏最多的书"></a>根据出版社和书排出用户收藏最多的书</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk();</span><br><span class="line"><span class="keyword">var</span> data = db.library.aggregate([</span><br><span class="line">	&#123;$group: &#123;_id: &#123;publisher: <span class="string">'$publisher'</span>, bid: <span class="string">'$bid'</span>, title: <span class="string">'$title'</span>&#125;, count: &#123;$sum: <span class="number">1</span>&#125;&#125;&#125;</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// to csv</span></span><br><span class="line">data</span><br><span class="line">.toArray()</span><br><span class="line">.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b.count - a.count;</span><br><span class="line">&#125;)</span><br><span class="line">.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item._id.publisher + <span class="string">','</span> + item._id.bid + <span class="string">','</span> + item._id.title + <span class="string">','</span> + item.count; </span><br><span class="line">&#125;)</span><br><span class="line">.join(<span class="string">"\n"</span>);</span><br></pre></td></tr></table></figure>
 <h2 id="u67E5_u51FA_u6307_u5B9A_u51FA_u7248_u793E_u524D10_u540D_u7684_u4E66_u7C4D"><a href="#u67E5_u51FA_u6307_u5B9A_u51FA_u7248_u793E_u524D10_u540D_u7684_u4E66_u7C4D" class="headerlink" title="查出指定出版社前10名的书籍"></a>查出指定出版社前10名的书籍</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">rs.slaveOk();</span><br><span class="line"><span class="keyword">var</span> publishers = [</span><br><span class="line">	<span class="string">'人民文学出版社'</span>,</span><br><span class="line">	<span class="string">'上海译文出版社'</span>,</span><br><span class="line">	<span class="string">'中华书局'</span>,</span><br><span class="line">	<span class="string">'中信出版社'</span>,</span><br><span class="line">	<span class="string">'商务印书馆'</span>,</span><br><span class="line">	<span class="string">'生活·读书·新知三联书店'</span>,</span><br><span class="line">	<span class="string">'广西师范大学出版社'</span>,</span><br><span class="line">	<span class="string">'译林出版社'</span>,</span><br><span class="line">	<span class="string">'新星出版社'</span>,</span><br><span class="line">	<span class="string">'南海出版公司'</span></span><br><span class="line">];</span><br><span class="line"><span class="keyword">var</span> data = db.library.aggregate([</span><br><span class="line">	&#123;$match: &#123;publisher: &#123;$<span class="keyword">in</span>: publishers&#125;&#125;&#125;,</span><br><span class="line">	&#123;$group: &#123;_id: &#123;publisher: <span class="string">'$publisher'</span>, title: <span class="string">'$title'</span>&#125;, count: &#123;$sum: <span class="number">1</span>&#125;&#125;&#125;</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//findIndex是es6的函数，自己写。。。</span></span><br><span class="line"><span class="keyword">var</span> findIndex = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> i = <span class="number">0</span>, r;</span><br><span class="line">	<span class="keyword">while</span> (<span class="keyword">this</span>.length &gt; i &amp;&amp; !(r = fn(<span class="keyword">this</span>[i], i, <span class="keyword">this</span>))) i++;</span><br><span class="line">	<span class="keyword">return</span> r ? i : -<span class="number">1</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// to csv</span></span><br><span class="line">data</span><br><span class="line"><span class="comment">// 对象数组化</span></span><br><span class="line">.toArray()</span><br><span class="line"><span class="comment">// 按出版社归类排序</span></span><br><span class="line">.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (publishers.indexOf(a._id.publisher) - publishers.indexOf(b._id.publisher)) || (b.count - a.count);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 过滤出前10的书籍，这里可以用另一个数组对象来存储数据，减少运算步骤。</span></span><br><span class="line">.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, ary</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> index &lt; (findIndex.call(ary, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> item._id.publisher === data._id.publisher;</span><br><span class="line">	&#125;) + <span class="number">10</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 格式化</span></span><br><span class="line">.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item._id.publisher + <span class="string">','</span> + item._id.title + <span class="string">','</span> + item.count; </span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// toString</span></span><br><span class="line">.join(<span class="string">"\n"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="ifNull_u7684_u4F7F_u7528"><a href="#ifNull_u7684_u4F7F_u7528" class="headerlink" title="ifNull的使用"></a>ifNull的使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.library.aggregate([&#10;&#9;&#123;$match: &#123;user_id: &#39;763532fec962ca3f5c96cd024860a43a&#39;&#125;&#125;,&#10;&#9;&#123;$project: &#123;read_status: &#123;$ifNull: [&#34;$read_status&#34;, &#34;unread&#34;]&#125;&#125;&#125;,&#10;&#9;&#123;$group: &#123;_id: &#39;$read_status&#39;, total: &#123;$sum: 1&#125;&#125;&#125;&#10;]);</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -726,123 +863,6 @@
       
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongodb/">mongodb</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-mysql-commander" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/18/mysql-commander/" class="article-date">
-      <time datetime="2016-04-17T23:41:59.000Z" itemprop="datePublished">2016-04-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/18/mysql-commander/">Mysql的一些语法</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <p>添加一个主键并将其放到表的最前<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE `test`.`user` &#10;ADD COLUMN `id` INT UNSIGNED NOT NULL COMMENT &#39;&#20027;&#38190;&#39; FIRST,&#10;ADD PRIMARY KEY (`id`);</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-
-      
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-javascript-skill" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/04/13/javascript-skill/" class="article-date">
-      <time datetime="2016-04-12T23:33:29.000Z" itemprop="datePublished">2016-04-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/13/javascript-skill/">javascript的一些常用技能</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-        <h2 id="u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32"><a href="#u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32" class="headerlink" title="反转一个字符串"></a>反转一个字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'123456789'</span>.split(<span class="string">''</span>).revert().join(<span class="string">''</span>); <span class="comment">// '987654321';</span></span><br></pre></td></tr></table></figure>
-<h2 id="u53BB_u91CD"><a href="#u53BB_u91CD" class="headerlink" title="去重"></a>去重</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'11122213434'</span>.split(<span class="string">''</span>).filter((item, index, ary) =&gt; index == ary.indexOf(item)).join(<span class="string">''</span>); <span class="comment">// '1234'</span></span><br></pre></td></tr></table></figure>
-<h2 id="u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32"><a href="#u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32" class="headerlink" title="多维数组-&gt;字符串"></a>多维数组-&gt;字符串</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[[<span class="number">1</span>], <span class="number">2</span>], [<span class="number">3</span>], <span class="number">4</span>].join(); <span class="comment">// '1,2,3,4'</span></span><br></pre></td></tr></table></figure>
-<h2 id="u8FD4_u56DE_u968F_u673A_u5143_u7D20"><a href="#u8FD4_u56DE_u968F_u673A_u5143_u7D20" class="headerlink" title="返回随机元素"></a>返回随机元素</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ary = [<span class="string">'male'</span>, <span class="string">'female'</span>];</span><br><span class="line"><span class="keyword">let</span> ret = ary[~~(<span class="built_in">Math</span>.random() * ary.length)];</span><br></pre></td></tr></table></figure>
-<h2 id="u8BA1_u7B97_u51FA_u5B57_u7B26_u4E32_u4E2D_u5B57_u7B26_u51FA_u73B0_u6B21_u6570"><a href="#u8BA1_u7B97_u51FA_u5B57_u7B26_u4E32_u4E2D_u5B57_u7B26_u51FA_u73B0_u6B21_u6570" class="headerlink" title="计算出字符串中字符出现次数"></a>计算出字符串中字符出现次数</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'abcdaabc'</span>.split(<span class="string">''</span>).reduce((p, c) =&gt; (p[c] = (p[c] || <span class="number">0</span>) + <span class="number">1</span>, p) , &#123;&#125;);</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
     </div>
 
       
