@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://coderq.github.io/"/>
-  <updated>2016-06-13T06:01:47.000Z</updated>
+  <updated>2016-06-23T13:14:16.000Z</updated>
   <id>http://coderq.github.io/</id>
   
   <author>
@@ -14,6 +14,83 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>爬取facebook站点的正确姿势</title>
+    <link href="http://coderq.github.io/2016/06/23/facebook-spider/"/>
+    <id>http://coderq.github.io/2016/06/23/facebook-spider/</id>
+    <published>2016-06-23T05:52:01.000Z</published>
+    <updated>2016-06-23T13:14:16.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;u80CC_u666F&quot;&gt;&lt;a href=&quot;#u80CC_u666F&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;最近的爬虫工作做得有些无趣，还好遇上几个比较难缠的站点，积累点偏门的经验。平常我们爬普通站点，跟着页码一页一页慢慢翻就可以，当然如果你觉得太慢，大可直接构造分页，然后并发爬取，很快很暴力，但是被封的风险也很高，偶尔遇到些像facebook这样的站点，还是比较有趣的。&lt;/p&gt;
+&lt;h2 id=&quot;GraphQL&quot;&gt;&lt;a href=&quot;#GraphQL&quot; class=&quot;headerlink&quot; title=&quot;GraphQL&quot;&gt;&lt;/a&gt;GraphQL&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;GraphQL&lt;/strong&gt;是最近的一个技术热点，这个技术就是Facebook放出来的，他家的产品自然也是用的这个技术做查询。对于这个技术，我之前也就只是听说而已，没有太多了解，今天爬取这个站点的时候，算是打了个照面，知道了它的查询方法。&lt;/p&gt;
+&lt;p&gt;跟普通站点的分页不同，没有死板的页码，它通过前端构造一段查询的文本，通过post方法提交后，由后端解析，后端知道了要查询哪些数据，并如何整合数据，处理完之后，以特定的格式返回数据。GraphQL的查询方式有点像关系数据库的join，而且要什么数据，怎么整合数据都是前端在字符串中定义好的，后端只负责解析字符串并查询、整合和返回数据。以往我们都是在后端定义好数据的查询，前端顶多就是一个url和一堆参数，根本看不出数据存储格式以及她们之间的关联。但GraphQL改变了这一切，看一段GraphQL的查询语句：&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;#34;q7&amp;#34;:&amp;#123;&amp;#34;priority&amp;#34;:0,&amp;#34;q&amp;#34;:&amp;#34;Query PagePhotosTabAllPhotosView_react_PageRelayQL &amp;#123;node(1515755625400923) &amp;#123;@F3&amp;#125;&amp;#125; QueryFragment F0 : Feedback &amp;#123;does_viewer_like,id&amp;#125; QueryFragment F1 : Photo &amp;#123;id,album &amp;#123;id,name&amp;#125;,feedback &amp;#123;id,can_viewer_comment,can_viewer_like,likers &amp;#123;count&amp;#125;,comments &amp;#123;count&amp;#125;,@F0&amp;#125;&amp;#125; QueryFragment F2 : Photo &amp;#123;image.sizing(cover-fill-cropped).height(201).width(201) as _image1LP0rd &amp;#123;uri&amp;#125;,url,id,@F1&amp;#125; QueryFragment F3 : Page &amp;#123;id,posted_photos.after(1543357872640698).first(28) as _posted_photos1oJl4V &amp;#123;edges &amp;#123;node &amp;#123;id,@F2&amp;#125;,cursor&amp;#125;,page_info &amp;#123;has_next_page,has_previous_page&amp;#125;&amp;#125;&amp;#125;&amp;#34;,&amp;#34;query_params&amp;#34;:&amp;#123;&amp;#125;&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Query PagePhotosTabAllPhotosView_react_PageRelayQL &amp;#123;node(1515755625400923) &amp;#123;@F3&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;定义一个查询，返回一个对象，将node后面的ID作为F3的查询ID查询病返回结果，查询表达式为{@F3}&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;QueryFragment F3 : Page &amp;#123;id,posted_photos.after(1543357872640698).first(28) as _posted_photos1oJl4V &amp;#123;edges &amp;#123;node &amp;#123;id,@F2&amp;#125;,cursor&amp;#125;,page_info &amp;#123;has_next_page,has_previous_page&amp;#125;&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;定义查询碎片，从Page集合中查询ID为1515755625400923的相关字段，返回内容包括id和_posted_photos1oJl4V&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;posted_photos.after(1543357872640698).first(28) as _posted_photos1oJl4V &amp;#123;edges &amp;#123;node &amp;#123;id,@F2&amp;#125;,cursor&amp;#125;,page_info &amp;#123;has_next_page,has_previous_page&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;从posted_photos这个字段中查询出ID为1543357872640698之后的28条数据，并以_posted_photos1oJl4V为名返回，对象中包括edages和page_info两个属性，edges包括node和curser两个属性，page_info包括has_next_page和has_previous_page两个属性。node包含id，以及该id对应下F2的返回数据。&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;QueryFragment F2 : Photo &amp;#123;image.sizing(cover-fill-cropped).height(201).width(201) as _image1LP0rd &amp;#123;uri&amp;#125;,url,id,@F1&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;从Photo集合中查出与当前id相对应的图片，并将图片缩放，以_image1LPord.uri返回，同时返回url和id以及F1返回值。&lt;/p&gt;
+&lt;p&gt;另外两段我就不解释了，大致明白了这段代码的含义。我做的爬虫其实只对它的图片感兴趣，因此我是想要他的原图的，怎么搞更方便呢？？我尝试着去删掉.height(201).width(201)这段代码，虽然它返回了一张更大的图，但并非原图，很可惜，只能通过其他途径来获取了。例如url字段。&lt;/p&gt;
+&lt;p&gt;我们爬取的要求很经常是首次爬取全部，之后每天爬取前几页。怎么爬取全部呢？F3里面的posted_photos.after(1543357872640698).first(28)你知道怎么改了嘛，把.after(1543357872640698).first(28)也去掉就可以了，这个测试是通过的。通过调整得到了下面的查询字符串：&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&amp;#34;q7&amp;#34;:&amp;#123;&amp;#34;priority&amp;#34;:0,&amp;#34;q&amp;#34;:&amp;#34;Query PagePhotosTabAllPhotosView &amp;#123;node(1515755625400923) &amp;#123;@F3&amp;#125;&amp;#125; QueryFragment F2 : Photo &amp;#123;url&amp;#125; QueryFragment F3 : Page &amp;#123;posted_photos as data &amp;#123;edges &amp;#123;node &amp;#123;id,@F2&amp;#125;&amp;#125;&amp;#125;&amp;#125;&amp;#34;,&amp;#34;query_params&amp;#34;:&amp;#123;&amp;#125;&amp;#125;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;通过encodeURIComponent转码并套上curl的代码&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;curl -X POST --data &lt;span class=&quot;string&quot;&gt;&quot;__user=0&amp;amp;__a=1&amp;amp;__dyn=7xeUmwkHgfpEbEK4osrWo5O12wAxu13wqovzEcUO2qaxe4E4u14wXx6exm3q260EEqx24o&amp;amp;__req=5&amp;amp;__be=-1&amp;amp;__pc=PHASED:DEFAULT&amp;amp;lsd=AVopxP6J&amp;amp;__rev=2408878&amp;amp;batch_name=PagePhotosTabAllPhotosView_react_PageRelayQL&amp;amp;method=GET&amp;amp;queries=%7B%22q7%22%3A%7B%22priority%22%3A0%2C%22q%22%3A%22Query%20PagePhotosTabAllPhotosView%20%7Bnode(1515755625400923)%20%7B%40F3%7D%7D%20QueryFragment%20F2%20%3A%20Photo%20%7Burl%7D%20QueryFragment%20F3%20%3A%20Page%20%7Bposted_photos%20as%20data%20%7Bedges%20%7Bnode%20%7Bid%2C%40F2%7D%7D%7D%7D%22%2C%22query_params%22%3A%7B%7D%7D%7D&amp;amp;response_format=json&amp;amp;scheduler=phased&quot;&lt;/span&gt; https://www.facebook.com/api/graphqlbatch/&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;请求后就可以活动该用户所有图片页面了。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;u80CC_u666F&quot;&gt;&lt;a href=&quot;#u80CC_u666F&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;最近的爬虫工作做得有些无趣，还好遇上几个比较难缠的站点，积累点偏门的经验。平常我们爬普通站点，跟着页码一
+    
+    </summary>
+    
+      <category term="html" scheme="http://coderq.github.io/categories/html/"/>
+    
+    
+      <category term="facebook" scheme="http://coderq.github.io/tags/facebook/"/>
+    
+      <category term="html" scheme="http://coderq.github.io/tags/html/"/>
+    
+      <category term="爬虫" scheme="http://coderq.github.io/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈html中charset的作用</title>
+    <link href="http://coderq.github.io/2016/06/22/charset-in-html/"/>
+    <id>http://coderq.github.io/2016/06/22/charset-in-html/</id>
+    <published>2016-06-22T06:39:22.000Z</published>
+    <updated>2016-06-23T03:56:06.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;u6982_u8981&quot;&gt;&lt;a href=&quot;#u6982_u8981&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h2&gt;&lt;p&gt;我们编辑一份代码的时候，会用一个文件来存储这份代码。用来存储的这个文件，有多种编码方式，常见的有&lt;em&gt;utf-8&lt;/em&gt;、&lt;em&gt;gb2312&lt;/em&gt;编码方式。当你在文件中写入某些特殊字符，例如中文的时候，计算机需要使用当前文件的编码方式来存储这些字符。因此，存储这些信息的格式，是以这种编码方式进行转译后的代码格式，而并非该字符本身。这种编码计算机可读，而人类不可读。&lt;/p&gt;
+&lt;p&gt;如果你刚接触计算机，可能会好奇，“明明我打开文件看到的就是我能理解的文本，并没有所谓我读不懂的东西。“是的，当你打开文本文件的时候，计算机肯定要给你你能看懂的文本，如果他给的是一堆看都看不懂的代码，你肯定要退货。所以，你所看到的文本，其实是文本文件这个程序通过你设定的那个编码格式，将代码文件转换成你能读懂的文本后结果。&lt;/p&gt;
+&lt;p&gt;编码方式相当于是一把钥匙，只有给对钥匙，计算机才能将代码正确解析成人类能看懂的文本。当我们需要将这种由人类不可读的代码重新转换为人类可读的文本时，我们需要告诉计算机，这种代码使用哪种类型的编码方式做的转换，计算机才能正确地将代码解析成正确的可读文本，否则，计算机会将代码做错误的解析，最终输出的文本我们称为&lt;em&gt;乱码&lt;/em&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;html&quot;&gt;&lt;a href=&quot;#html&quot; class=&quot;headerlink&quot; title=&quot;html&quot;&gt;&lt;/a&gt;html&lt;/h2&gt;&lt;p&gt;当我们要在浏览器中展现各种文字的时候，我们需要将一份代码文件交给浏览器去呈现。我们举个比较简单的例子，像我的博客，我的前端页面目前搭建的是一个静态站点，那么我要交给浏览器的这份代码文件必然是直接从某个文本中读取出来的。这个文件就是前文中所说的那个代码文件，它在创建或保存的时候就被指定了编码格式，因此，他所保存的内容就是以该编码格式进行编码后的代码结果。当我们需要把这些代码在浏览器中呈现的时候，我们同样需要告诉浏览器，这些文件是以什么编码格式做的编码。&lt;/p&gt;
+&lt;p&gt;这个时候，我们可能会有另外一个疑惑，我们保存代码的时候不是已经在文件中指定了该文件的编码格式吗，那我们将文本推送给浏览器的时候，不就清楚我们用的是什么格式的编码了吗？为什么还要再告诉浏览器我们用的是什么编码？也许只有我曾经犯过这个低级的错误！&lt;/p&gt;
+&lt;p&gt;其实我们推给浏览器的是这个文本中的内容，而文本文件的编码格式是以属性的方式存储在该文件相关的位置，并不存储在文本文件中。因此，当我们将这个文本文件的内容推给浏览器的时候，浏览器并不知道它是以什么样的编码格式存在的，为了保证浏览器能够解析文本内容，我们需要告诉浏览器这个文本文件的存储格式，告诉的方式就是&lt;code&gt;&amp;lt;meta charset=&amp;quot;???&amp;quot;&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;做一个测试，我们可以随便建立一个文本文件，以&lt;em&gt;html&lt;/em&gt;为后缀，写入一段中文，双击打开后发现是一些乱码。是的，因为现代浏览器默认的编码格式是&lt;em&gt;ISO-8859-1&lt;/em&gt;，而我们一般创建的文本文件是&lt;em&gt;UTF-8&lt;/em&gt;编码（也有可能是&lt;em&gt;gb2312&lt;/em&gt;等其它编码）。因为没有指定正确的编码格式，因此，网页以&lt;em&gt;ISO-8859-1&lt;/em&gt;的解码方式去解了&lt;em&gt;UTF-8&lt;/em&gt;编码后的代码文件，用错了钥匙，于是出现了乱码。这时候我们只要在指定&lt;code&gt;&amp;lt;meta charset=&amp;quot;UTF-8&amp;quot;&amp;gt;&lt;/code&gt;即可。&lt;/p&gt;
+&lt;h2 id=&quot;u722C_u866B&quot;&gt;&lt;a href=&quot;#u722C_u866B&quot; class=&quot;headerlink&quot; title=&quot;爬虫&quot;&gt;&lt;/a&gt;爬虫&lt;/h2&gt;&lt;p&gt;为什么会写这篇文章呢？因为最近在做爬虫。爬到&lt;a href=&quot;http://www.somoyerkonthosor.com/category/%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%AB%E0%A6%B8%E0%A7%8D%E0%A6%9F%E0%A6%BE%E0%A6%87%E0%A6%B2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;一个国外的站点&lt;/a&gt;，这个站点设置了&lt;code&gt;charset=&amp;quot;ibm866&amp;quot;&lt;/code&gt;。根据我们爬虫的框架，在抓取到页面数据后，会用页面指定的charset去反编码页面。之前的站点都正常，出了这个站点。一执行反编码操作，页面内容全部变成乱码。很奇怪，于是我用curl尝试请求该页面，发现返回回来的数据在bash里面可以正常显示。内容与网页所见一致，由于bash本身是utf-8编码，于是我推断，该站点正确的编码格式应该是&lt;code&gt;utf-8&lt;/code&gt;而不是&lt;code&gt;ibm866&lt;/code&gt;，否则我的bash不可能正常解析。&lt;/p&gt;
+&lt;h2 id=&quot;u7591_u95EE&quot;&gt;&lt;a href=&quot;#u7591_u95EE&quot; class=&quot;headerlink&quot; title=&quot;疑问&quot;&gt;&lt;/a&gt;疑问&lt;/h2&gt;&lt;p&gt;于是，我产生了疑问，如果说文档的编码格式是UTF-8，而页面设置的编码格式是&lt;code&gt;ibm866&lt;/code&gt;，那根据常理来说应该会解析错误，导致页面出现乱码，但那个站点却显示正常。&lt;/p&gt;
+&lt;p&gt;为了搞清楚这个问题，我创建了一个UTF-8格式的html文件，写上一段中文，双击打开，乱码，预料之中。然后我把这个文件放到web服务器中去，通过http访问这个文件，这个文件正常显示中文了，我比较惊讶，浏览器默认编码格式并非UTF-8。接着，我试着将charset定义为各种错误的编码方法，结果都是正常显示中文字符。这个有点超过我的知识范围了，我在segmentfault提交了一个&lt;a href=&quot;https://segmentfault.com/q/1010000005776131&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;问题&lt;/a&gt;，如果你明白这个原理，请不吝赐教，谢谢！！&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;u6982_u8981&quot;&gt;&lt;a href=&quot;#u6982_u8981&quot; class=&quot;headerlink&quot; title=&quot;概要&quot;&gt;&lt;/a&gt;概要&lt;/h2&gt;&lt;p&gt;我们编辑一份代码的时候，会用一个文件来存储这份代码。用来存储的这个文件，有多种编码方式，常见的有&lt;em&gt;
+    
+    </summary>
+    
+      <category term="html" scheme="http://coderq.github.io/categories/html/"/>
+    
+    
+      <category term="charset" scheme="http://coderq.github.io/tags/charset/"/>
+    
+      <category term="html" scheme="http://coderq.github.io/tags/html/"/>
+    
+  </entry>
   
   <entry>
     <title>node.js的一些实用技巧</title>
@@ -75,7 +152,7 @@
     <link href="http://coderq.github.io/2016/05/16/javascript-eslint-sublime/"/>
     <id>http://coderq.github.io/2016/05/16/javascript-eslint-sublime/</id>
     <published>2016-05-16T00:06:25.000Z</published>
-    <updated>2016-06-13T06:02:42.000Z</updated>
+    <updated>2016-06-22T12:42:02.000Z</updated>
     
     <content type="html">&lt;p&gt;之前一直使用jshint，只从用上了&lt;code&gt;async&lt;/code&gt;、&lt;code&gt;wait&lt;/code&gt;这些语法糖之后，发现jshint无法识别了，于是准备换&lt;code&gt;eslint&lt;/code&gt;。&lt;/p&gt;
 &lt;h2 id=&quot;u5B89_u88C5&quot;&gt;&lt;a href=&quot;#u5B89_u88C5&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm install eslint -g&amp;#10;npm install babel-eslint -g&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -86,19 +163,14 @@
 &lt;h2 id=&quot;u914D_u7F6E&quot;&gt;&lt;a href=&quot;#u914D_u7F6E&quot; class=&quot;headerlink&quot; title=&quot;配置&quot;&gt;&lt;/a&gt;配置&lt;/h2&gt;&lt;p&gt;在项目目录下新建&lt;code&gt;.eslintrc&lt;/code&gt;文件&lt;br&gt;&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;env&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &quot;&lt;span class=&quot;attribute&quot;&gt;browser&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &quot;&lt;span class=&quot;attribute&quot;&gt;node&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &quot;&lt;span class=&quot;attribute&quot;&gt;es6&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&amp;#125;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;parser&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;babel-eslint&quot;&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;ecmaFeatures&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;       &quot;&lt;span class=&quot;attribute&quot;&gt;jsx&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&amp;#125;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;rules&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &quot;&lt;span class=&quot;attribute&quot;&gt;semi&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;always&quot;&lt;/span&gt;]&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &quot;&lt;span class=&quot;attribute&quot;&gt;quotes&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;[&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;single&quot;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;你也可以执行&lt;code&gt;eslint --init&lt;/code&gt;自行配置。&lt;/p&gt;
 &lt;h2 id=&quot;u6267_u884C&quot;&gt;&lt;a href=&quot;#u6267_u884C&quot; class=&quot;headerlink&quot; title=&quot;执行&quot;&gt;&lt;/a&gt;执行&lt;/h2&gt;&lt;p&gt;代码执行的时候，因为这些语法糖目前都还未被支持，所以需要使用babel进行降级。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;新建文件&lt;code&gt;.babelrc&lt;/code&gt;写入以下内容&lt;/p&gt;
+&lt;p&gt;新建文件&lt;code&gt;.babelrc&lt;/code&gt;写入以下内容&lt;/p&gt;
 &lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &quot;&lt;span class=&quot;attribute&quot;&gt;presets&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;[&lt;span class=&quot;string&quot;&gt;&quot;es2015&quot;&lt;/span&gt;]&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &quot;&lt;span class=&quot;attribute&quot;&gt;plugins&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;[&lt;span class=&quot;string&quot;&gt;&quot;syntax-async-functions&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;&quot;transform-regenerator&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;transform-runtime&quot;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;新建文件&lt;code&gt;package.json&lt;/code&gt;写入以下内容&lt;/p&gt;
+&lt;p&gt;新建文件&lt;code&gt;package.json&lt;/code&gt;写入以下内容&lt;/p&gt;
 &lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;babel-plugin-syntax-async-functions&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;^6.1.4&quot;&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;babel-plugin-transform-regenerator&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;^6.1.4&quot;&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;babel-plugin-transform-runtime&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;^6.1.4&quot;&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;babel-polyfill&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;^6.1.4&quot;&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;babel-preset-es2015&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;^6.1.4&quot;&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;request&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;^2.65.0&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;执行&lt;code&gt;npm i&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;执行&lt;code&gt;npm i&lt;/code&gt;&lt;/p&gt;
 &lt;h2 id=&quot;u6D4B_u8BD5&quot;&gt;&lt;a href=&quot;#u6D4B_u8BD5&quot; class=&quot;headerlink&quot; title=&quot;测试&quot;&gt;&lt;/a&gt;测试&lt;/h2&gt;&lt;p&gt;将下面代码存于项目中的一个文本文件中，暂且命名为test.es7&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pi&quot;&gt;&#39;use strict&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; = &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;Promise&lt;/span&gt;((resolve, reject) =&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;		setTimeout(() =&amp;gt; resolve(&lt;span class=&quot;string&quot;&gt;&#39;end&#39;&lt;/span&gt;), &lt;span class=&quot;number&quot;&gt;2000&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; test = &lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; ret = &lt;span class=&quot;keyword&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;async&lt;/span&gt;();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(ret);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;test();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;执行&lt;code&gt;babel-node test.es7&lt;/code&gt;。会在2秒后看到&lt;code&gt;end&lt;/code&gt;的输出。正常的项目开发中，我们还需要借助gulp等工具作为开发和发布工具。这里只做eslint示例就不再介绍。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;async与generator的区别在于，generator没有自动执行的功能，需要依赖co库才能执行，async有自动执行的功能，因此可以像普通函数一样执行。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;async与generator的区别在于，generator没有自动执行的功能，需要依赖co库才能执行，async有自动执行的功能，因此可以像普通函数一样执行。&lt;/p&gt;
 </content>
     
     <summary type="html">
@@ -508,26 +580,6 @@
   </entry>
   
   <entry>
-    <title>mongoose中document的版本控制（__v）</title>
-    <link href="http://coderq.github.io/2016/04/22/mongoose-version/"/>
-    <id>http://coderq.github.io/2016/04/22/mongoose-version/</id>
-    <published>2016-04-22T03:26:47.000Z</published>
-    <updated>2016-04-22T03:28:23.000Z</updated>
-    
-    <content type="html">&lt;p&gt;技术债，待还。。。&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;技术债，待还。。。&lt;/p&gt;
-
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
     <title>我是如何构建我的后端服务器的</title>
     <link href="http://coderq.github.io/2016/04/20/backend-build/"/>
     <id>http://coderq.github.io/2016/04/20/backend-build/</id>
@@ -589,32 +641,6 @@
     
     
       <category term="mongodb" scheme="http://coderq.github.io/tags/mongodb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>javascript的一些常用技能</title>
-    <link href="http://coderq.github.io/2016/04/13/javascript-skill/"/>
-    <id>http://coderq.github.io/2016/04/13/javascript-skill/</id>
-    <published>2016-04-12T23:33:29.000Z</published>
-    <updated>2016-06-20T04:55:59.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32&quot;&gt;&lt;a href=&quot;#u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32&quot; class=&quot;headerlink&quot; title=&quot;反转一个字符串&quot;&gt;&lt;/a&gt;反转一个字符串&lt;/h2&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&#39;123456789&#39;&lt;/span&gt;.split(&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;).revert().join(&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;// &#39;987654321&#39;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;u53BB_u91CD&quot;&gt;&lt;a href=&quot;#u53BB_u91CD&quot; class=&quot;headerlink&quot; title=&quot;去重&quot;&gt;&lt;/a&gt;去重&lt;/h2&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&#39;11122213434&#39;&lt;/span&gt;.split(&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;).filter((item, index, ary) =&amp;gt; index == ary.indexOf(item)).join(&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;// &#39;1234&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32&quot;&gt;&lt;a href=&quot;#u591A_u7EF4_u6570_u7EC4-_26gt_3B_u5B57_u7B26_u4E32&quot; class=&quot;headerlink&quot; title=&quot;多维数组-&amp;gt;字符串&quot;&gt;&lt;/a&gt;多维数组-&amp;gt;字符串&lt;/h2&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;[[[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;], &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;], [&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;], &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;].join(); &lt;span class=&quot;comment&quot;&gt;// &#39;1,2,3,4&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;u8FD4_u56DE_u968F_u673A_u5143_u7D20&quot;&gt;&lt;a href=&quot;#u8FD4_u56DE_u968F_u673A_u5143_u7D20&quot; class=&quot;headerlink&quot; title=&quot;返回随机元素&quot;&gt;&lt;/a&gt;返回随机元素&lt;/h2&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// method1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; ary = [&lt;span class=&quot;string&quot;&gt;&#39;male&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;female&#39;&lt;/span&gt;];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;let&lt;/span&gt; ret = ary[~~(&lt;span class=&quot;built_in&quot;&gt;Math&lt;/span&gt;.random() * ary.length)];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// method2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;[&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;].sort(() =&amp;gt; &amp;#123;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; v = &lt;span class=&quot;built_in&quot;&gt;Math&lt;/span&gt;.random() - &lt;span class=&quot;number&quot;&gt;.5&lt;/span&gt;; &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; v / &lt;span class=&quot;built_in&quot;&gt;Math&lt;/span&gt;.abs(v);&amp;#125;).shift();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;u8BA1_u7B97_u51FA_u5B57_u7B26_u4E32_u4E2D_u5B57_u7B26_u51FA_u73B0_u6B21_u6570&quot;&gt;&lt;a href=&quot;#u8BA1_u7B97_u51FA_u5B57_u7B26_u4E32_u4E2D_u5B57_u7B26_u51FA_u73B0_u6B21_u6570&quot; class=&quot;headerlink&quot; title=&quot;计算出字符串中字符出现次数&quot;&gt;&lt;/a&gt;计算出字符串中字符出现次数&lt;/h2&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;string&quot;&gt;&#39;abcdaabc&#39;&lt;/span&gt;.split(&lt;span class=&quot;string&quot;&gt;&#39;&#39;&lt;/span&gt;).reduce((p, c) =&amp;gt; (p[c] = (p[c] || &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;) + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, p) , &amp;#123;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32&quot;&gt;&lt;a href=&quot;#u53CD_u8F6C_u4E00_u4E2A_u5B57_u7B26_u4E32&quot; class=&quot;headerlink&quot; title=&quot;反转一个字符串&quot;&gt;&lt;
-    
-    </summary>
-    
-      <category term="javascript" scheme="http://coderq.github.io/categories/javascript/"/>
-    
-    
-      <category term="javascript" scheme="http://coderq.github.io/tags/javascript/"/>
     
   </entry>
   
