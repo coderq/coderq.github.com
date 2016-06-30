@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>gzip带来的工作中的小插曲 | CoderQ·博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景今天，爬取一个https地址的时候，发现如下问题，从浏览器打开该地址，显示正常的json格式。但通过curl访问却返回类似乱码一样的内容，一开始以为是https协议安全机制导致的异常。进过细究后发觉不可能，后来查证是因为服务端对数据做了gzip压缩，因此客户端如果要获取到正确的数据，需要对数据做解压，在curl中，增加参数–compressed。如果是node的request模块，则在其配置相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gzip带来的工作中的小插曲">
+<meta property="og:url" content="http://coderq.github.io/2016/06/29/http-content-encoding-gzip/index.html">
+<meta property="og:site_name" content="CoderQ·博客">
+<meta property="og:description" content="背景今天，爬取一个https地址的时候，发现如下问题，从浏览器打开该地址，显示正常的json格式。但通过curl访问却返回类似乱码一样的内容，一开始以为是https协议安全机制导致的异常。进过细究后发觉不可能，后来查证是因为服务端对数据做了gzip压缩，因此客户端如果要获取到正确的数据，需要对数据做解压，在curl中，增加参数–compressed。如果是node的request模块，则在其配置相">
+<meta property="og:updated_time" content="2016-06-29T15:31:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gzip带来的工作中的小插曲">
+<meta name="twitter:description" content="背景今天，爬取一个https地址的时候，发现如下问题，从浏览器打开该地址，显示正常的json格式。但通过curl访问却返回类似乱码一样的内容，一开始以为是https协议安全机制导致的异常。进过细究后发觉不可能，后来查证是因为服务端对数据做了gzip压缩，因此客户端如果要获取到正确的数据，需要对数据做解压，在curl中，增加参数–compressed。如果是node的request模块，则在其配置相">
+  
+    <link rel="alternative" href="/atom.xml" title="CoderQ·博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  
+  <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">CoderQ</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
+        
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:623619038@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/coderq" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C/" style="font-size: 12px;">C</a> <a href="/tags/Content-Encoding/" style="font-size: 10px;">Content-Encoding</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/charset/" style="font-size: 10px;">charset</a> <a href="/tags/eslint/" style="font-size: 10px;">eslint</a> <a href="/tags/facebook/" style="font-size: 10px;">facebook</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/gzip/" style="font-size: 10px;">gzip</a> <a href="/tags/highlight/" style="font-size: 10px;">highlight</a> <a href="/tags/html/" style="font-size: 14px;">html</a> <a href="/tags/http/" style="font-size: 16px;">http</a> <a href="/tags/http-server/" style="font-size: 10px;">http-server</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/mac/" style="font-size: 12px;">mac</a> <a href="/tags/mongodb/" style="font-size: 18px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mosh/" style="font-size: 10px;">mosh</a> <a href="/tags/msgpack/" style="font-size: 10px;">msgpack</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 16px;">nginx</a> <a href="/tags/node-js/" style="font-size: 16px;">node.js</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/orientdb/" style="font-size: 12px;">orientdb</a> <a href="/tags/pm2/" style="font-size: 10px;">pm2</a> <a href="/tags/redis/" style="font-size: 16px;">redis</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/爬虫/" style="font-size: 10px;">爬虫</a> <a href="/tags/状态码/" style="font-size: 10px;">状态码</a> <a href="/tags/算法/" style="font-size: 12px;">算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">CoderQ</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="http://7xqex1.com1.z0.glb.clouddn.com/avatar%2F1426483393_DXGAJIiR.jpeg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">CoderQ</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">不积硅步无以至千里(旧博客地址：http://blog.coderq.net)</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:623619038@qq.com" title="Email"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/coderq" title="GitHub"></a></li>
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-http-content-encoding-gzip" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/29/http-content-encoding-gzip/" class="article-date">
+      <time datetime="2016-06-29T06:22:10.000Z" itemprop="datePublished">2016-06-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gzip带来的工作中的小插曲
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/爬虫/">爬虫</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Content-Encoding/">Content-Encoding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gzip/">gzip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https/">https</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="u80CC_u666F"><a href="#u80CC_u666F" class="headerlink" title="背景"></a>背景</h2><p>今天，爬取一个https地址的时候，发现如下问题，从浏览器打开该地址，显示正常的json格式。但通过curl访问却返回类似乱码一样的内容，一开始以为是https协议安全机制导致的异常。进过细究后发觉不可能，后来查证是因为服务端对数据做了gzip压缩，因此客户端如果要获取到正确的数据，需要对数据做解压，在curl中，增加参数–compressed。如果是node的request模块，则在其配置相中设置gzip: true即可。</p>
+<h2 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h2><p><strong>gzip</strong> 是服务端为了节省流量，对数据做压缩的一种方案。特别是在针对某些数据量特别大的接口，压缩可以大大减少网络带宽的消耗，但同时也会增加服务器CPU的压力，因此只有在接口数据量特别巨大，确实有必要的时候才用。服务端使用了gzip压缩，客户端获取到数据后就必须对数据做解压。浏览器会自动处理解压操作，而其他客户端一般需要某些设定或依赖其它的工具才能完成解压的工作。</p>
+<h2 id="https_u539F_u7406_u4E0E_u8FD0_u884C_u6D41_u7A0B"><a href="#https_u539F_u7406_u4E0E_u8FD0_u884C_u6D41_u7A0B" class="headerlink" title="https原理与运行流程"></a>https原理与运行流程</h2><p>1.客户端的浏览器向服务器传送客户端 SSL 协议的版本号，加密算法的种类，产生的随机数，以及其他服务器和客户端之间通讯所需要的各种信息。</p>
+<p>2.服务器向客户端传送 SSL 协议的版本号，加密算法的种类，随机数以及其他相关信息，同时服务器还将向客户端传送自己的证书。</p>
+<p>3.客户利用服务器传过来的信息 验证服务器的合法性，服务器的合法性包括：证书是否过期，发行服务器证书的 CA 是否可靠，发行者证书的公钥能否正确解开服务器证书的“发行者的数字签名”，服务器证书上的域名是否和服务器的实际域名相匹配。如果合法性验证没有通过，通讯将断开；如果合法性验证通过，将继续进行第四步。</p>
+<p>4.用户端随机产生一个用于后面通讯的“对称密码”，然后 用服务器的公钥（服务器的公钥从步骤②中的服务器的证书中获得）对其加密，然后将加密后的“预主密码”传给服务器。</p>
+<p>5.如果服务器要求客户的身份认证（在握手过程中为可选），用户可以建立一个随机数然后对其进行数据签名，将这个含有签名的随机数和客户自己的证书以及加密过的“预主密码”一起传给服务器。</p>
+<p>6.如果服务器要求客户的身份认证，服务器必须检验客户证书和签名随机数的合法性，具体的合法性验证过程包括：客户的证书使用日期是否有效，为客户提供证书的CA 是否可靠，发行CA 的公钥能否正确解开客户证书的发行 CA 的数字签名，检查客户的证书是否在证书废止列表（CRL）中。检验如果没有通过，通讯立刻中断；</p>
+<p>7.如果验证通过，服务器将用自己的私钥解开加密的“预主密码”，然后执行一系列步骤来产生主通讯密码（客户端也将通过同样的方法产生相同的主通讯密码）。</p>
+<p>8.服务器和客户端用相同的主密码即“通话密码”，一个对称密钥用于 SSL 协议的安全数据通讯的加解密通讯。同时在 SSL 通讯过程中还要完成数据通讯的完整性，防止数据通讯中的任何变化。</p>
+<p>9.客户端向服务器端发出信息，指明后面的数据通讯将使用的步骤⑦中的主密码为对称密钥，同时通知服务器客户端的握手过程结束。</p>
+<p>10.服务器向客户端发出信息，指明后面的数据通讯将使用的步骤⑦中的主密码为对称密钥，同时通知客户端服务器端的握手过程结束。</p>
+<p>SSL 的握手部分结束，SSL 安全通道的数据通讯开始，客户和服务器开始使用相同的对称密钥进行数据通讯，同时进行通讯完整性的检验。</p>
+<p>从上面的流程可以看出（加粗字体），SSL通信在握手阶段使用的是非对称加密，在数据的传输阶段使用的是对成加密。</p>
+<h2 id="u53C2_u8003_u8D44_u6599"><a href="#u53C2_u8003_u8D44_u6599" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://segmentfault.com/a/1190000000476876" target="_blank" rel="external">https://segmentfault.com/a/1190000000476876</a></li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/06/29/http-content-encoding-gzip/">gzip带来的工作中的小插曲</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 CoderQ 的个人博客">CoderQ</a></p>
+        <p><span>发布时间:</span>2016年06月29日 - 14时22分</p>
+        <p><span>最后更新:</span>2016年06月29日 - 23时31分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/06/29/http-content-encoding-gzip/" title="gzip带来的工作中的小插曲">http://coderq.github.io/2016/06/29/http-content-encoding-gzip/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://coderq.github.io/2016/06/29/http-content-encoding-gzip/　　作者: CoderQ" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/06/23/facebook-spider/">
+                    爬取facebook站点的正确姿势
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u80CC_u666F"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gzip"><span class="toc-number">2.</span> <span class="toc-text">gzip</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#https_u539F_u7406_u4E0E_u8FD0_u884C_u6D41_u7A0B"><span class="toc-number">3.</span> <span class="toc-text">https原理与运行流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#u53C2_u8003_u8D44_u6599"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/06/23/facebook-spider/" title="下一篇: 爬取facebook站点的正确姿势">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/29/http-content-encoding-gzip/">gzip带来的工作中的小插曲</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/23/facebook-spider/">爬取facebook站点的正确姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/22/charset-in-html/">浅谈html中charset的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/13/node-js-skill/">node.js的一些实用技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/06/04/mac-80-it-works/">mac上启动nginx遇到80端口被占用的解决方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/javascript-eslint-sublime/">sublime中配置使用eslint</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/16/mongoose-replica-set/">mongodb replica set配置与mongoose连接实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/13/mongodb-seldom-command-note/">Mongodb中一些不常用的命令备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/13/cross-domain/">Nginx配置支持跨域</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/12/sorting-algorithms/">排序算法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/11/algorithm-rate-of-increase/">算法中的增长率标记法及含义</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/06/formula/">常用数学公式</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/how-to-build-fast-api/">node.js在项目中应该放在哪个位置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/05/ssh-rsa-mosh/">通过RSA实现SSH免密登录及mosh替换SSH避免断网断线</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/04/data-structure/">数据结构的一些基本概念</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/03/javascript-fast-sort/">javascript实现快速排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/02/c-binary/">C语言中整型的二进制表示</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/28/git/">git踩坑记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/25/javascript-async-order/">Javascript异步调用顺序执行方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/20/backend-build/">我是如何构建我的后端服务器的</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/18/mongodb-command/">自己平时使用过的一些mongodb命令记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/13/javascript-skill/">javascript的一些常用技能</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/11/mac-server-cmd/">MAC上的各种服务命令备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/08/orientdb-note-1/">OrientDB学习笔记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/08/msgpack/">msgpack使用记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/highlight-build/">highlight使用前的构建操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/redis-basic/">redis基础操作指令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/18/javascript-useful-functions/">自己写的一些常用函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/18/weixin-jssdk/">实现记录微信分享路径树的功能</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/javascript-proto-prototype-constructor/">Javascript继承之理解__proto__、prototype、constructor三者的含义与用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/javascript-es5-useless-tech/">Javascript中一些可能是用较少的语法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/npm-useful-logs/">npm命令使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/nginx-config/">nginx配置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/create-openssl-certificate-for-https/">通过OpenSSL创建证书文件构建https服务</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/29/decode-utf8/">html中UTF8编码的解码</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/27/mongodb-update-by-self-field/">mongodb的文档如何通过自己的某些字段更新文档的方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/javascript-merge-sort/">javascript实现合并排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/19/opencv-ippicv-macosx/">用cmake安装opencv遇到缺少ippicv-macosx-*.*文件的解决方案</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/16/javascript-deal-with-unicode/">Unicode字符处理</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/14/c-basic/">C语言基础</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/06/http-accept-encoding/">Accept-Encoding</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/06/http-accept/">Accept</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/06/http-header/">HTTP报头字段列表</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/05/node-mongodb/">MongoDB的NodeJS版API操作笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/04/redis-review-2/">Redis学习笔记（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/04/redis-review-1/">Redis学习笔记（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/02/mac-commands/">MAC常用命令（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/01/http-status-code/">HTTP状态码</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 CoderQ
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.1.22/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
